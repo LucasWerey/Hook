@@ -45,3 +45,10 @@ export const studentSignup = reactive({
   rememberMe: 'Se souvenir de moi ?',
   title: 'Inscription'
 })
+
+export const RecruiterSignup = reactive({
+  phase: {
+    phase1: `1. Entreprise`,
+    phase2: `2. Informations de l'administrateur`
+  }
+})

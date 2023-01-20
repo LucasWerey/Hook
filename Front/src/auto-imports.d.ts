@@ -9,6 +9,7 @@ declare global {
   const AuthenticationUtils: typeof import('./utils/authenticationUtils')['AuthenticationUtils']
   const DateUtils: typeof import('./utils/dateUtils')['DateUtils']
   const EffectScope: typeof import('vue')['EffectScope']
+  const RecruiterSignup: typeof import('./data/wording')['RecruiterSignup']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addChip: typeof import('./utils/chipUtils')['addChip']
   const afterAll: typeof import('vitest')['afterAll']
@@ -380,6 +381,7 @@ declare module 'vue' {
     readonly AuthenticationUtils: UnwrapRef<typeof import('./utils/authenticationUtils')['AuthenticationUtils']>
     readonly DateUtils: UnwrapRef<typeof import('./utils/dateUtils')['DateUtils']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly RecruiterSignup: UnwrapRef<typeof import('./data/wording')['RecruiterSignup']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addChip: UnwrapRef<typeof import('./utils/chipUtils')['addChip']>
     readonly afterAll: UnwrapRef<typeof import('vitest')['afterAll']>
@@ -734,6 +736,7 @@ declare module '@vue/runtime-core' {
     readonly AuthenticationUtils: UnwrapRef<typeof import('./utils/authenticationUtils')['AuthenticationUtils']>
     readonly DateUtils: UnwrapRef<typeof import('./utils/dateUtils')['DateUtils']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly RecruiterSignup: UnwrapRef<typeof import('./data/wording')['RecruiterSignup']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addChip: UnwrapRef<typeof import('./utils/chipUtils')['addChip']>
     readonly afterAll: UnwrapRef<typeof import('vitest')['afterAll']>
