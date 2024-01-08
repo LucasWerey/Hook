@@ -56,3 +56,13 @@ The backend is written in Rust, a language that offers high performance and safe
 You can find the backend code in the [backend directory](https://github.com/LucasWerey/Hook/tree/main/Api).
 
 This way, you can work on the frontend and backend separately, but they're both part of the same project and repository. This makes it easier to coordinate changes and keep everything in sync.
+
+## 📝 TODO
+
+As our project continues to evolve, there are several enhancements and features we're planning to implement:
+
+1. ~~Setup the front end and the back end~~
+2. Setup MongoDb with all collections
+3. Implement API paths for all collections
+4. Landing Page
+5. Make the sign in and sign up

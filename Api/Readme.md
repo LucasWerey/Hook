@@ -15,10 +15,10 @@ To install Rust, please refer to the official Rust installation guide [here](htt
 
 ### Environment Configuration
 
-Create a `.env` file at the root of the project and add the following line, replacing `<YOUR USERNAME HERE>` and `<YOUR PASSWORD HERE>` with your MongoDB credentials:
+Create a `.env` file at the root of the project and add the following line, replacing `<YOUR USERNAME HERE>`, `<YOUR PASSWORD HERE>` and `<YOUR CLUSTER DATABASE HERE>` with your MongoDB credentials:
 
 ```bash
-MONGOURI=mongodb+srv://<YOUR USERNAME HERE>:<YOUR PASSWORD HERE>@cluster0.e5akf.mongodb.net/myFirstDatabese?retryWrites=true&w=majority
+MONGOURI=mongodb+srv://<YOUR USERNAME HERE>:<YOUR PASSWORD HERE>@<YOUR CLUSTER DATABASE HERE>?retryWrites=true&w=majority
 ```
 
 ## Building and Running the Project
