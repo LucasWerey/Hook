@@ -1,0 +1,124 @@
+# API Endpoints
+
+[![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![Rocket](https://img.shields.io/badge/Rocket-000000?style=for-the-badge&logo=rocket&logoColor=white)](https://rocket.rs/)
+
+All API endpoints are based on the following base URL: http://127.0.0.1:8000
+
+## Installation
+
+To set up the project, follow these steps:
+
+### Install Rust
+
+To install Rust, please refer to the official Rust installation guide [here](https://www.rust-lang.org/tools/install).
+
+### Environment Configuration
+
+Create a `.env` file at the root of the project and add the following line, replacing `<YOUR USERNAME HERE>` and `<YOUR PASSWORD HERE>` with your MongoDB credentials:
+
+```bash
+MONGOURI=mongodb+srv://<YOUR USERNAME HERE>:<YOUR PASSWORD HERE>@cluster0.e5akf.mongodb.net/myFirstDatabese?retryWrites=true&w=majority
+```
+
+## Building and Running the Project
+
+Once you have Rust installed and the project cloned, you can build and run the project using Cargo, Rust's package manager and build system.
+
+Open your terminal and navigate to the project directory. Then, run the following commands:
+
+```bash
+# This command will compile the project and create an executable
+cargo build
+
+# This command will start the server
+cargo run
+```
+
+## User Model
+
+The `User` model represents a user in the system. Here's the structure of the `User` model:
+
+```rust
+pub struct User {
+    pub id: Option<ObjectId>,  // The unique ID of the user. This is optional because MongoDB will automatically assign an ID when a user is created.
+    pub firstname: String,     // The user's first name.
+    pub lastname: String,      // The user's last name.
+    pub email: String,         // The user's email address.
+    pub password: String,      // The user's password. In a real system, this would be hashed and salted for security.
+    pub statut: String,        // The user's status.
+    pub date: DateTime<Utc>,   // The date and time when the user was created. Should be number long
+}
+```
+
+## User Endpoints
+
+### Create User - `POST /user`
+
+Creates a new user. The request body should be a JSON object with the following structure:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "email": "user@example.com",
+    "password": "password",
+    "statut": "Status",
+    "date": {
+        "$date": {
+            "$numberLong": "1704712581950"
+        }
+    }
+}' http://127.0.0.1:8000/user
+```
+
+### Get All Users - `GET /users`
+
+Returns a list of all users in the system. No request body is required for this endpoint.
+
+Example:
+
+```bash
+curl -X GET http://127.0.0.1:8000/users
+```
+
+### Get User - `GET /user/<id>`
+
+Returns the details of a specific user. Replace `<id>` with the ID of the user you want to retrieve. No request body is required for this endpoint.
+
+Example:
+
+```bash
+curl -X GET http://127.0.0.1:8000/user/<id>
+```
+
+### Update User - `PUT /user/<id>`
+
+Updates the details of a specific user. Replace `<id>` with the ID of the user you want to update. The request body should be a JSON object with the fields to update.
+
+Example:
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{
+    "firstname": "Updated First Name",
+    "lastname": "Updated Last Name",
+    "email": "updated_user@example.com",
+    "password": "updated_password",
+    "statut": "Updated Status",
+    "date": {
+        "$date": {
+            "$numberLong": "1704712581950"
+        }
+    }
+}' http://127.0.0.1:8000/user/<id>
+```
+
+### Delete User - `DELETE /user/<id>`
+
+Deletes a specific user. Replace `<id>` with the ID of the user you want to delete. No request body is required for this endpoint.
+
+Example:
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/user/<id>
+```
