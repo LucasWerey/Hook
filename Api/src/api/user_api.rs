@@ -1,6 +1,8 @@
-use crate::{models::user_model::User, repository::mongodb_repo::MongoRepo};
+use crate::{models::user_model::User,models::user_model::LoginData, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
+use bcrypt::{hash, DEFAULT_COST};
+use bcrypt::verify;
 
 #[post("/user", data = "<new_user>")]
 pub fn create_user(
@@ -12,7 +14,10 @@ pub fn create_user(
         firstname: new_user.firstname.to_owned(),
         lastname: new_user.lastname.to_owned(),
         email: new_user.email.to_owned(),
-        password: new_user.password.to_owned(),
+        password: match hash(new_user.password.to_owned(), DEFAULT_COST) {
+            Ok(password) => password,
+            Err(_) => return Err(Status::InternalServerError),
+        },
         statut: new_user.statut.to_owned(),
         date: new_user.date.to_owned(),
     };
@@ -51,7 +56,10 @@ pub fn update_user(
         firstname: new_user.firstname.to_owned(),
         lastname: new_user.lastname.to_owned(),
         email: new_user.email.to_owned(),
-        password: new_user.password.to_owned(),
+        password: match hash(new_user.password.to_owned(), DEFAULT_COST) {
+            Ok(password) => password,
+            Err(_) => return Err(Status::InternalServerError),
+        },
         statut: new_user.statut.to_owned(),
         date: new_user.date.to_owned(),
     };
@@ -96,6 +104,26 @@ pub fn get_all_users(db: &State<MongoRepo>) -> Result<Json<Vec<User>>, Status> {
     let users = db.get_all_users();
     match users {
         Ok(users) => Ok(Json(users)),
+        Err(_) => Err(Status::InternalServerError),
+    }
+}
+
+#[post("/login", data = "<login_data>")]
+pub fn login(
+    db: &State<MongoRepo>,
+    login_data: Json<LoginData>,
+) -> Result<Status, Status> {
+    let user_detail = db.get_user_by_email(&login_data.email);
+    match user_detail {
+        Ok(user) => {
+            if verify(&login_data.password, &user.password).unwrap_or(false) {
+                println!("User connected");
+                Ok(Status::Ok)
+            } else {
+                println!("User not connected");
+                Err(Status::Unauthorized)
+            }
+        },
         Err(_) => Err(Status::InternalServerError),
     }
 }

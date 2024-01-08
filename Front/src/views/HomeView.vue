@@ -22,7 +22,7 @@
           type="default"
           state="active"
           styled="outlined"
-          class="text-basic-white bg-transparent border-basic-white shadow-md max-w-fit sm:max-w-none"
+          class="text-basic-white border-basic-white shadow-md max-w-fit sm:max-w-none"
           @click=""
           >{{ wording.student }}
         </Button>

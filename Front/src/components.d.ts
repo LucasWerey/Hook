@@ -9,9 +9,10 @@ declare module 'vue' {
   export interface GlobalComponents {
     Avatar: (typeof import('@lucaswerey/dslib-pfe'))['Avatar']
     BulletPoints: (typeof import('@lucaswerey/dslib-pfe'))['BulletPoints']
+    BurgerMenu: typeof import('@lucaswerey/dslib-pfe')['BurgerMenu']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
-    DarkLogo: typeof import('@lucaswerey/dslib-pfe')['DarkLogo']
-    IconBase: typeof import('@lucaswerey/dslib-pfe')['IconBase']
+    DarkLogo: (typeof import('@lucaswerey/dslib-pfe'))['DarkLogo']
+    IconBase: (typeof import('@lucaswerey/dslib-pfe'))['IconBase']
     IconCommunity: (typeof import('./components/icons/IconCommunity.vue'))['default']
     IconDocumentation: (typeof import('./components/icons/IconDocumentation.vue'))['default']
     IconEcosystem: (typeof import('./components/icons/IconEcosystem.vue'))['default']

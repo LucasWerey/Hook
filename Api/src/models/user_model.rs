@@ -13,3 +13,10 @@ pub struct User {
     pub statut: String,
     pub date: DateTime
 }
+
+
+#[derive(Deserialize)]
+pub struct LoginData {
+    pub email: String,
+    pub password: String,
+}

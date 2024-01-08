@@ -47,7 +47,7 @@ Once the packages are installed, you can start the project with the following co
 npm run dev
 ```
 
-The project should now be running at http://localhost:5173/ 🎉
+The project should now be running at <http://localhost:5173/> 🎉
 
 ## 📁 Directory Structure
 

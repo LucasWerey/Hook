@@ -99,4 +99,14 @@ pub struct MongoRepo {
             let users = cursors.map(|doc| doc.unwrap()).collect();
             Ok(users)
         }
+
+        pub fn get_user_by_email(&self, email: &String) -> Result<User, Error> {
+            let filter = doc! {"email": email};
+            let user_detail = self
+                .col
+                .find_one(filter, None)
+                .ok()
+                .expect("Error getting user's detail");
+            Ok(user_detail.unwrap())
+        }
     }

@@ -3,7 +3,7 @@
     <IconsBase name="logo" size="large" @click="onClickLogo" class="cursor-pointer md:w-40" />
     <div class="inline-flex">
       <Button type="default" state="active" styled="off" @click="onClickSignUp">
-        S'inscrire
+        {{ wording.inscription }}
       </Button>
       <Button
         type="default"
@@ -12,7 +12,7 @@
         class="text-primary-powder"
         @click="onClickLogin"
       >
-        Se connecter
+        {{ wording.connexion }}
       </Button>
     </div>
   </div>
@@ -20,6 +20,11 @@
 
 <script setup lang="ts">
 import router from '../router'
+
+const wording = {
+  inscription: 'S’inscrire',
+  connexion: 'Se connecter'
+}
 
 const onClickLogin = () => {
   router.push('/eaz')

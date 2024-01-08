@@ -3,7 +3,7 @@
 [![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![Rocket](https://img.shields.io/badge/Rocket-000000?style=for-the-badge&logo=rocket&logoColor=white)](https://rocket.rs/)
 
-All API endpoints are based on the following base URL: http://127.0.0.1:8000
+All API endpoints are based on the following base URL: <http://127.0.0.1:8000>
 
 ## Installation
 
@@ -122,3 +122,29 @@ Example:
 ```bash
 curl -X DELETE http://127.0.0.1:8000/user/<id>
 ```
+
+### Login - `POST /login`
+
+Logs in a user. The request body should be a JSON object with the following properties:
+
+- `email`: The user's email.
+- `password`: The user's password.
+
+Example:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"email":"test@example.com","password":"password"}' http://127.0.0.1:8000/login
+```
+
+In this command, replace `test@example.com` and `password` with the actual email and password you want to test. If the login is successful, the server will print "User connected" to the console.
+
+## Docker Deployment
+
+To deploy the API using docker follow these steps :
+
+```bash
+docker build -t pfe-api . #This command builds a Docker image from the Dockerfile and tags it with the name pfe-api.
+docker run -p 8000:8000 pfe-api #This command starts a new Docker container from the pfe-api image and maps the container's port 8000 to port 8000 on your host machine.
+```
+
+:Warning: Be careful when running the Docker commands. Waiting for an upgrade on Docker and MongoDb dependencies
