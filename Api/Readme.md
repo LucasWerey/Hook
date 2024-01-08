@@ -147,4 +147,4 @@ docker build -t pfe-api . #This command builds a Docker image from the Dockerfil
 docker run -p 8000:8000 pfe-api #This command starts a new Docker container from the pfe-api image and maps the container's port 8000 to port 8000 on your host machine.
 ```
 
-:Warning: Be careful when running the Docker commands. Waiting for an upgrade on Docker and MongoDb dependencies
+⚠️ Docker's image won't build. Waiting for an upgrade on Docker and MongoDb dependencies
