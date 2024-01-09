@@ -28,6 +28,7 @@ Once you have Rust installed and the project cloned, you can build and run the p
 Open your terminal and navigate to the project directory. Then, run the following commands:
 
 ```bash
+
 # This command will compile the project and create an executable
 cargo build
 

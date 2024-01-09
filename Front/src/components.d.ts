@@ -7,27 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Avatar: (typeof import('@lucaswerey/dslib-pfe'))['Avatar']
-    BulletPoints: (typeof import('@lucaswerey/dslib-pfe'))['BulletPoints']
-    BurgerMenu: typeof import('@lucaswerey/dslib-pfe')['BurgerMenu']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
-    DarkLogo: (typeof import('@lucaswerey/dslib-pfe'))['DarkLogo']
-    IconBase: (typeof import('@lucaswerey/dslib-pfe'))['IconBase']
-    IconCommunity: (typeof import('./components/icons/IconCommunity.vue'))['default']
-    IconDocumentation: (typeof import('./components/icons/IconDocumentation.vue'))['default']
-    IconEcosystem: (typeof import('./components/icons/IconEcosystem.vue'))['default']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
-    IconSupport: (typeof import('./components/icons/IconSupport.vue'))['default']
-    IconTooling: (typeof import('./components/icons/IconTooling.vue'))['default']
-    InputField: (typeof import('@lucaswerey/dslib-pfe'))['InputField']
-    Loader: (typeof import('@lucaswerey/dslib-pfe'))['Loader']
     NavBar: typeof import('./components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SnackBar: (typeof import('@lucaswerey/dslib-pfe'))['SnackBar']
-    StepIndicator: (typeof import('@lucaswerey/dslib-pfe'))['StepIndicator']
-    TheWelcome: (typeof import('./components/TheWelcome.vue'))['default']
-    ToggleButton: (typeof import('@lucaswerey/dslib-pfe'))['ToggleButton']
-    VideoPlayer: (typeof import('@lucaswerey/dslib-pfe'))['VideoPlayer']
+    SnackBar: typeof import('@lucaswerey/dslib-pfe')['SnackBar']
   }
 }

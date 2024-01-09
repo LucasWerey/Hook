@@ -4,19 +4,30 @@ mod repository;
 
 #[macro_use]
 extern crate rocket;
+use rocket::http::Method;
+use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
-use api::user_api::{create_user, get_user, update_user, delete_user, get_all_users, login}; //import the handler here
+use api::user_api::{create_user, get_user, update_user, delete_user, get_all_users, login};
 use repository::mongodb_repo::MongoRepo;
 
 #[launch]
 fn rocket() -> _ {
     let db = MongoRepo::init();
+
+    let allowed_origins = AllowedOrigins::some_exact(&["http://localhost:5173"]);
+
+    let cors = CorsOptions {
+        allowed_origins,
+        allowed_methods: vec![Method::Get, Method::Post, Method::Put, Method::Delete].into_iter().map(From::from).collect(),
+        allowed_headers: AllowedHeaders::some(&["Authorization", "Accept"]),
+        allow_credentials: true,
+        ..Default::default()
+    }
+    .to_cors()
+    .unwrap();
+
     rocket::build()
+        .attach(cors)
         .manage(db)
-        .mount("/", routes![create_user])
-        .mount("/", routes![get_user])
-        .mount("/", routes![update_user])
-        .mount("/", routes![delete_user])
-        .mount("/", routes![get_all_users])
-        .mount("/", routes![login])
+        .mount("/", routes![create_user, get_user, update_user, delete_user, get_all_users, login])
 }

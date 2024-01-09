@@ -1,5 +1,5 @@
 [package]
-name = "ApiPfe"
+name = "apipfe"
 version = "0.1.0"
 authors = ["Lucas <lucas.werey@hotmail.com>"]
 edition = "2021"
@@ -11,6 +11,7 @@ edition = "2021"
     serde = "1.0.136"
     dotenv = "0.15.0"
     bcrypt = "0.10.1"
+    rocket_cors = "0.6.0"
 
     [dependencies.mongodb]
     version = "2.2.0"

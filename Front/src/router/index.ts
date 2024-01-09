@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Cookies from 'js-cookie'
 import HomeView from '../views/HomeView.vue'
-import { RouteRecordRaw } from 'vue-router'
 import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 
 const routes = [
@@ -34,7 +32,7 @@ function redirectToAboutIfUserExists(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  if (Cookies.get('User')) {
+  if (AuthenticationUtils.getToken() && to.name !== 'about') {
     next({ name: 'about' })
   } else {
     next()
@@ -46,10 +44,7 @@ function redirectToHomeIfUserNotExists(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  if (
-    to.matched.some((record: RouteRecordRaw) => record.meta && record.meta.requiresAuth) &&
-    !Cookies.get('User')
-  ) {
+  if (!AuthenticationUtils.getToken() && to.name !== 'home') {
     next({ name: 'home' })
   } else {
     next()
