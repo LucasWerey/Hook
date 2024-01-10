@@ -27,7 +27,7 @@ const wording = {
 }
 
 const onClickLogin = () => {
-  router.push('/eaz')
+  router.push('/login')
 }
 
 const onClickSignUp = () => {

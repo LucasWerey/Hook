@@ -3,6 +3,20 @@ use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
 use bcrypt::verify;
+use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
+use std::collections::BTreeMap;
+use rocket::serde::Serialize;
+use rocket::serde::Deserialize;
+use chrono::{Utc, Duration};
+use std::env;
+use dotenv::dotenv;
+
+
+#[derive(Serialize, Deserialize)]
+struct Claims {
+    sub: String,
+    exp: usize,
+}
 
 #[post("/user", data = "<new_user>")]
 pub fn create_user(
@@ -108,17 +122,33 @@ pub fn get_all_users(db: &State<MongoRepo>) -> Result<Json<Vec<User>>, Status> {
     }
 }
 
+
+
 #[post("/login", data = "<login_data>")]
 pub fn login(
     db: &State<MongoRepo>,
     login_data: Json<LoginData>,
-) -> Result<Status, Status> {
+) -> Result<Json<BTreeMap<String, String>>, Status> {
+    dotenv().ok();
     let user_detail = db.get_user_by_email(&login_data.email);
     match user_detail {
         Ok(user) => {
             if verify(&login_data.password, &user.password).unwrap_or(false) {
                 println!("User connected");
-                Ok(Status::Ok)
+
+                let claims = Claims {
+                    sub: user.email,
+                    exp: (Utc::now() + Duration::hours(24)).timestamp() as usize,
+                };
+                let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
+                let key = EncodingKey::from_secret(secret_key.as_ref());
+                let token = encode(&Header::new(Algorithm::HS512), &claims, &key)
+                    .expect("Failed to encode claims");
+
+                let mut map = BTreeMap::new();
+                map.insert("token".to_string(), token);
+
+                Ok(Json(map))
             } else {
                 println!("User not connected");
                 Err(Status::Unauthorized)

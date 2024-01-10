@@ -7,13 +7,20 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    beforeEnter: redirectToAboutIfUserExists
+    beforeEnter: redirectToAboutIfUserExists,
+    meta: { requiresAuth: false }
   },
   {
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutView.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue'),
+    meta: { requiresAuth: false }
   }
   // Add meta: { requiresAuth: true } to all other routes
 ]
@@ -32,7 +39,7 @@ function redirectToAboutIfUserExists(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  if (AuthenticationUtils.getToken() && to.name !== 'about') {
+  if (AuthenticationUtils.getToken() && to.name !== 'login') {
     next({ name: 'about' })
   } else {
     next()
@@ -44,7 +51,7 @@ function redirectToHomeIfUserNotExists(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  if (!AuthenticationUtils.getToken() && to.name !== 'home') {
+  if (!AuthenticationUtils.getToken() && to.meta.requiresAuth !== false) {
     next({ name: 'home' })
   } else {
     next()

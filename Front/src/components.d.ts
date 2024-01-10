@@ -7,8 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BackButton: typeof import('@lucaswerey/dslib-pfe')['BackButton']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
+    ButtonBase: typeof import('@lucaswerey/dslib-pfe')['ButtonBase']
+    CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
+    InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
     NavBar: typeof import('./components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
