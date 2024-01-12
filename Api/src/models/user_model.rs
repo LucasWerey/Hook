@@ -1,6 +1,6 @@
 use mongodb::bson::oid::ObjectId;
 use serde::{Serialize, Deserialize};
-use mongodb::bson::DateTime;
+use mongodb::bson::DateTime as BsonDateTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
@@ -11,7 +11,7 @@ pub struct User {
     pub email: String,
     pub password: String,
     pub statut: String,
-    pub date: DateTime
+    pub date: Option<BsonDateTime>,
 }
 
 

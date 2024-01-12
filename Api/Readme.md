@@ -65,11 +65,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "email": "user@example.com",
     "password": "password",
     "statut": "Status",
-    "date": {
-        "$date": {
-            "$numberLong": "1704712581950"
-        }
-    }
+
 }' http://127.0.0.1:8000/user
 ```
 

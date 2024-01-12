@@ -10,6 +10,8 @@ use rocket::serde::Deserialize;
 use chrono::{Utc, Duration};
 use std::env;
 use dotenv::dotenv;
+use mongodb::bson::DateTime as BsonDateTime;
+
 
 
 #[derive(Serialize, Deserialize)]
@@ -33,7 +35,7 @@ pub fn create_user(
             Err(_) => return Err(Status::InternalServerError),
         },
         statut: new_user.statut.to_owned(),
-        date: new_user.date.to_owned(),
+        date: Some(BsonDateTime::from_millis(Utc::now().timestamp_millis())),
     };
     let user_detail = db.create_user(data);
     match user_detail {
