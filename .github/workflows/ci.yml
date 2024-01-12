@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: "https://npm.pkg.github.com"
+          registry-url: "https://npm.pkg.github.com/@lucaswerey"
 
       - name: Prepare .npmrc
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > Front/.npmrc
 
       - name: Install dependencies
         run: cd Front && npm ci
