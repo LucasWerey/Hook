@@ -50,12 +50,12 @@ const userTypeStore = useUserTypeStore()
 
 const onRecruiterClick = () => {
   userTypeStore.setUserType('recruiter')
-  router.push({ path: '/', query: { userType: 'recruiter' } })
+  router.push({ path: '/signup', query: { userType: 'recruiter' } })
 }
 
 const onStudentClick = () => {
   userTypeStore.setUserType('student')
-  router.push({ path: '/', query: { userType: 'student' } })
+  router.push({ path: '/signup', query: { userType: 'student' } })
 }
 </script>
 

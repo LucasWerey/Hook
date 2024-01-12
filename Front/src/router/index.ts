@@ -21,6 +21,12 @@ const routes = [
     name: 'login',
     component: () => import('../views/LoginView.vue'),
     meta: { requiresAuth: false }
+  },
+  {
+    path: '/signup',
+    name: 'recruiterSignup',
+    component: () => import('../views/SignupView.vue'),
+    meta: { requiresAuth: false }
   }
   // Add meta: { requiresAuth: true } to all other routes
 ]

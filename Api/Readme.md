@@ -28,6 +28,8 @@ Once you have Rust installed and the project cloned, you can build and run the p
 Open your terminal and navigate to the project directory. Then, run the following commands:
 
 ```bash
+# Switch to Rust Nightly
+rustup default nightly
 
 # This command will compile the project and create an executable
 cargo build
@@ -102,11 +104,6 @@ curl -X PUT -H "Content-Type: application/json" -d '{
     "email": "updated_user@example.com",
     "password": "updated_password",
     "statut": "Updated Status",
-    "date": {
-        "$date": {
-            "$numberLong": "1704712581950"
-        }
-    }
 }' http://127.0.0.1:8000/user/<id>
 ```
 

@@ -1,6 +1,7 @@
 <template>
   <div class="lg:flex lg:flex-row">
     <div
+      ref="loginForm"
       class="w-full lg:w-1/3 h-[100vh] p-4 flex flex-col justify-center items-center gap-6 self-stretch relative"
     >
       <IconsBase name="logo" class="min-w-32 min-h-16 lg:min-w-60 lg:min-h-32 pb-4" />
@@ -59,9 +60,8 @@
             <a href="" class="text-4 font-700 underline text-primary-moonstone"
               >Mot de passe oublié ?</a
             >
-            <div class="flex items-center gap-2 w-full">
+            <div class="flex items-center gap-2 w-fit">
               <CheckBox
-                class="w-fit"
                 v-model="keepLogged"
                 @click="keepLogged = !keepLogged"
                 state="unchecked"
@@ -91,7 +91,22 @@
         />
       </div>
     </div>
-    <div class="hidden lg:block lg:w-2/3 lg:h-100 lg:bg-basic-lightgrey" />
+    <div
+      ref="blobs"
+      class="hidden lg:block lg:w-2/3 lg:h-100 lg:bg-basic-lightgrey lg:relative lg:-z-[1]"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-full backdrop-blur-[120px] z-[2] pointer-events-none"
+      ></div>
+      <div ref="blobItems" class="absolute top-0 left-0 w-full h-full z-[1]">
+        <div ref="blob1" class="blob bg-primary-moonstone w-[600px] h-[600px] rounded-full" />
+        <div ref="blob2" class="blob bg-primary-platinum w-[400px] h-[400px] rounded-full" />
+        <div ref="blob3" class="blob bg-primary-powder w-[600px] h-[600px] rounded-full" />
+        <div ref="blob4" class="blob bg-primary-moonstone w-[400px] h-[400px] rounded-full" />
+        <div ref="blob5" class="blob bg-primary-platinum w-[400px] h-[400px] rounded-full" />
+        <div ref="blob6" class="blob bg-primary-powder w-[400px] h-[400px] rounded-full" />
+      </div>
+    </div>
   </div>
   <transition name="fade">
     <SnackBar
@@ -118,6 +133,20 @@ const success = ref(false)
 const passwordfailed = ref(false)
 const emailFailed = ref(false)
 
+const windowWidth = ref(window.innerWidth)
+const windowHeight = ref(window.innerHeight)
+const borderRigthBlobItems: Ref<Number | null> = ref(null)
+const borderBottomBlobItems: Ref<Number | null> = ref(null)
+const loginFormRightBorder: Ref<Number | null> = ref(null)
+const loginForm: Ref<HTMLElement | null> = ref(null)
+const blobItems: Ref<HTMLElement | null> = ref(null)
+const blob1: Ref<HTMLElement | null> = ref(null)
+const blob2: Ref<HTMLElement | null> = ref(null)
+const blob3: Ref<HTMLElement | null> = ref(null)
+const blob4: Ref<HTMLElement | null> = ref(null)
+const blob5: Ref<HTMLElement | null> = ref(null)
+const blob6: Ref<HTMLElement | null> = ref(null)
+
 // USE test@m.com psw pass
 
 const resetSnackbar = () => {
@@ -128,7 +157,6 @@ const handleResponse = (data: any) => {
   response.value = data
   showSnackbar.value = true
   success.value = true
-  console.log(response.value)
   setTimeout(resetSnackbar, 5000)
 }
 
@@ -163,6 +191,120 @@ const getLoggedInUser = async () => {
     handleError(error)
   }
 }
+
+class Blob {
+  el: HTMLElement
+  size: number
+  x: number
+  y: number
+  vx: number
+  vy: number
+
+  constructor(el: HTMLElement) {
+    this.el = el
+    this.size = el.getBoundingClientRect().width
+    this.x = random(
+      0,
+      windowWidth.value -
+        Number(borderRigthBlobItems.value) -
+        Number(loginFormRightBorder.value) -
+        this.size
+    )
+    this.y = random(0, windowHeight.value - this.size)
+    this.vx = random(3, 4) * Math.random() > 0.5 ? -1 : 1
+    this.vy = random(3, 4) * Math.random() > 0.5 ? -1 : 1
+  }
+
+  update(): void {
+    this.x += this.vx
+    this.y += this.vy
+
+    if (
+      borderRigthBlobItems.value !== null &&
+      this.x >= Number(borderRigthBlobItems.value) - Number(loginFormRightBorder.value) - this.size
+    ) {
+      this.vx *= -1
+      this.x = Number(borderRigthBlobItems.value) - Number(loginFormRightBorder.value) - this.size
+    }
+
+    if (
+      borderBottomBlobItems.value !== null &&
+      this.y >= Number(borderBottomBlobItems.value) - this.size
+    ) {
+      this.vy *= -1
+      this.y = Number(borderBottomBlobItems.value) - this.size
+    }
+
+    if (this.x <= 0) {
+      this.vx *= -1
+      this.x = 0
+    }
+
+    if (this.y <= 0) {
+      this.vy *= -1
+      this.y = 0
+    }
+  }
+
+  move(): void {
+    this.el.style.transform = `translate(${this.x}px, ${this.y}px)`
+  }
+}
+
+function initBlobs() {
+  const blobs = [blob1.value, blob2.value, blob3.value, blob4.value, blob5.value, blob6.value]
+    .filter(el => el !== null)
+    .map(el => new Blob(el as HTMLElement))
+  const element = blobItems.value
+  const loginFormEl = loginForm.value
+
+  if (element && loginFormEl) {
+    const rect = element.getBoundingClientRect()
+    const log = loginFormEl.getBoundingClientRect()
+
+    borderRigthBlobItems.value = rect.right
+    borderBottomBlobItems.value = rect.bottom
+    loginFormRightBorder.value = log.right
+  }
+
+  function update() {
+    blobs.forEach(blob => {
+      blob.update()
+      blob.move()
+    })
+    requestAnimationFrame(update)
+  }
+  requestAnimationFrame(update)
+}
+
+function random(min: number, max: number): number {
+  return Math.random() * (max - min) + min
+}
+
+const updateBlobItemsBorder = () => {
+  windowWidth.value = window.innerWidth
+  windowHeight.value = window.innerHeight
+  const element = blobItems.value
+  const loginFormEl = loginForm.value
+
+  if (element && loginFormEl) {
+    const rect = element.getBoundingClientRect()
+    const log = loginFormEl.getBoundingClientRect()
+
+    borderRigthBlobItems.value = rect.right
+    borderBottomBlobItems.value = rect.bottom
+    loginFormRightBorder.value = log.right
+  }
+}
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateBlobItemsBorder)
+})
+
+onMounted(() => {
+  initBlobs()
+  window.addEventListener('resize', updateBlobItemsBorder)
+})
 </script>
 
 <style scoped>
@@ -173,5 +315,12 @@ const getLoggedInUser = async () => {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.blob {
+  aspect-ratio: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
