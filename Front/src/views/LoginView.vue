@@ -5,7 +5,7 @@
       class="w-full lg:w-1/3 h-[100vh] p-4 flex flex-col justify-center items-center gap-6 self-stretch relative"
     >
       <IconsBase name="logo" class="min-w-32 min-h-16 lg:min-w-60 lg:min-h-32 pb-4" />
-      <h1 class="font-800 text-7">Content de vous revoir !</h1>
+      <h1 class="font-800 text-7">{{ loginWords.title }}</h1>
       <div class="flex flex-col gap-12 sm:w-2/3 lg:w-3/4">
         <div class="flex flex-col gap-2 w-full">
           <Button
@@ -15,7 +15,7 @@
             icon-position="leading"
             styled="outlined"
             state="active"
-            >Se connecter avec Google</Button
+            >{{ loginWords.google }}</Button
           >
           <Button
             class="w-full font-eina1 font-normal text-4"
@@ -24,7 +24,7 @@
             icon-position="leading"
             styled="outlined"
             state="active"
-            >Se connecter avec Linkedin</Button
+            >{{ loginWords.linkedin }}</Button
           >
         </div>
         <div class="flex items-center align-middle justify-center h-6 gap-2 self-stretch w-full">
@@ -40,9 +40,9 @@
             <InputField
               class="w-full"
               v-model="emailModel"
-              placeholder="exemple@email.com"
-              label="e-mail"
-              hint="Email incorrect"
+              :placeholder="loginWords.emailPlaceholder"
+              :label="loginWords.emailLabel"
+              :hint="loginWords.emailHint"
               :state="emailFailed ? 'error' : 'default'"
               hasIcon
               @blur="onBlur"
@@ -50,16 +50,16 @@
             <InputField
               class="w-full"
               v-model="passwordModel"
-              placeholder="motdepasse"
-              label="mot de passe"
-              hint="Mot de passe incorrect"
+              :placeholder="loginWords.passwordPlaceholder"
+              :label="loginWords.passwordLabel"
+              :hint="loginWords.passwordHint"
               :state="passwordfailed ? 'error' : 'default'"
               hasIcon
               password
             />
-            <a href="" class="text-4 font-700 underline text-primary-moonstone"
-              >Mot de passe oublié ?</a
-            >
+            <a href="" class="text-4 font-700 underline text-primary-moonstone">{{
+              loginWords.forgottenPass
+            }}</a>
             <div class="flex items-center gap-2 w-fit">
               <CheckBox
                 v-model="keepLogged"
@@ -68,7 +68,7 @@
                 color="transparent"
                 form="square"
               />
-              <p class="w-full text-4 font-eina1 font-normal">Se souvenir de moi ?</p>
+              <p class="w-full text-4 font-eina1 font-normal">{{ loginWords.rememberMe }}</p>
             </div>
             <Button
               type="default"
@@ -77,7 +77,7 @@
               styled="fill"
               state="active"
             >
-              Valider
+              {{ loginWords.validate }}
             </Button>
           </form>
         </div>
@@ -96,15 +96,17 @@
       class="hidden lg:block lg:w-2/3 lg:h-100 lg:bg-basic-lightgrey lg:relative lg:-z-[1]"
     >
       <div
-        class="absolute top-0 left-0 w-full h-full backdrop-blur-[120px] z-[2] pointer-events-none"
-      ></div>
+        class="absolute top-0 text-17 font-800 text-primary-moonstone left-0 w-full h-full flex align-middle items-center justify-center backdrop-blur-[120px] z-[2] pointer-events-none"
+      >
+        {{ loginWords.blobText }}
+      </div>
       <div ref="blobItems" class="absolute top-0 left-0 w-full h-full z-[1]">
         <div ref="blob1" class="blob bg-primary-moonstone w-[600px] h-[600px] rounded-full" />
-        <div ref="blob2" class="blob bg-primary-platinum w-[400px] h-[400px] rounded-full" />
+        <div ref="blob2" class="blob bg-primary-platinum w-[600px] h-[600px] rounded-full" />
         <div ref="blob3" class="blob bg-primary-powder w-[600px] h-[600px] rounded-full" />
-        <div ref="blob4" class="blob bg-primary-moonstone w-[400px] h-[400px] rounded-full" />
-        <div ref="blob5" class="blob bg-primary-platinum w-[400px] h-[400px] rounded-full" />
-        <div ref="blob6" class="blob bg-primary-powder w-[400px] h-[400px] rounded-full" />
+        <div ref="blob4" class="blob bg-primary-moonstone w-[600px] h-[600px] rounded-full" />
+        <div ref="blob5" class="blob bg-primary-platinum w-[600px] h-[600px] rounded-full" />
+        <div ref="blob6" class="blob bg-primary-powder w-[600px] h-[600px] rounded-full" />
       </div>
     </div>
   </div>
@@ -122,17 +124,21 @@
 </template>
 
 <script setup lang="ts">
-const emailModel = ref('')
-const passwordModel = ref('')
-const keepLogged = ref(false)
+// API
 const response = ref<any>(null)
 const showSnackbar = ref(false)
+const success = ref(false)
 const errorMessage = ref('Failed to connect')
 const successMessage = ref('Successfully connected')
-const success = ref(false)
+
+// Inputs
+const keepLogged = ref(false)
 const passwordfailed = ref(false)
 const emailFailed = ref(false)
+const emailModel = ref('')
+const passwordModel = ref('')
 
+// Blob animation
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
 const borderRigthBlobItems: Ref<Number | null> = ref(null)
@@ -148,9 +154,19 @@ const blob5: Ref<HTMLElement | null> = ref(null)
 const blob6: Ref<HTMLElement | null> = ref(null)
 
 // USE test@m.com psw pass
+const getLoggedInUser = async () => {
+  if (!isValidEmail(emailModel.value)) {
+    emailFailed.value = true
+    return
+  }
 
-const resetSnackbar = () => {
-  showSnackbar.value = false
+  try {
+    const data = await loginUser(emailModel.value, passwordModel.value)
+    if (keepLogged.value) setLocalStorage('authToken', data.token)
+    handleResponse(data)
+  } catch (error) {
+    handleError(error)
+  }
 }
 
 const handleResponse = (data: any) => {
@@ -170,25 +186,15 @@ const handleError = (error: any) => {
   setTimeout(resetSnackbar, 5000)
 }
 
+const resetSnackbar = () => {
+  showSnackbar.value = false
+}
+
 const onBlur = () => {
   if (!isValidEmail(emailModel.value) && emailModel.value !== '') {
     emailFailed.value = true
   } else {
     emailFailed.value = false
-  }
-}
-const getLoggedInUser = async () => {
-  if (!isValidEmail(emailModel.value)) {
-    emailFailed.value = true
-    return
-  }
-
-  try {
-    const data = await loginUser(emailModel.value, passwordModel.value)
-    if (keepLogged.value) setLocalStorage('authToken', data.token)
-    handleResponse(data)
-  } catch (error) {
-    handleError(error)
   }
 }
 
@@ -216,15 +222,13 @@ class Blob {
   }
 
   update(): void {
+    const borderRight = Number(borderRigthBlobItems.value) - Number(loginFormRightBorder.value)
     this.x += this.vx
     this.y += this.vy
 
-    if (
-      borderRigthBlobItems.value !== null &&
-      this.x >= Number(borderRigthBlobItems.value) - Number(loginFormRightBorder.value) - this.size
-    ) {
+    if (borderRigthBlobItems.value !== null && this.x >= borderRight - this.size) {
       this.vx *= -1
-      this.x = Number(borderRigthBlobItems.value) - Number(loginFormRightBorder.value) - this.size
+      this.x = borderRight - this.size
     }
 
     if (
@@ -277,11 +281,7 @@ function initBlobs() {
   requestAnimationFrame(update)
 }
 
-function random(min: number, max: number): number {
-  return Math.random() * (max - min) + min
-}
-
-const updateBlobItemsBorder = () => {
+function updateBlobItemsBorder() {
   windowWidth.value = window.innerWidth
   windowHeight.value = window.innerHeight
   const element = blobItems.value
@@ -295,6 +295,10 @@ const updateBlobItemsBorder = () => {
     borderBottomBlobItems.value = rect.bottom
     loginFormRightBorder.value = log.right
   }
+}
+
+function random(min: number, max: number): number {
+  return Math.random() * (max - min) + min
 }
 
 onUnmounted(() => {

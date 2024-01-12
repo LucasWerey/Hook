@@ -51,6 +51,7 @@ declare global {
   const getUser: typeof import('./utils/userApiUtils')['getUser']
   const h: typeof import('vue')['h']
   const handleApiError: typeof import('./utils/apiErrorUtils')['handleApiError']
+  const homeWords: typeof import('./data/wording')['homeWords']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const includesAll: typeof import('./utils/arrayUtils')['includesAll']
   const includesAny: typeof import('./utils/arrayUtils')['includesAny']
@@ -65,6 +66,7 @@ declare global {
   const isValidEmail: typeof import('./utils/inputValidationUtils')['isValidEmail']
   const isValidPassword: typeof import('./utils/inputValidationUtils')['isValidPassword']
   const loginUser: typeof import('./utils/userApiUtils')['loginUser']
+  const loginWords: typeof import('./data/wording')['loginWords']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
@@ -371,6 +373,7 @@ declare module 'vue' {
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
+    readonly homeWords: UnwrapRef<typeof import('./data/wording')['homeWords']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly includesAll: UnwrapRef<typeof import('./utils/arrayUtils')['includesAll']>
     readonly includesAny: UnwrapRef<typeof import('./utils/arrayUtils')['includesAny']>
@@ -385,6 +388,7 @@ declare module 'vue' {
     readonly isValidEmail: UnwrapRef<typeof import('./utils/inputValidationUtils')['isValidEmail']>
     readonly isValidPassword: UnwrapRef<typeof import('./utils/inputValidationUtils')['isValidPassword']>
     readonly loginUser: UnwrapRef<typeof import('./utils/userApiUtils')['loginUser']>
+    readonly loginWords: UnwrapRef<typeof import('./data/wording')['loginWords']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
@@ -684,6 +688,7 @@ declare module '@vue/runtime-core' {
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
+    readonly homeWords: UnwrapRef<typeof import('./data/wording')['homeWords']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly includesAll: UnwrapRef<typeof import('./utils/arrayUtils')['includesAll']>
     readonly includesAny: UnwrapRef<typeof import('./utils/arrayUtils')['includesAny']>
@@ -698,6 +703,7 @@ declare module '@vue/runtime-core' {
     readonly isValidEmail: UnwrapRef<typeof import('./utils/inputValidationUtils')['isValidEmail']>
     readonly isValidPassword: UnwrapRef<typeof import('./utils/inputValidationUtils')['isValidPassword']>
     readonly loginUser: UnwrapRef<typeof import('./utils/userApiUtils')['loginUser']>
+    readonly loginWords: UnwrapRef<typeof import('./data/wording')['loginWords']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>

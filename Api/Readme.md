@@ -103,7 +103,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
     "lastname": "Updated Last Name",
     "email": "updated_user@example.com",
     "password": "updated_password",
-    "statut": "Updated Status",
+    "statut": "Updated Status"
 }' http://127.0.0.1:8000/user/<id>
 ```
 

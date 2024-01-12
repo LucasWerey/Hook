@@ -67,6 +67,7 @@ Here's a high-level overview of our main directories:
     ├── 📂 assets/            # 🖼️ Static assets (images, fonts, etc.)
     ├── 📂 composable/        # 🧩 Composable functions for Vue Composition API
     ├── 📂 components/        # 🧩 Reusable components
+    ├── 📂 data/              # 💾 All the const datas
     ├── 📂 router/            # 🗺️ Vue Router configuration
     ├── 📂 stores/            # 🏪 State management with Pinia
     ├── 📂 utils/             # 🛠️ Utility functions
