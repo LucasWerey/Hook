@@ -1,9 +1,9 @@
-name: CI
+name: Lint
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -22,9 +22,6 @@ jobs:
 
       - name: Install dependencies
         run: cd Front && npm ci
-
-      - name: Run tests
-        run: cd Front && npm run test
 
       - name: Run linter
         run: cd Front && npm run lint

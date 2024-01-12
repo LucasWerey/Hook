@@ -1,0 +1,27 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: "https://npm.pkg.github.com/@lucaswerey"
+
+      - name: Prepare .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > Front/.npmrc
+
+      - name: Install dependencies
+        run: cd Front && npm ci
+
+      - name: Run tests
+        run: cd Front && npm run test
