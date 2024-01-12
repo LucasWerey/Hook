@@ -3,6 +3,7 @@ module.exports = {
     'vue',
     'vue-router',
     '@vueuse/core',
+    'vitest',
     {
       axios: [['default', 'axios']]
     }

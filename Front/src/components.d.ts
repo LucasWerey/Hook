@@ -9,10 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
-    GlassAnimation: typeof import('./components/login/GlassAnimation.vue')['default']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
-    LoginForm: typeof import('./components/login/LoginForm.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

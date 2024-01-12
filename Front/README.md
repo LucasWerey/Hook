@@ -61,6 +61,7 @@ Here's a high-level overview of our main directories:
 ├── 🌐 public/                # 📂 Public files
 │   └── 📄 index.html         # 📝 HTML template
 ├── 📚 README.md              # 📖 The first page that the user will view when visiting the repository.
+└── 📂 tests/                 # ✔ All the tests
 └── 📂 src/                   # 📂 Source files
     ├── 📄 App.vue            # 📝 Main application component
     ├── 📄 main.ts            # 🚀 Main application entry point
