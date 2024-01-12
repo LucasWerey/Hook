@@ -26,3 +26,4 @@ test('getQueryParameter returns undefined for a non-existent query parameter', (
   const result = getQueryParameter(route, 'param')
   expect(result).toBeUndefined()
 })
+

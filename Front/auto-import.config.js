@@ -4,6 +4,7 @@ module.exports = {
     'vue-router',
     '@vueuse/core',
     'vitest',
+    'pinia',
     {
       axios: [['default', 'axios']]
     }

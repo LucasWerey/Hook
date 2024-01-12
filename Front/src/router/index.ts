@@ -1,12 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  RouteLocationNormalized,
+  NavigationGuardNext
+} from 'vue-router'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('../views/HomeView.vue'),
     beforeEnter: redirectToAboutIfUserExists,
     meta: { requiresAuth: false }
   },
@@ -28,7 +31,6 @@ const routes = [
     component: () => import('../views/SignupView.vue'),
     meta: { requiresAuth: false }
   }
-  // Add meta: { requiresAuth: true } to all other routes
 ]
 
 const router = createRouter({
