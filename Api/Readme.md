@@ -69,6 +69,16 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/user
 ```
 
+curl -X POST -H "Content-Type: application/json" -d '{
+"duree":5,
+"niveau": "BAC+5",
+"type_contrat": "alternance",
+"date_debut": "2024-02-11",
+"lieu": "Paris",
+"recherche": true,
+
+}' http://127.0.0.1:8000/students
+
 ### Get All Users - `GET /users`
 
 Returns a list of all users in the system. No request body is required for this endpoint.

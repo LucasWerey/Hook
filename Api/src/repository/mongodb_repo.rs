@@ -8,9 +8,11 @@ use mongodb::{
     sync::{Client, Collection},
 };
 use crate::models::user_model::User;
+use crate::models::students_model::Students;
 
 pub struct MongoRepo {
     col: Collection<User>,
+    col2: Collection<Students>
 }
 
 
@@ -24,7 +26,8 @@ pub struct MongoRepo {
             let client = Client::with_uri_str(uri).unwrap();
             let db = client.database("Pfe");
             let col: Collection<User> = db.collection("users");
-            MongoRepo { col }
+            let col2: Collection<Students>=db.collection("students");
+            MongoRepo { col, col2 }
         }
 
         pub fn create_user(&self, new_user: User) -> Result<InsertOneResult, Error> {
@@ -108,5 +111,35 @@ pub struct MongoRepo {
                 .ok()
                 .expect("Error getting user's detail");
             Ok(user_detail.unwrap())
+        }
+
+        pub fn create_students(&self, new_students: Students) -> Result<InsertOneResult, Error> {
+            let new_doc = Students {
+                id: None,
+                duree: new_students.duree,
+                niveau: new_students.niveau,
+                type_contrat: new_students.type_contrat,
+                date_debut: new_students.date_debut,
+                lieu: new_students.lieu,
+                recherche: new_students.recherche
+                
+            };
+            let students = self
+                .col2
+                .insert_one(new_doc, None)
+                .ok()
+                .expect("Error creating students");
+            Ok(students)
+        }
+
+        pub fn get_students(&self, id: &String) -> Result<Students, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let students_detail = self
+                .col2
+                .find_one(filter, None)
+                .ok()
+                .expect("Error getting students detail");
+            Ok(students_detail.unwrap())
         }
     }
