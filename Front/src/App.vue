@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="w-100 h-[100vh]">
-    <NavBarWelcome class="z-50 fixed" v-show="showNavBar" />
+    <NavBarWelcome class="fixed z-50" v-show="showNavBar" />
     <RouterView />
   </div>
 </template>

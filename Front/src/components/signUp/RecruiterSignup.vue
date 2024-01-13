@@ -1,3 +1,3 @@
 <template>
-  <div class="h-[100vh] flex align-middle justify-center items-center">Recruiter View</div>
+  <div class="flex h-[100vh] items-center justify-center align-middle">Recruiter View</div>
 </template>

@@ -2,14 +2,14 @@
   <div class="lg:flex lg:flex-row">
     <div
       ref="loginForm"
-      class="w-full lg:w-1/3 h-[100vh] p-4 flex flex-col justify-center items-center gap-6 self-stretch relative"
+      class="relative flex h-[100vh] w-full flex-col items-center justify-center gap-6 self-stretch p-4 lg:w-1/3"
     >
-      <IconsBase name="logo" class="min-w-32 min-h-16 lg:min-w-60 lg:min-h-32 pb-4" />
-      <h1 class="font-800 text-7">{{ loginWords.title }}</h1>
+      <IconsBase name="logo" class="min-h-16 min-w-32 pb-4 lg:min-h-32 lg:min-w-60" />
+      <h1 class="text-7 font-800">{{ loginWords.title }}</h1>
       <div class="flex flex-col gap-12 sm:w-2/3 lg:w-3/4">
-        <div class="flex flex-col gap-2 w-full">
+        <div class="flex w-full flex-col gap-2">
           <Button
-            class="w-full font-eina1 font-normal text-4"
+            class="w-full font-eina1 text-4 font-normal"
             type="socialMedia"
             icon="google"
             icon-position="leading"
@@ -18,7 +18,7 @@
             >{{ loginWords.google }}</Button
           >
           <Button
-            class="w-full font-eina1 font-normal text-4"
+            class="w-full font-eina1 text-4 font-normal"
             type="socialMedia"
             icon="linkedin"
             icon-position="leading"
@@ -27,14 +27,14 @@
             >{{ loginWords.linkedin }}</Button
           >
         </div>
-        <div class="flex items-center align-middle justify-center h-6 gap-2 self-stretch w-full">
-          <hr class="h-px my-8 bg-basic-black border-0 w-full" />
-          <p class="font-eina1 font-500 text-4">OU</p>
-          <hr class="h-px my-8 bg-basic-black border-0 w-full" />
+        <div class="flex h-6 w-full items-center justify-center gap-2 self-stretch align-middle">
+          <hr class="my-8 h-px w-full border-0 bg-basic-black" />
+          <p class="font-eina1 text-4 font-500">OU</p>
+          <hr class="my-8 h-px w-full border-0 bg-basic-black" />
         </div>
-        <div class="flex flex-col justify-center items-start gap-6 self-stretch w-full">
+        <div class="flex w-full flex-col items-start justify-center gap-6 self-stretch">
           <form
-            class="flex flex-col justify-center items-start gap-6 self-stretch w-full"
+            class="flex w-full flex-col items-start justify-center gap-6 self-stretch"
             @submit.prevent="getLoggedInUser"
           >
             <InputField
@@ -57,10 +57,10 @@
               hasIcon
               password
             />
-            <a href="" class="text-4 font-700 underline text-primary-moonstone">{{
+            <a href="" class="text-4 font-700 text-primary-moonstone underline">{{
               loginWords.forgottenPass
             }}</a>
-            <div class="flex items-center gap-2 w-fit">
+            <div class="flex w-fit items-center gap-2">
               <CheckBox
                 v-model="keepLogged"
                 @click="keepLogged = !keepLogged"
@@ -68,7 +68,7 @@
                 color="transparent"
                 form="square"
               />
-              <p class="w-full text-4 font-eina1 font-normal">{{ loginWords.rememberMe }}</p>
+              <p class="w-full font-eina1 text-4 font-normal">{{ loginWords.rememberMe }}</p>
             </div>
             <Button
               type="default"
@@ -85,7 +85,7 @@
       <div class="absolute left-9 top-9">
         <IconsBase
           name="moveLeft"
-          class="cursor-pointer w-9 h-9"
+          class="h-9 w-9 cursor-pointer"
           color="powder"
           @click="() => $router.push('/')"
         />
@@ -93,20 +93,20 @@
     </div>
     <div
       ref="blobs"
-      class="hidden lg:block lg:w-2/3 lg:h-100 lg:bg-basic-lightgrey lg:relative lg:-z-[1]"
+      class="lg:h-100 hidden lg:relative lg:-z-[1] lg:block lg:w-2/3 lg:bg-basic-lightgrey"
     >
       <div
-        class="absolute top-0 text-17 font-800 text-primary-moonstone left-0 w-full h-full flex align-middle items-center justify-center backdrop-blur-[120px] z-[2] pointer-events-none"
+        class="pointer-events-none absolute left-0 top-0 z-[2] flex h-full w-full items-center justify-center align-middle text-17 font-800 text-primary-moonstone backdrop-blur-[120px]"
       >
         {{ loginWords.blobText }}
       </div>
-      <div ref="blobItems" class="absolute top-0 left-0 w-full h-full z-[1]">
-        <div ref="blob1" class="blob bg-primary-moonstone w-[600px] h-[600px] rounded-full" />
-        <div ref="blob2" class="blob bg-primary-platinum w-[600px] h-[600px] rounded-full" />
-        <div ref="blob3" class="blob bg-primary-powder w-[600px] h-[600px] rounded-full" />
-        <div ref="blob4" class="blob bg-primary-moonstone w-[600px] h-[600px] rounded-full" />
-        <div ref="blob5" class="blob bg-primary-platinum w-[600px] h-[600px] rounded-full" />
-        <div ref="blob6" class="blob bg-primary-powder w-[600px] h-[600px] rounded-full" />
+      <div ref="blobItems" class="absolute left-0 top-0 z-[1] h-full w-full">
+        <div ref="blob1" class="blob h-[600px] w-[600px] rounded-full bg-primary-moonstone" />
+        <div ref="blob2" class="blob h-[600px] w-[600px] rounded-full bg-primary-platinum" />
+        <div ref="blob3" class="blob h-[600px] w-[600px] rounded-full bg-primary-powder" />
+        <div ref="blob4" class="blob h-[600px] w-[600px] rounded-full bg-primary-moonstone" />
+        <div ref="blob5" class="blob h-[600px] w-[600px] rounded-full bg-primary-platinum" />
+        <div ref="blob6" class="blob h-[600px] w-[600px] rounded-full bg-primary-powder" />
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@
       :type="success ? 'validation' : 'error'"
       close="no"
       size="small"
-      class="z-50 absolute bottom-2 md:w-auto top-5 right-2"
+      class="absolute bottom-2 right-2 top-5 z-50 md:w-auto"
     >
       {{ success ? successMessage : errorMessage }}
     </SnackBar>

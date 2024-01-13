@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col lg:flex-row gap-6 w-full lg:w-1/2">
+  <div class="flex w-full flex-col gap-6 lg:w-1/2 lg:flex-row">
     <Button
-      class="w-full font-eina1 font-normal text-4 bg-basic-white"
+      class="w-full bg-basic-white font-eina1 text-4 font-normal"
       type="socialMedia"
       icon="google"
       icon-position="leading"
@@ -11,7 +11,7 @@
       {{ studentSignup.google }}
     </Button>
     <Button
-      class="w-full font-eina1 font-normal text-4 bg-basic-white"
+      class="w-full bg-basic-white font-eina1 text-4 font-normal"
       type="socialMedia"
       icon="linkedin"
       icon-position="leading"
@@ -21,12 +21,12 @@
       {{ studentSignup.linkedin }}
     </Button>
   </div>
-  <div class="flex items-center align-middle justify-center h-6 gap-2 w-full lg:w-1/3">
-    <hr class="h-px my-8 bg-basic-black border-0 w-full" />
-    <p class="font-eina1 font-500 text-4">OU</p>
-    <hr class="h-px my-8 bg-basic-black border-0 w-full" />
+  <div class="flex h-6 w-full items-center justify-center gap-2 align-middle lg:w-1/3">
+    <hr class="my-8 h-px w-full border-0 bg-basic-black" />
+    <p class="font-eina1 text-4 font-500">OU</p>
+    <hr class="my-8 h-px w-full border-0 bg-basic-black" />
   </div>
-  <form class="flex flex-col gap-6 justify-center w-full lg:w-1/2">
+  <form class="flex w-full flex-col justify-center gap-6 lg:w-1/2">
     <div class="items-start lg:w-1/2">
       <InputField
         class="w-full"
@@ -38,7 +38,7 @@
         @blur="isEmailValid"
       />
     </div>
-    <div class="flex flex-col md:flex-row gap-6">
+    <div class="flex flex-col gap-6 md:flex-row">
       <InputField
         class="w-full"
         v-model="passwordModel"
@@ -60,7 +60,7 @@
         password
       />
     </div>
-    <div class="flex items-center gap-2 w-fit">
+    <div class="flex w-fit items-center gap-2">
       <CheckBox
         v-model="keepLogged"
         @click="keepLogged = !keepLogged"
@@ -68,11 +68,11 @@
         color="transparent"
         form="square"
       />
-      <p class="w-full text-4 font-eina1 font-normal">{{ studentSignup.rememberMe }}</p>
+      <p class="w-full font-eina1 text-4 font-normal">{{ studentSignup.rememberMe }}</p>
     </div>
     <Button
       type="default"
-      class="self-center w-full max-w-md"
+      class="w-full max-w-md self-center"
       icon="moveRight"
       iconPosition="trailing"
       styled="fill"

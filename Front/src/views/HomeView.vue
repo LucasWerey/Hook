@@ -1,22 +1,22 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-full w-full background-image">
-    <div class="flex flex-col items-center justify-center gap-8 w-2/3">
+  <div class="background-image flex h-full w-full flex-col items-center justify-center">
+    <div class="flex w-2/3 flex-col items-center justify-center gap-8">
       <DarkLogo class="w-22" />
-      <h1 class="text-6 lg:text-24 text-center text-basic-white font-800">
+      <h1 class="text-center text-6 font-800 text-basic-white lg:text-24">
         {{ homeWords.title }}
       </h1>
-      <p class="text-4 lg:text-8 text-center text-basic-white font-400 opacity-80">
+      <p class="font-400 text-center text-4 text-basic-white opacity-80 lg:text-8">
         {{ homeWords.description }}
       </p>
-      <p class="text-4 lg:text-8 text-center text-primary-charcoal font-700">
+      <p class="text-center text-4 font-700 text-primary-charcoal lg:text-8">
         {{ homeWords.ask }}
       </p>
-      <div class="flex-col sm:flex-row flex items-center max-w-full justify-center gap-4">
+      <div class="flex max-w-full flex-col items-center justify-center gap-4 sm:flex-row">
         <Button
           type="default"
           state="active"
           styled="fill"
-          class="shadow-md max-w-3/4 max-w-fit sm:max-w-none"
+          class="max-w-3/4 max-w-fit shadow-md sm:max-w-none"
           @click="onRecruiterClick"
         >
           {{ homeWords.recruiter }}
@@ -25,7 +25,7 @@
           type="default"
           state="active"
           styled="outlined"
-          class="border-basic-white shadow-md max-w-fit sm:max-w-none"
+          class="max-w-fit border-basic-white shadow-md sm:max-w-none"
           style="color: white"
           @click="onStudentClick"
           >{{ homeWords.student }}

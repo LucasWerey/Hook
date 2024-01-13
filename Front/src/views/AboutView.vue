@@ -7,7 +7,7 @@
       type="error"
       close="no"
       size="small"
-      class="z-50 absolute bottom-6 left-1/2 -translate-x-1/2"
+      class="absolute bottom-6 left-1/2 z-50 -translate-x-1/2"
     >
       {{ errorMessage }}
     </SnackBar>

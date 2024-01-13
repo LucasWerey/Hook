@@ -1,29 +1,29 @@
 <template>
   <div
     ref="loginForm"
-    class="w-full h-[100vh] lg:pt-10 flex flex-col items-center gap-4 lg:gap-12 self-stretch relative p-2 lg:p-0 bg-basic-verylightgrey"
+    class="relative flex h-[100vh] w-full flex-col items-center gap-4 self-stretch bg-basic-verylightgrey p-2 lg:gap-12 lg:p-0 lg:pt-10"
   >
-    <div class="flex flex-col gap-4 items-center">
-      <IconsBase name="logo" size="medium" class="min-w-32 min-h-32" />
-      <h1 class="text-5 lg:text-8 font-800">{{ studentSignup.title }}</h1>
+    <div class="flex flex-col items-center gap-4">
+      <IconsBase name="logo" size="medium" class="min-h-32 min-w-32" />
+      <h1 class="text-5 font-800 lg:text-8">{{ studentSignup.title }}</h1>
     </div>
-    <div class="w-full flex flex-col items-center gap-4 lg:gap-12">
-      <div class="w-full flex flex-col items-center gap-4">
+    <div class="flex w-full flex-col items-center gap-4 lg:gap-12">
+      <div class="flex w-full flex-col items-center gap-4">
         <StepIndicator :number="stepNumber" :currentStep="currentStep" class="h-2" />
         <h2
-          class="text-3 lg:text-4 text-primary-moonstone font-eina1 font-bold uppercase"
+          class="font-eina1 text-3 font-bold uppercase text-primary-moonstone lg:text-4"
           :key="phaseWording"
         >
           {{ phaseWording }}
         </h2>
       </div>
-      <div v-show="currentStep === 1" class="w-full items-center flex flex-col gap-4 lg:gap-12">
+      <div v-show="currentStep === 1" class="flex w-full flex-col items-center gap-4 lg:gap-12">
         <StudentForm @submit="handleSubmit" key="1" />
       </div>
       <div v-show="currentStep === 2" key="2">eazezae</div>
     </div>
     <div class="absolute left-9 top-9">
-      <IconsBase name="moveLeft" class="cursor-pointer w-9 h-9" color="powder" @click="goBack" />
+      <IconsBase name="moveLeft" class="h-9 w-9 cursor-pointer" color="powder" @click="goBack" />
     </div>
   </div>
 </template>
