@@ -13,7 +13,6 @@ use dotenv::dotenv;
 use mongodb::bson::DateTime as BsonDateTime;
 
 
-
 #[derive(Serialize, Deserialize)]
 struct Claims {
     sub: String,
@@ -47,7 +46,7 @@ pub fn create_user(
                     duree: 0, // Vous devez définir une valeur par défaut ou récupérer cette information ailleurs
                     niveau: String::new(),
                     type_contrat: String::new(),
-                    date_debut: String::new(),
+                    date_debut: BsonDateTime::now(),
                     lieu: String::new(),
                     recherche: false,
                 };

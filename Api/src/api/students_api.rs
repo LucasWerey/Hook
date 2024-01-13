@@ -22,7 +22,7 @@ pub fn create_students(
         duree: new_students.duree,
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
-        date_debut: new_students.date_debut.to_owned(),
+        date_debut: new_students.date_debut,
         lieu: new_students.lieu.to_owned(),
         recherche: new_students.recherche,
         
@@ -63,7 +63,7 @@ pub fn update_students(
         duree: new_students.duree,
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
-        date_debut: new_students.date_debut.to_owned(),
+        date_debut: new_students.date_debut,
         lieu: new_students.lieu.to_owned(),
         recherche: new_students.recherche,
     };

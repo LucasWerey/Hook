@@ -70,12 +70,14 @@ curl -X POST -H "Content-Type: application/json" -d '{
 ```
 
 curl -X POST -H "Content-Type: application/json" -d '{
-"duree":"5",
+"duree":5,
 "niveau": "BAC+5",
 "type_contrat": "alternance",
-"date_debut": "2024-02-11",
+"date_debut": {
+"$date": {"$numberLong": "1644566400000"}
+},
 "lieu": "Paris",
-"recherche": "true"
+"recherche": true
 
 }' http://127.0.0.1:8000/student
 
@@ -124,7 +126,11 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "duree":4,
 "niveau": "BAC+4",
 "type_contrat": "stage",
-"date_debut": "2023-02-11",
+"date_debut": {
+"$date": {
+            "$numberLong": "1704712581950"
+}
+},
 "lieu": "Paris",
 "recherche": false
 
