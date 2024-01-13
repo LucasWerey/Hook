@@ -66,10 +66,22 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "lastname": "Last Name",
     "email": "user@example.com",
     "password": "password",
-    "statut": "Status",
+    "statut": "Status"
 
 }' http://127.0.0.1:8000/user
 ```
+
+curl -X POST -H "Content-Type: application/json" -d '{
+"duree":5,
+"niveau": "BAC+5",
+"type_contrat": "alternance",
+"date_debut": {
+"$date": {"$numberLong": "1644566400000"}
+},
+"lieu": "Paris",
+"recherche": true
+
+}' http://127.0.0.1:8000/student
 
 ### Get All Users - `GET /users`
 
@@ -106,6 +118,20 @@ curl -X PUT -H "Content-Type: application/json" -d '{
     "statut": "Updated Status"
 }' http://127.0.0.1:8000/user/<id>
 ```
+
+curl -X PUT -H "Content-Type: application/json" -d '{
+"duree":4,
+"niveau": "BAC+4",
+"type_contrat": "stage",
+"date_debut": {
+"$date": {
+            "$numberLong": "1704712581950"
+}
+},
+"lieu": "Paris",
+"recherche": false
+
+}' http://127.0.0.1:8000/student/65a17960c47012ed8f140bfe
 
 ### Delete User - `DELETE /user/<id>`
 

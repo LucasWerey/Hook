@@ -1,4 +1,4 @@
-use crate::{models::user_model::User,models::user_model::LoginData, repository::mongodb_repo::MongoRepo};
+use crate::{models::user_model::User,models::user_model::LoginData,models::students_model::Students, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
@@ -37,9 +37,26 @@ pub fn create_user(
         statut: new_user.statut.to_owned(),
         date: Some(BsonDateTime::from_millis(Utc::now().timestamp_millis())),
     };
-    let user_detail = db.create_user(data);
+    let user_clone = data.clone(); 
+    let user_detail = db.create_user(user_clone);
     match user_detail {
-        Ok(user) => Ok(Json(user)),
+        Ok(user) =>{
+            if data.statut == "student" {
+                let student_data = Students {
+                    id: data.id.as_ref().map(|id| id).copied(), // Utilisez le même ID que l'utilisateur
+                    duree: 0, // Vous devez définir une valeur par défaut ou récupérer cette information ailleurs
+                    niveau: String::new(),
+                    type_contrat: String::new(),
+                    date_debut: BsonDateTime::now(),
+                    lieu: String::new(),
+                    recherche: false,
+                };
+                
+                // Créez l'étudiant
+                let _ = db.create_students(student_data);
+            }
+        Ok(Json(user))
+        },
         Err(_) => Err(Status::InternalServerError),
     }
 }
