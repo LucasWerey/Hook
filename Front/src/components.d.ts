@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Avatar: (typeof import('@lucaswerey/dslib-pfe'))['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']

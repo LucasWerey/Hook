@@ -11,5 +11,5 @@ module.exports = {
   ],
   vueTemplate: true,
   dts: './src/auto-imports.d.ts',
-  dirs: ['./src/composables/*', './src/utils/*', './src/stores/*', './src/data/*']
+  dirs: ['./src/composables/*', './src/utils/*', './src/stores/*', './src/data/*', './src/router/*']
 }

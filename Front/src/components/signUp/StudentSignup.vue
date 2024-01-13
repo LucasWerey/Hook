@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import router from '../../router'
-
 type StepNumber = 1 | 2 | undefined
 
 const stepNumber: Ref<StepNumber> = ref(2)
@@ -52,4 +50,13 @@ const goBack = () => {
   if (currentStep.value && currentStep.value === 1) router.push('/')
   if (currentStep.value && currentStep.value > 1) currentStep.value -= 1
 }
+
+onBeforeRouteLeave((_, __, next) => {
+  if (currentStep.value && currentStep.value > 1) {
+    currentStep.value -= 1
+    next(false)
+  } else {
+    next()
+  }
+})
 </script>

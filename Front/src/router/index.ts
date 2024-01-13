@@ -40,8 +40,6 @@ const router = createRouter({
 
 router.beforeEach(redirectToHomeIfUserNotExists)
 
-export default router
-
 function redirectToAboutIfUserExists(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
@@ -65,3 +63,4 @@ function redirectToHomeIfUserNotExists(
     next()
   }
 }
+export default router

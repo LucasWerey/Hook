@@ -1,7 +1,10 @@
 function Resolver() {
   return {
     type: 'component',
-    resolve: (name) => {
+    resolve: name => {
+      if (name === 'RouterView') {
+        return { name, from: 'vue-router' }
+      }
       return { name, from: '@lucaswerey/dslib-pfe' }
     }
   }

@@ -37,7 +37,6 @@
 
 <script setup lang="ts">
 import DarkLogo from '../assets/DarkLogo.vue'
-import router from '../router'
 
 import { useUserTypeStore } from '../stores/userTypeStore'
 
