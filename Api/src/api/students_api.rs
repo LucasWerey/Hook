@@ -1,4 +1,4 @@
-use crate::{models::students_model::Students, repository::mongodb_repo::MongoRepo};
+use crate::{models::students_model::Students, models::user_model::User, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
@@ -11,14 +11,6 @@ use chrono::{Utc, Duration};
 use std::env;
 use dotenv::dotenv;
 use mongodb::bson::DateTime as BsonDateTime;
-
-
-
-#[derive(Serialize, Deserialize)]
-struct Claims {
-    sub: String,
-    exp: usize,
-}
 
 #[post("/student", data = "<new_students>")]
 pub fn create_students(
