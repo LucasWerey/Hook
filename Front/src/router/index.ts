@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: '/signup',
-    name: 'recruiterSignup',
+    name: 'signup',
     component: () => import('../views/SignupView.vue'),
     meta: { requiresAuth: false }
   }
@@ -42,7 +42,7 @@ router.beforeEach(redirectToHomeIfUserNotExists)
 
 function redirectToAboutIfUserExists(
   to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
+  _: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
   if (AuthenticationUtils.getToken() && to.name !== 'login') {
@@ -54,7 +54,7 @@ function redirectToAboutIfUserExists(
 
 function redirectToHomeIfUserNotExists(
   to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
+  _: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
   if (!AuthenticationUtils.getToken() && to.meta.requiresAuth !== false) {

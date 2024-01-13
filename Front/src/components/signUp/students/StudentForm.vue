@@ -77,7 +77,7 @@
       iconPosition="trailing"
       styled="fill"
       state="active"
-      @click.prevent="emit('submit')"
+      @click.prevent="handleSubmit"
     >
       {{ studentSignup.nextButton }}
     </Button>
@@ -85,6 +85,8 @@
 </template>
 
 <script setup lang="ts">
+const store = useRegistrationStore()
+
 const emailModel = ref('')
 const passwordModel = ref('')
 const confirmPasswordModel = ref('')
@@ -111,6 +113,15 @@ const isConfirmPasswordValid = () => {
   confirmPasswordFailed.value =
     !areStringsEqual(passwordModel.value, confirmPasswordModel.value) &&
     confirmPasswordModel.value !== ''
+}
+
+const handleSubmit = () => {
+  store.updateForm1({
+    email: emailModel.value,
+    password: passwordModel.value,
+    keepLogged: keepLogged.value
+  })
+  emit('submit')
 }
 
 const emit = defineEmits(['submit'])

@@ -17,10 +17,10 @@
           {{ phaseWording }}
         </h2>
       </div>
-      <div v-show="currentStep === 1" class="flex w-full flex-col items-center gap-4 lg:gap-12">
+      <div v-show="store.step === 1" class="flex w-full flex-col items-center gap-4 lg:gap-12">
         <StudentForm @submit="handleSubmit" key="1" />
       </div>
-      <div v-show="currentStep === 2" key="2">eazezae</div>
+      <div v-show="store.step === 2" key="2">eazezae</div>
     </div>
     <div class="absolute left-9 top-9">
       <IconsBase name="moveLeft" class="h-9 w-9 cursor-pointer" color="powder" @click="goBack" />
@@ -34,26 +34,28 @@ type StepNumber = 1 | 2 | undefined
 const stepNumber: Ref<StepNumber> = ref(2)
 const currentStep: Ref<StepNumber> = ref(1)
 
+const store = useRegistrationStore()
+
 const phaseWording = computed(() => {
-  return currentStep.value && currentStep.value >= 1 && currentStep.value <= 3
-    ? studentSignup.phase[`phase${currentStep.value}`]
+  return store.step >= 1 && store.step <= 3
+    ? studentSignup.phase[`phase${store.step as 1 | 2}`]
     : ''
 })
 
 const handleSubmit = () => {
-  if (currentStep.value && stepNumber.value && currentStep.value < stepNumber.value) {
-    currentStep.value += 1
+  if (store.step < 2) {
+    store.nextStep()
   }
 }
 
 const goBack = () => {
-  if (currentStep.value && currentStep.value === 1) router.push('/')
-  if (currentStep.value && currentStep.value > 1) currentStep.value -= 1
+  if (store.step === 1) router.push('/')
+  if (store.step > 1) store.prevStep()
 }
 
 onBeforeRouteLeave((_, __, next) => {
-  if (currentStep.value && currentStep.value > 1) {
-    currentStep.value -= 1
+  if (store.step > 1) {
+    store.prevStep()
     next(false)
   } else {
     next()

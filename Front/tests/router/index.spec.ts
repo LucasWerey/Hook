@@ -26,7 +26,7 @@ test('login route should be correctly defined', () => {
 })
 
 test('signup route should be correctly defined', () => {
-  const signupRoute = router.getRoutes().find(route => route.name === 'recruiterSignup')
+  const signupRoute = router.getRoutes().find(route => route.name === 'signup')
 
   expect(signupRoute).toBeDefined()
   expect(signupRoute.path).toBe('/signup')
