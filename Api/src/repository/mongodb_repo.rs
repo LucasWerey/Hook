@@ -142,4 +142,47 @@ pub struct MongoRepo {
                 .expect("Error getting students detail");
             Ok(students_detail.unwrap())
         }
+
+        pub fn update_students(&self, id: &String, new_students: Students) -> Result<UpdateResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let new_doc = doc! {
+                "$set":
+                    {
+                        "duree": new_students.duree,
+                        "niveau": new_students.niveau,
+                        "type_contrat": new_students.type_contrat,
+                        "date_debut": new_students.date_debut,
+                        "lieu": new_students.lieu,
+                        "recherche": new_students.recherche
+                    },
+            };
+            let updated_doc = self
+                .col2
+                .update_one(filter, new_doc, None)
+                .ok()
+                .expect("Error updating students");
+            Ok(updated_doc)
+        }
+
+        pub fn delete_students(&self, id: &String) -> Result<DeleteResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let students_detail = self
+                .col2
+                .delete_one(filter, None)
+                .ok()
+                .expect("Error deleting students");
+            Ok(students_detail)
+        }
+
+        pub fn get_all_students(&self) -> Result<Vec<Students>, Error> {
+            let cursors = self
+                .col2
+                .find(None, None)
+                .ok()
+                .expect("Error getting list of students");
+            let students = cursors.map(|doc| doc.unwrap()).collect();
+            Ok(students)
+        }
     }

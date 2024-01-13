@@ -8,7 +8,7 @@ use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
 use api::user_api::{create_user, get_user, update_user, delete_user, get_all_users, login};
-use api::students_api::{create_students, get_students};
+use api::students_api::{create_students, get_students, update_students, delete_students,get_all_students };
 use repository::mongodb_repo::MongoRepo;
 
 #[launch]
@@ -29,5 +29,5 @@ fn rocket() -> _ {
     rocket::build()
         .attach(cors)
         .manage(db)
-        .mount("/", routes![create_user, get_user, update_user, delete_user, get_all_users, login,create_students, get_students ])
+        .mount("/", routes![create_user, get_user, update_user, delete_user, get_all_users, login,create_students, get_students, update_students, delete_students, get_all_students ])
 }
