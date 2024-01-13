@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="w-100 h-[100vh]">
-    <NavBar class="z-50 fixed" v-show="showNavBar" />
+    <NavBarWelcome class="z-50 fixed" v-show="showNavBar" />
     <RouterView />
   </div>
 </template>
@@ -12,6 +12,6 @@ import { computed } from 'vue'
 
 const route = useRoute()
 const showNavBar = computed(() => {
-  return route.path !== '/login'
+  return route.path !== '/login' && route.path !== '/signup'
 })
 </script>

@@ -5,7 +5,7 @@
       <h1 class="text-6 lg:text-24 text-center text-basic-white font-800">
         {{ homeWords.title }}
       </h1>
-      <p class="text-4 lg:text-8 text-center text-basic-white font-700">
+      <p class="text-4 lg:text-8 text-center text-basic-white font-400 opacity-80">
         {{ homeWords.description }}
       </p>
       <p class="text-4 lg:text-8 text-center text-primary-charcoal font-700">

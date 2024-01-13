@@ -20,6 +20,16 @@ export function isValidPassword(password: string): boolean {
 }
 
 /**
+ * Checks if two strings are the same.
+ * @param {string} string1 - The first string to compare.
+ * @param {string} string2 - The second string to compare.
+ * @returns {boolean} - True if the strings are the same, false otherwise.
+ */
+export function areStringsEqual(string1: string, string2: string): boolean {
+  return string1 === string2
+}
+
+/**
  * Checks if a string is not empty.
  * @param {string} text - The string to check.
  * @returns {boolean} - True if the string is not empty, false otherwise.
