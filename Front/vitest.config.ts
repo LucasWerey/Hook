@@ -17,7 +17,8 @@ export default mergeConfig(
           'src/App.vue',
           'src/main.ts',
           'src/utils/screenSizeUtils.ts',
-          'src/utils/userApiUtils.ts'
+          'src/utils/userApiUtils.ts',
+          'src/utils/studentApiUtils.ts'
         ]
       },
       environment: 'jsdom',

@@ -39,6 +39,7 @@ declare global {
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
   const createReusableTemplate: typeof import('@vueuse/core')['createReusableTemplate']
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
+  const createStudent: typeof import('./utils/studentApiUtils')['createStudent']
   const createTemplatePromise: typeof import('@vueuse/core')['createTemplatePromise']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const createUser: typeof import('./utils/userApiUtils')['createUser']
@@ -48,6 +49,7 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
+  const deleteStudent: typeof import('./utils/studentApiUtils')['deleteStudent']
   const deleteUser: typeof import('./utils/userApiUtils')['deleteUser']
   const describe: typeof import('vitest')['describe']
   const difference: typeof import('./utils/arrayUtils')['difference']
@@ -57,12 +59,14 @@ declare global {
   const expect: typeof import('vitest')['expect']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const getActivePinia: typeof import('pinia')['getActivePinia']
+  const getAllStudents: typeof import('./utils/studentApiUtils')['getAllStudents']
   const getAllUsers: typeof import('./utils/userApiUtils')['getAllUsers']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getLocalStorage: typeof import('./utils/storageUtils')['getLocalStorage']
   const getQueryParameter: typeof import('./utils/getQueryRouteUtils')['getQueryParameter']
   const getSessionStorage: typeof import('./utils/storageUtils')['getSessionStorage']
+  const getStudent: typeof import('./utils/studentApiUtils')['getStudent']
   const getUser: typeof import('./utils/userApiUtils')['getUser']
   const h: typeof import('vue')['h']
   const handleApiError: typeof import('./utils/apiErrorUtils')['handleApiError']
@@ -167,6 +171,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const unrefElement: typeof import('@vueuse/core')['unrefElement']
   const until: typeof import('@vueuse/core')['until']
+  const updateStudent: typeof import('./utils/studentApiUtils')['updateStudent']
   const updateUser: typeof import('./utils/userApiUtils')['updateUser']
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
   const useAnimate: typeof import('@vueuse/core')['useAnimate']
@@ -395,6 +400,7 @@ declare module 'vue' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
+    readonly createStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['createStudent']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly createUser: UnwrapRef<typeof import('./utils/userApiUtils')['createUser']>
@@ -404,6 +410,7 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
     readonly difference: UnwrapRef<typeof import('./utils/arrayUtils')['difference']>
@@ -413,12 +420,14 @@ declare module 'vue' {
     readonly expect: UnwrapRef<typeof import('vitest')['expect']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
+    readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
@@ -519,6 +528,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
@@ -739,6 +749,7 @@ declare module '@vue/runtime-core' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
+    readonly createStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['createStudent']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly createUser: UnwrapRef<typeof import('./utils/userApiUtils')['createUser']>
@@ -748,6 +759,7 @@ declare module '@vue/runtime-core' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
     readonly difference: UnwrapRef<typeof import('./utils/arrayUtils')['difference']>
@@ -757,12 +769,14 @@ declare module '@vue/runtime-core' {
     readonly expect: UnwrapRef<typeof import('vitest')['expect']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
+    readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
@@ -863,6 +877,7 @@ declare module '@vue/runtime-core' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
