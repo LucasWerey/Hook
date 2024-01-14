@@ -54,7 +54,23 @@ pub struct User {
 }
 ```
 
-## User Endpoints
+## Student Model
+
+The `Student` model represents a user in the system. Here's the structure of the `Student` model:
+
+```rust
+pub struct Students {
+    pub user_id: Option<ObjectId>, // The student id linked to user ID
+    pub duree: i32,                // The duration of the stage/internship
+    pub niveau: String,            // The graduation level
+    pub type_contrat: String,      // Type of contract
+    pub date_debut: BsonDateTime,  // Date of start
+    pub lieu: String,              // Place of stage
+    pub recherche: bool,           // Currently looking for ?
+}
+```
+
+## Endpoints
 
 ### Create User - `POST /user`
 
@@ -71,43 +87,51 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/user
 ```
 
-curl -X POST -H "Content-Type: application/json" -d '{
-"duree":5,
-"niveau": "BAC+5",
-"type_contrat": "alternance",
-"date_debut": {
-"$date": {"$numberLong": "1644566400000"}
-},
-"lieu": "Paris",
-"recherche": true
+> To create a student statut must be set to "student"
 
-}' http://127.0.0.1:8000/student
-
-### Get All Users - `GET /users`
+### Get queries
 
 Returns a list of all users in the system. No request body is required for this endpoint.
 
-Example:
+Examples:
+
+#### Get All Users - `GET /users`
 
 ```bash
 curl -X GET http://127.0.0.1:8000/users
 ```
 
-### Get User - `GET /user/<id>`
+#### Get All Students - `GET /students`
+
+```bash
+curl -X GET http://127.0.0.1:8000/students
+```
+
+### Get queries
 
 Returns the details of a specific user. Replace `<id>` with the ID of the user you want to retrieve. No request body is required for this endpoint.
 
-Example:
+Examples:
+
+#### Get User - `GET /user/<id>`
 
 ```bash
 curl -X GET http://127.0.0.1:8000/user/<id>
 ```
 
-### Update User - `PUT /user/<id>`
+#### Get Student - `GET /student/<id>`
+
+```bash
+curl -X GET http://127.0.0.1:8000/student/<id>
+```
+
+### Update queries
 
 Updates the details of a specific user. Replace `<id>` with the ID of the user you want to update. The request body should be a JSON object with the fields to update.
 
-Example:
+Examples:
+
+#### Update User - `PUT /user/<id>`
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -119,6 +143,9 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/user/<id>
 ```
 
+#### Update Student - `PUT /student/<id>`
+
+```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
 "duree":4,
 "niveau": "BAC+4",
@@ -131,16 +158,25 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "lieu": "Paris",
 "recherche": false
 
-}' http://127.0.0.1:8000/student/65a17960c47012ed8f140bfe
+}' http://127.0.0.1:8000/student/65a2c1f81cb256b4957fee3c
+```
 
-### Delete User - `DELETE /user/<id>`
+### Delete queries
 
 Deletes a specific user. Replace `<id>` with the ID of the user you want to delete. No request body is required for this endpoint.
 
-Example:
+Examples:
+
+#### Delete User - `DELETE /user/<id>`
 
 ```bash
 curl -X DELETE http://127.0.0.1:8000/user/<id>
+```
+
+#### Delete Student - `DELETE /student/<id>`
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/student/<id>
 ```
 
 ### Login - `POST /login`
