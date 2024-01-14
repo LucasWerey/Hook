@@ -7,14 +7,15 @@ export const useRegistrationStore = defineStore({
     form1: {
       email: '',
       password: '',
-      keepLogged: false
+      keepLogged: false,
+      userType: 'Student'
     },
     form2: {
       name: '',
       firstname: '',
       schoolGrade: '',
       contractType: 'stage',
-      duration: '',
+      duration: 0,
       start: new Date(),
       location: '',
       actualLookingFor: false

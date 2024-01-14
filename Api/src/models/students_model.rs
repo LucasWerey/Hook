@@ -7,13 +7,13 @@ use mongodb::bson::DateTime as BsonDateTime;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Students {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<ObjectId>,
+    pub user_id: Option<ObjectId>,
     pub duree: i32,
     pub niveau: String,
     pub type_contrat: String,
     pub date_debut: BsonDateTime,
     pub lieu: String,
-    pub recherche: bool, 
+    pub recherche: bool,
 }
 
 

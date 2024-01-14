@@ -48,6 +48,23 @@ const handleSubmit = () => {
   }
 }
 
+const response = ref(null)
+onMounted(async () => {
+  try {
+    response.value = await createUser({
+      firstname: 'Firezazaezaest Student',
+      lastname: 'Last Student',
+      email: 'user@example.com',
+      password: 'password',
+      statut: 'student'
+    })
+    console.log(response.value)
+  } catch (error) {
+    const apiError = handleApiError(error)
+    console.log(apiError)
+  }
+})
+
 const goBack = () => {
   if (store.step === 1) router.push('/')
   if (store.step > 1) store.prevStep()
