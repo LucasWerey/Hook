@@ -2,8 +2,6 @@ use mongodb::bson::oid::ObjectId;
 use serde::{Serialize, Deserialize};
 use mongodb::bson::DateTime as BsonDateTime;
 
-
-
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Students {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
