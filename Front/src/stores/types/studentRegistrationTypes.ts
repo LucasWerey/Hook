@@ -17,7 +17,7 @@ export interface Form2State {
 }
 
 export interface RegistrationState {
-  step: number
+  step: 1 | 2 | 3 | 4
   form1: Form1State
   form2: Form2State
 }

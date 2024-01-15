@@ -10,6 +10,7 @@ declare module 'vue' {
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
+    Input: typeof import('@lucaswerey/dslib-pfe')['Input']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
     NavBar: typeof import('./components/navBars/NavBar.vue')['default']
     NavBarWelcome: typeof import('./components/navBars/NavBarWelcome.vue')['default']
@@ -19,6 +20,8 @@ declare module 'vue' {
     SnackBar: typeof import('@lucaswerey/dslib-pfe')['SnackBar']
     StepIndicator: typeof import('@lucaswerey/dslib-pfe')['StepIndicator']
     StudentForm: typeof import('./components/signUp/students/StudentForm.vue')['default']
+    StudentFormStep1: typeof import('./components/signUp/students/StudentFormStep1.vue')['default']
+    StudentFormStep2: typeof import('./components/signUp/students/StudentFormStep2.vue')['default']
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
   }
 }

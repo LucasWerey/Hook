@@ -27,7 +27,7 @@
     <hr class="my-8 h-px w-full border-0 bg-basic-black" />
   </div>
   <form class="flex w-full flex-col justify-center gap-6 lg:w-1/2">
-    <div class="items-start lg:w-1/2">
+    <div class="flex flex-col gap-6 md:flex-row">
       <InputField
         class="w-full"
         v-model="emailModel"
@@ -37,6 +37,7 @@
         :state="emailFailed ? 'error' : 'default'"
         @blur="isEmailValid"
       />
+      <p class="invisible w-full" />
     </div>
     <div class="flex flex-col gap-6 md:flex-row">
       <InputField
