@@ -10,7 +10,7 @@ pub fn create_students(
 ) -> Result<Json<InsertOneResult>, Status> {
     let data = Students {
         user_id: new_students.user_id,
-        duree: new_students.duree,
+        duree: new_students.duree.to_owned(),
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
         date_debut: new_students.date_debut,
@@ -51,7 +51,7 @@ pub fn update_students(
     };
     let data = Students {
         user_id: Some(ObjectId::parse_str(&id).unwrap()),
-        duree: new_students.duree,
+        duree: new_students.duree.to_owned(),
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
         date_debut: new_students.date_debut,

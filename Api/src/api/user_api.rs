@@ -44,7 +44,7 @@ pub fn create_user(
             if data.statut == "student" {
                 let student_data = Students {
                     user_id: Some(user.inserted_id.as_object_id().unwrap().clone()), // Use the same ID as the user
-                    duree: 0, // You need to set a default value or get this information from somewhere else
+                    duree: String::new(), // You need to set a default value or get this information from somewhere else
                     niveau: String::new(),
                     type_contrat: String::new(),
                     date_debut: BsonDateTime::now(),

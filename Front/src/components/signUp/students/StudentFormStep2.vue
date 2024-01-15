@@ -150,7 +150,7 @@ const handleSubmit = () => {
     firstname: firstNameModel.value,
     schoolGrade: schoolGradeModel.value,
     contractType: selectedContractModel.value,
-    duration: Number(durationModel.value),
+    duration: durationModel.value + ' ' + durationTypeModel.value,
     start: new Date(startingDateModel.value),
     location: placeModel.value,
     actualLookingFor: lookingForModel.value

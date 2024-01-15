@@ -147,7 +147,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
-"duree":4,
+"duree":"4 mois",
 "niveau": "BAC+4",
 "type_contrat": "stage",
 "date_debut": {

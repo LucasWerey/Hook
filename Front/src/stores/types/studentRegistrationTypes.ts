@@ -10,7 +10,7 @@ export interface Form2State {
   firstname: string
   schoolGrade: string
   contractType: 'stage' | 'alternance'
-  duration: number
+  duration: string
   start: Date
   location: string
   actualLookingFor: boolean
