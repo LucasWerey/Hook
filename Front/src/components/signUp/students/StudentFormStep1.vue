@@ -116,14 +116,29 @@ const isConfirmPasswordValid = () => {
     confirmPasswordModel.value !== ''
 }
 
+const isFormValid = () => {
+  if (emailModel.value === '' || passwordModel.value === '' || confirmPasswordModel.value === '') {
+    return false
+  }
+
+  if (emailFailed.value || passwordFailed.value || confirmPasswordFailed.value) {
+    return false
+  }
+
+  return true
+}
 const handleSubmit = () => {
-  store.updateForm1({
-    email: emailModel.value,
-    password: passwordModel.value,
-    keepLogged: keepLogged.value
-  })
-  emit('submit')
+  if (isFormValid()) {
+    store.updateForm1({
+      email: emailModel.value,
+      password: passwordModel.value,
+      keepLogged: keepLogged.value
+    })
+    emit('submit')
+  } else {
+    emit('failed')
+  }
 }
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'failed'])
 </script>

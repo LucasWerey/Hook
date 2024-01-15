@@ -144,21 +144,38 @@ const goBack = () => {
   if (store.step > 1) store.prevStep()
 }
 
+const isAllInputFilled = computed(() => {
+  return (
+    lastNameModel.value !== '' &&
+    firstNameModel.value !== '' &&
+    schoolGradeModel.value !== '' &&
+    selectedContractModel.value !== undefined &&
+    durationModel.value !== '' &&
+    durationTypeModel.value !== '' &&
+    startingDateModel.value !== '' &&
+    placeModel.value !== ''
+  )
+})
+
 const handleSubmit = () => {
-  store.updateForm2({
-    name: lastNameModel.value,
-    firstname: firstNameModel.value,
-    schoolGrade: schoolGradeModel.value,
-    contractType: selectedContractModel.value,
-    duration: durationModel.value + ' ' + durationTypeModel.value,
-    start: new Date(startingDateModel.value),
-    location: placeModel.value,
-    actualLookingFor: lookingForModel.value
-  })
-  emit('submit')
+  if (isAllInputFilled.value) {
+    store.updateForm2({
+      name: lastNameModel.value,
+      firstname: firstNameModel.value,
+      schoolGrade: schoolGradeModel.value,
+      contractType: selectedContractModel.value,
+      duration: durationModel.value + ' ' + durationTypeModel.value,
+      start: new Date(startingDateModel.value),
+      location: placeModel.value,
+      actualLookingFor: lookingForModel.value
+    })
+    emit('submit')
+  } else {
+    emit('failed')
+  }
 }
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'failed'])
 </script>
 
 <style scoped>

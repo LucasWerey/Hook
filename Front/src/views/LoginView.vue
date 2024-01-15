@@ -96,17 +96,23 @@
       class="lg:h-100 hidden lg:relative lg:-z-[1] lg:block lg:w-2/3 lg:bg-basic-lightgrey"
     >
       <div
-        class="pointer-events-none absolute left-0 top-0 z-[2] flex h-full w-full items-center justify-center align-middle text-17 font-800 text-primary-moonstone backdrop-blur-[120px]"
+        class="pointer-events-none absolute left-0 top-0 z-[2] flex h-full w-full items-center justify-center align-middle text-17 font-800 text-primary-moonstone backdrop-blur-[100px]"
       >
         {{ loginWords.blobText }}
       </div>
       <div ref="blobItems" class="absolute left-0 top-0 z-[1] h-full w-full">
-        <div ref="blob1" class="blob h-[600px] w-[600px] rounded-full bg-primary-moonstone" />
-        <div ref="blob2" class="blob h-[600px] w-[600px] rounded-full bg-primary-platinum" />
-        <div ref="blob3" class="blob h-[600px] w-[600px] rounded-full bg-primary-powder" />
-        <div ref="blob4" class="blob h-[600px] w-[600px] rounded-full bg-primary-moonstone" />
-        <div ref="blob5" class="blob h-[600px] w-[600px] rounded-full bg-primary-platinum" />
-        <div ref="blob6" class="blob h-[600px] w-[600px] rounded-full bg-primary-powder" />
+        <div ref="blob1" class="blob h-[200px] w-[200px] rounded-full bg-primary-moonstone" />
+        <div ref="blob2" class="blob h-[200px] w-[200px] rounded-full bg-primary-platinum" />
+        <div ref="blob3" class="blob h-[200px] w-[200px] rounded-full bg-primary-powder" />
+        <div ref="blob4" class="blob h-[200px] w-[200px] rounded-full bg-primary-moonstone" />
+        <div ref="blob5" class="blob h-[200px] w-[200px] rounded-full bg-primary-platinum" />
+        <div ref="blob6" class="blob h-[200px] w-[200px] rounded-full bg-primary-powder" />
+        <div ref="blob7" class="blob h-[200px] w-[200px] rounded-full bg-primary-moonstone" />
+        <div ref="blob8" class="blob h-[200px] w-[200px] rounded-full bg-primary-platinum" />
+        <div ref="blob9" class="blob h-[200px] w-[200px] rounded-full bg-primary-powder" />
+        <div ref="blob10" class="blob h-[200px] w-[200px] rounded-full bg-primary-moonstone" />
+        <div ref="blob11" class="blob h-[200px] w-[200px] rounded-full bg-primary-platinum" />
+        <div ref="blob12" class="blob h-[200px] w-[200px] rounded-full bg-primary-powder" />
       </div>
     </div>
   </div>
@@ -152,6 +158,12 @@ const blob3: Ref<HTMLElement | null> = ref(null)
 const blob4: Ref<HTMLElement | null> = ref(null)
 const blob5: Ref<HTMLElement | null> = ref(null)
 const blob6: Ref<HTMLElement | null> = ref(null)
+const blob7: Ref<HTMLElement | null> = ref(null)
+const blob8: Ref<HTMLElement | null> = ref(null)
+const blob9: Ref<HTMLElement | null> = ref(null)
+const blob10: Ref<HTMLElement | null> = ref(null)
+const blob11: Ref<HTMLElement | null> = ref(null)
+const blob12: Ref<HTMLElement | null> = ref(null)
 
 // USE test@m.com psw pass
 const getLoggedInUser = async () => {
@@ -256,7 +268,20 @@ class Blob {
 }
 
 function initBlobs() {
-  const blobs = [blob1.value, blob2.value, blob3.value, blob4.value, blob5.value, blob6.value]
+  const blobs = [
+    blob1.value,
+    blob2.value,
+    blob3.value,
+    blob4.value,
+    blob5.value,
+    blob6.value,
+    blob7.value,
+    blob8.value,
+    blob9.value,
+    blob10.value,
+    blob11.value,
+    blob12.value
+  ]
     .filter(el => el !== null)
     .map(el => new Blob(el as HTMLElement))
   const element = blobItems.value

@@ -18,15 +18,26 @@
         </h2>
       </div>
       <div v-show="store.step === 1" class="flex w-full flex-col items-center gap-4 lg:gap-12">
-        <StudentFormStep1 @submit="handleSubmit" key="1" />
+        <StudentFormStep1 @submit="handleSubmit" @failed="onFailed" key="1" />
       </div>
       <div v-show="store.step === 2" class="flex w-full flex-col items-center gap-4 lg:gap-12">
-        <StudentFormStep2 @submit="handleSubmit" key="2" />
+        <StudentFormStep2 @submit="handleSubmit" @failed="onFailed" key="2" />
       </div>
     </div>
     <div class="absolute left-9 top-9">
       <IconsBase name="moveLeft" class="h-9 w-9 cursor-pointer" color="powder" @click="goBack" />
     </div>
+    <transition name="fade">
+      <SnackBar
+        v-if="showSnackbar"
+        :type="success ? 'validation' : 'error'"
+        close="no"
+        size="small"
+        class="absolute bottom-2 right-2 top-5 z-50 md:w-auto"
+      >
+        {{ success ? successMessage : errorMessage }}
+      </SnackBar>
+    </transition>
   </div>
 </template>
 
@@ -34,6 +45,10 @@
 type StepNumber = 1 | 2 | undefined
 
 const stepNumber: Ref<StepNumber> = ref(2)
+const showSnackbar = ref(false)
+const success = ref(false)
+const successMessage = ref('')
+const errorMessage = ref('')
 
 const store = useRegistrationStore()
 
@@ -102,6 +117,21 @@ const goBack = () => {
   if (store.step > 1) store.prevStep()
 }
 
+const onFailed = () => {
+  showSnackbar.value = true
+  success.value = false
+  successMessage.value = ''
+  errorMessage.value = 'Veuillez remplir tous les champs'
+  setTimeout(resetSnackbar, 5000)
+}
+
+const resetSnackbar = () => {
+  showSnackbar.value = false
+  success.value = false
+  successMessage.value = ''
+  errorMessage.value = ''
+}
+
 onBeforeRouteLeave((_, __, next) => {
   if (store.step > 1) {
     store.prevStep()
@@ -111,3 +141,14 @@ onBeforeRouteLeave((_, __, next) => {
   }
 })
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
