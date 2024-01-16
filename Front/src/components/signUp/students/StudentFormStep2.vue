@@ -160,14 +160,14 @@ const isAllInputFilled = computed(() => {
 const handleSubmit = () => {
   if (isAllInputFilled.value) {
     store.updateForm2({
-      name: lastNameModel.value,
-      firstname: firstNameModel.value,
-      schoolGrade: schoolGradeModel.value,
+      actualLookingFor: lookingForModel.value,
       contractType: selectedContractModel.value,
       duration: durationModel.value + ' ' + durationTypeModel.value,
-      start: new Date(startingDateModel.value),
+      firstname: firstNameModel.value,
       location: placeModel.value,
-      actualLookingFor: lookingForModel.value
+      name: lastNameModel.value,
+      schoolGrade: schoolGradeModel.value,
+      start: new Date(startingDateModel.value)
     })
     emit('submit')
   } else {

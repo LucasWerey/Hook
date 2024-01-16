@@ -71,9 +71,9 @@ const studentId = ref('')
 
 const createUserStudent = async () => {
   const data = {
+    email: store.form1.email,
     firstname: store.form2.firstname,
     lastname: store.form2.name,
-    email: store.form1.email,
     password: store.form1.password,
     statut: 'student'
   }
@@ -91,16 +91,16 @@ const createUserStudent = async () => {
 
 const updateUserStudent = async () => {
   const data = {
-    duree: store.form2.duration,
-    niveau: store.form2.schoolGrade,
-    type_contrat: store.form2.contractType,
     date_debut: {
       $date: {
         $numberLong: String(store.form2.start.getTime())
       }
     },
+    duree: store.form2.duration,
     lieu: store.form2.location,
-    recherche: store.form2.actualLookingFor
+    niveau: store.form2.schoolGrade,
+    recherche: store.form2.actualLookingFor,
+    type_contrat: store.form2.contractType
   }
   console.log(store.form2.start.toISOString(), typeof store.form2.start.toISOString())
   try {

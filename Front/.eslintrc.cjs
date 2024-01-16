@@ -2,8 +2,6 @@
 require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
-  root: true,
-  plugins: ['filename-rules'],
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
@@ -11,27 +9,7 @@ module.exports = {
     '@vue/eslint-config-prettier/skip-formatting',
     'prettier'
   ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  },
   ignorePatterns: ['dist', 'node_modules', '**/*.js', '**/*.d.ts'],
-  rules: {
-    'vue/multi-word-component-names': 'off',
-    'vue/component-tags-order': [
-      'error',
-      {
-        order: ['template', 'script', 'style']
-      }
-    ],
-    'filename-rules/match': [
-      2,
-      {
-        '.vue': 'PascalCase',
-        '.ts': 'camelCase',
-        '.js': 'camelCase'
-      }
-    ]
-  },
   overrides: [
     {
       files: './*.js',
@@ -39,5 +17,29 @@ module.exports = {
         'no-undef': 'off'
       }
     }
-  ]
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
+
+  plugins: ['filename-rules', 'sort-keys-fix'],
+  root: true,
+  rules: {
+    'filename-rules/match': [
+      2,
+      {
+        '.js': 'camelCase',
+        '.ts': 'camelCase',
+        '.vue': 'PascalCase'
+      }
+    ],
+    'sort-keys-fix/sort-keys-fix': ['warn', 'asc', { caseSensitive: false, natural: true }],
+    'vue/component-tags-order': [
+      'error',
+      {
+        order: ['template', 'script', 'style']
+      }
+    ],
+    'vue/multi-word-component-names': 'off'
+  }
 }

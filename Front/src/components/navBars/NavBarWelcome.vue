@@ -22,8 +22,8 @@
 import router from '../../router'
 
 const wording = {
-  inscription: 'S’inscrire',
-  connexion: 'Se connecter'
+  connexion: 'Se connecter',
+  inscription: 'S’inscrire'
 }
 
 const onClickLogin = () => {

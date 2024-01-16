@@ -131,8 +131,8 @@ const handleSubmit = () => {
   if (isFormValid()) {
     store.updateForm1({
       email: emailModel.value,
-      password: passwordModel.value,
-      keepLogged: keepLogged.value
+      keepLogged: keepLogged.value,
+      password: passwordModel.value
     })
     emit('submit')
   } else {

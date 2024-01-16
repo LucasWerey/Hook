@@ -7,29 +7,29 @@ import {
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/HomeView.vue'),
     beforeEnter: redirectToAboutIfUserExists,
-    meta: { requiresAuth: false }
+    component: () => import('../views/HomeView.vue'),
+    meta: { requiresAuth: false },
+    name: 'home',
+    path: '/'
   },
   {
-    path: '/about',
-    name: 'about',
     component: () => import('../views/AboutView.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    name: 'about',
+    path: '/about'
   },
   {
-    path: '/login',
-    name: 'login',
     component: () => import('../views/LoginView.vue'),
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: false },
+    name: 'login',
+    path: '/login'
   },
   {
-    path: '/signup',
-    name: 'signup',
     component: () => import('../views/SignupView.vue'),
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: false },
+    name: 'signup',
+    path: '/signup'
   }
 ]
 

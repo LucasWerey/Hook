@@ -22,8 +22,8 @@ export default mergeConfig(
         ]
       },
       environment: 'jsdom',
-      include: ['./tests/**/*.ts'],
       exclude: [...configDefaults.exclude, 'e2e/*', './tests/setup.ts'],
+      include: ['./tests/**/*.ts'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       setupFiles: './tests/setup.ts'
     }
