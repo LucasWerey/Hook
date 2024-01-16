@@ -73,7 +73,6 @@ We adhere to the [Conventional Commits](https://www.conventionalcommits.org/) sp
 
 A commit message consists of a **header**, **body** and **footer**. The header has a special format that includes a **type**, a **scope** and a **description**:
 
-
 ### Type
 
 Must be one of the following:
@@ -89,7 +88,7 @@ Must be one of the following:
 
 ### Scope
 
-The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages.
+The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages.)
 
 ### Description
 
@@ -98,5 +97,3 @@ The description is a short description of the change:
 - use the imperative, present tense: "change" not "changed" nor "changes"
 - don't capitalize the first letter
 - no dot (.) at the end
-
-Example of a commit message:
