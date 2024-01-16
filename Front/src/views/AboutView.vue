@@ -1,37 +1,44 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <p>{{ formattedResponse }}</p>
-    <SnackBar
-      v-if="showSnackbar"
-      type="error"
-      close="no"
-      size="small"
-      class="absolute bottom-6 left-1/2 z-50 -translate-x-1/2"
-    >
-      {{ errorMessage }}
-    </SnackBar>
+  <div class="w-full flex-1 pt-20">
+    <NavBarWelcome v-if="!hasToken" />
+    <NavBarStudent v-if="isStudent" />
+    <NavBarCompany v-if="isCompany" />
+    {{ email }}
   </div>
+  <SnackBar v-if="showSnackbar" type="error" size="small" close="no">
+    {{ errorMessage }}
+  </SnackBar>
 </template>
 
 <script setup lang="ts">
-onMounted(async () => {
-  console.log(await doesCityExist('pAris'))
-})
-
 let response = ref()
 let showSnackbar = ref(false)
 let errorMessage = ref('')
+const email = ref('')
+const isStudent = ref(false)
+const isCompany = ref(false)
+const hasToken = ref(false)
 
 onMounted(async () => {
   try {
-    response.value = await getAllUsers()
+    response.value = await getUserInfoFromToken(AuthenticationUtils.getToken() || '')
+    console.log(response.value)
+    email.value = response.value.email
+    hasToken.value = true
+    if (response.value.statut === 'student') {
+      isStudent.value = true
+    } else {
+      isCompany.value = true
+    }
+    console.log(isStudent.value)
   } catch (error) {
-    const apiError = handleApiError(error)
-    errorMessage.value = apiError.message
+    console.log(error)
+    if ((error as any).response && (error as any).response.status === 500) {
+      errorMessage.value = 'Invalid or expired token.'
+    } else {
+      errorMessage.value = (error as Error).message
+    }
     showSnackbar.value = true
   }
 })
-
-let formattedResponse = computed(() => JSON.stringify(response.value, null, 2))
 </script>

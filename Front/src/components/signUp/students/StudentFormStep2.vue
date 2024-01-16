@@ -5,12 +5,19 @@
         Informations generales
       </h3>
       <div class="flex items-start gap-6">
-        <InputField class="w-full" v-model="lastNameModel" placeholder="PLACEHOLDER" label="NOM*" />
+        <InputField
+          class="w-full"
+          v-model="lastNameModel"
+          placeholder="PLACEHOLDER"
+          label="NOM*"
+          inputType="text"
+        />
         <InputField
           class="w-full"
           v-model="firstNameModel"
           placeholder="PLACEHOLDER"
           label="PRENOM*"
+          inputType="text"
         />
       </div>
       <div class="flex items-start gap-6">
@@ -19,6 +26,7 @@
           v-model="schoolGradeModel"
           placeholder="PLACEHOLDER"
           label="NIVEAU D'ETUDES*"
+          inputType="text"
         />
         <p class="invisible w-full"></p>
       </div>
@@ -58,10 +66,11 @@
         <div class="flex w-full gap-6">
           <InputField
             class="w-full"
-            v-model.number="durationModel"
+            :modelValue="durationModel.toString()"
+            @update:modelValue="val => (durationModel = Number(val))"
             placeholder="0"
             label="DUREE*"
-            type="number"
+            inputType="number"
           />
           <select
             class="h-[48px] w-full items-start self-end rounded-md border-2 border-basic-grey bg-basic-white px-4 py-3 text-primary-moonstone focus:border-primary-charcoal"
@@ -69,10 +78,10 @@
             name="cars"
             v-model="durationTypeModel"
           >
-            <option value="an">An(s)</option>
+            <option value="an(s)">An(s)</option>
             <option value="mois">Mois</option>
-            <option value="semaines">Semaines</option>
-            <option value="jours">Jours</option>
+            <option value="semaine(s)">Semaine(s)</option>
+            <option value="jour(s)">Jour(s)</option>
           </select>
         </div>
         <InputField
@@ -133,7 +142,7 @@ const lastNameModel: Ref<string> = ref('')
 const firstNameModel: Ref<string> = ref('')
 const schoolGradeModel: Ref<string> = ref('')
 const selectedContractModel: Ref<'stage' | 'alternance' | undefined> = ref('stage')
-const durationModel: Ref<string> = ref('')
+const durationModel: Ref<number> = ref(0)
 const durationTypeModel: Ref<string> = ref('an')
 const startingDateModel: Ref<string> = ref('')
 const placeModel: Ref<string> = ref('')
@@ -150,7 +159,7 @@ const isAllInputFilled = computed(() => {
     firstNameModel.value !== '' &&
     schoolGradeModel.value !== '' &&
     selectedContractModel.value !== undefined &&
-    durationModel.value !== '' &&
+    durationModel.value !== 0 &&
     durationTypeModel.value !== '' &&
     startingDateModel.value !== '' &&
     placeModel.value !== ''
@@ -162,7 +171,7 @@ const handleSubmit = () => {
     store.updateForm2({
       actualLookingFor: lookingForModel.value,
       contractType: selectedContractModel.value,
-      duration: durationModel.value + ' ' + durationTypeModel.value,
+      duration: durationModel.value.toString() + ' ' + durationTypeModel.value,
       firstname: firstNameModel.value,
       location: placeModel.value,
       name: lastNameModel.value,

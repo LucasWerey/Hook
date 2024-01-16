@@ -88,3 +88,27 @@ export async function loginUser(email: string, password: string) {
     throw handleApiError(error)
   }
 }
+
+import axios from 'axios'
+
+/**
+ * Fetches the email from a JWT token by making a GET request to the /user/email endpoint.
+ *
+ * @param {string} token - The JWT token.
+ * @returns {Promise<string>} The email from the JWT token.
+ */
+export async function getEmailFromToken(token: string): Promise<string> {
+  const response = await axios.get(`http://127.0.0.1:8000/user/email/${token}`)
+  return response.data
+}
+
+/**
+ * Fetches the user information from a JWT token by making a GET request to the /user/info endpoint.
+ *
+ * @param {string} token - The JWT token.
+ * @returns {Promise<any>} The user information from the JWT token.
+ */
+export async function getUserInfoFromToken(token: string): Promise<any> {
+  const response = await axios.get(`http://127.0.0.1:8000/user/info/${token}`)
+  return response.data
+}

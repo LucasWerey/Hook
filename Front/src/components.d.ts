@@ -7,12 +7,19 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
+    ChevronDownIcon: typeof import('@lucaswerey/dslib-pfe')['ChevronDownIcon']
+    CloseIcon: typeof import('@lucaswerey/dslib-pfe')['CloseIcon']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
     Input: typeof import('@lucaswerey/dslib-pfe')['Input']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
+    LogoIcon: typeof import('@lucaswerey/dslib-pfe')['LogoIcon']
+    Na: typeof import('@lucaswerey/dslib-pfe')['Na']
     NavBar: typeof import('./components/navBars/NavBar.vue')['default']
+    NavBarCompany: typeof import('./components/navBars/NavBarCompany.vue')['default']
+    NavBarStudent: typeof import('./components/navBars/NavBarStudent.vue')['default']
     NavBarWelcome: typeof import('./components/navBars/NavBarWelcome.vue')['default']
     RecruiterSignup: typeof import('./components/signUp/RecruiterSignup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

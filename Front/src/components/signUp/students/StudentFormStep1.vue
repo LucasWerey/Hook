@@ -36,6 +36,7 @@
         :hint="emailHint"
         :state="emailFailed ? 'error' : 'default'"
         @blur="isEmailValid"
+        inputType="email"
       />
       <p class="invisible w-full" />
     </div>
@@ -48,7 +49,7 @@
         :hint="studentSignup.passwordHint"
         :state="passwordFailed ? 'error' : 'default'"
         @blur="checkPasswordFields"
-        password
+        inputType="password"
       />
       <InputField
         class="w-full"
@@ -58,7 +59,7 @@
         :hint="studentSignup.confirmPasswordHint"
         :state="confirmPasswordFailed ? 'error' : 'default'"
         @blur="checkPasswordFields"
-        password
+        inputType="password"
       />
     </div>
     <div class="flex w-fit items-center gap-2">

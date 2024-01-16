@@ -63,11 +63,13 @@ declare global {
   const getAllUsers: typeof import('./utils/userApiUtils')['getAllUsers']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getEmailFromToken: typeof import('./utils/userApiUtils')['getEmailFromToken']
   const getLocalStorage: typeof import('./utils/storageUtils')['getLocalStorage']
   const getQueryParameter: typeof import('./utils/getQueryRouteUtils')['getQueryParameter']
   const getSessionStorage: typeof import('./utils/storageUtils')['getSessionStorage']
   const getStudent: typeof import('./utils/studentApiUtils')['getStudent']
   const getUser: typeof import('./utils/userApiUtils')['getUser']
+  const getUserInfoFromToken: typeof import('./utils/userApiUtils')['getUserInfoFromToken']
   const h: typeof import('vue')['h']
   const handleApiError: typeof import('./utils/apiErrorUtils')['handleApiError']
   const homeWords: typeof import('./data/wording')['homeWords']
@@ -424,11 +426,13 @@ declare module 'vue' {
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
     readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
+    readonly getUserInfoFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getUserInfoFromToken']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
     readonly homeWords: UnwrapRef<typeof import('./data/wording')['homeWords']>
@@ -773,11 +777,13 @@ declare module '@vue/runtime-core' {
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
     readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
     readonly getUser: UnwrapRef<typeof import('./utils/userApiUtils')['getUser']>
+    readonly getUserInfoFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getUserInfoFromToken']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleApiError: UnwrapRef<typeof import('./utils/apiErrorUtils')['handleApiError']>
     readonly homeWords: UnwrapRef<typeof import('./data/wording')['homeWords']>

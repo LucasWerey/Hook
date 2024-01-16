@@ -55,7 +55,7 @@
               :hint="loginWords.passwordHint"
               :state="passwordfailed ? 'error' : 'default'"
               hasIcon
-              password
+              input-type="password"
             />
             <a href="" class="text-4 font-700 text-primary-moonstone underline">{{
               loginWords.forgottenPass

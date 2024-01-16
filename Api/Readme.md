@@ -194,6 +194,26 @@ curl -X POST -H "Content-Type: application/json" -d '{"email":"test@example.com"
 
 In this command, replace `test@example.com` and `password` with the actual email and password you want to test. If the login is successful, the server will print "User connected" to the console.
 
+### Get Email from Token - `GET /user/email/<token>`
+
+This endpoint returns the email associated with the provided JWT token.
+
+```bash
+curl -X GET http://127.0.0.1:8000/user/email/<token>
+```
+
+Replace `<token>` with the actual JWT token. If the operation is successful, the server will return the email associated with the token.
+
+### Get User Info from Token - `GET /user/info/<token>`
+
+This endpoint returns the user information associated with the provided JWT token.
+
+```bash
+curl -X GET http://127.0.0.1:8000/user/info/<token>
+```
+
+Replace `<token>` with the actual JWT token. If the operation is successful, the server will return the user information associated with the token.
+
 ## Docker Deployment
 
 To deploy the API using docker follow these steps :
