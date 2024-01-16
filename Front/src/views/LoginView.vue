@@ -176,6 +176,7 @@ const getLoggedInUser = async () => {
     const data = await loginUser(emailModel.value, passwordModel.value)
     if (keepLogged.value) setLocalStorage('authToken', data.token)
     handleResponse(data)
+    router.push({ name: 'about' })
   } catch (error) {
     handleError(error)
   }

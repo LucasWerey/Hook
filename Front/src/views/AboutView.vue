@@ -34,7 +34,13 @@ onMounted(async () => {
   } catch (error) {
     console.log(error)
     if ((error as any).response && (error as any).response.status === 500) {
-      errorMessage.value = 'Invalid or expired token.'
+      AuthenticationUtils.removeToken()
+      errorMessage.value = 'Invalid token.'
+      router.push({ name: 'login' })
+    } else if ((error as any).response && (error as any).response.status === 401) {
+      AuthenticationUtils.removeToken()
+      errorMessage.value = 'Expired token.'
+      router.push({ name: 'login' })
     } else {
       errorMessage.value = (error as Error).message
     }

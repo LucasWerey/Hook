@@ -3,7 +3,7 @@ use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
 use bcrypt::verify;
-use jsonwebtoken::{encode, EncodingKey, Header, Algorithm, DecodingKey, Validation, decode};
+use jsonwebtoken::{encode, EncodingKey, Header, Algorithm, DecodingKey, Validation, decode, errors::ErrorKind::ExpiredSignature};
 use std::collections::BTreeMap;
 use chrono::{Utc, Duration};
 use std::env;
@@ -147,7 +147,7 @@ pub fn login(
 
                 let claims = Claims {
                     sub: user.email,
-                    exp: (Utc::now() + Duration::hours(24)).timestamp() as usize,
+                    exp: (Utc::now() + Duration::minutes(30)).timestamp() as usize,
                 };
                 let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
                 let key = EncodingKey::from_secret(secret_key.as_ref());
@@ -163,7 +163,10 @@ pub fn login(
                 Err(Status::Unauthorized)
             }
         },
-        Err(_) => Err(Status::InternalServerError),
+        Err(e) => {
+            println!("Error: {:?}", e);
+            Err(Status::InternalServerError)
+        },
     }
 }
 
@@ -175,7 +178,10 @@ pub fn get_email_from_token(token: String) -> Result<Json<String>, Status> {
     let validation = Validation::new(Algorithm::HS512);
     match decode::<Claims>(&token, &key, &validation) {
         Ok(c) => Ok(Json(c.claims.sub)),
-        Err(_) => Err(Status::InternalServerError),
+        Err(err) => match *err.kind() {
+            ExpiredSignature => Err(Status::Unauthorized),
+            _ => Err(Status::InternalServerError),
+        },
     }
 }
 
@@ -193,6 +199,9 @@ pub fn get_user_info_from_token(db: &State<MongoRepo>, token: String) -> Result<
                 Err(_) => Err(Status::InternalServerError),
             }
         },
-        Err(_) => Err(Status::InternalServerError),
+        Err(err) => match *err.kind() {
+            ExpiredSignature => Err(Status::Unauthorized),
+            _ => Err(Status::InternalServerError),
+        },
     }
 }
