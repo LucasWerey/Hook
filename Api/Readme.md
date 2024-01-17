@@ -85,12 +85,12 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 curl -X POST -H "Content-Type: application/json" -d '{
 "n_siret": "123 456 789 12345",
-"nom_entreprise": "Bouygues",
-"adresse": "3 cite Falguiere",
-"code_postal": 75016,
-"ville": "Paris",
-"pays": "France",
-"statut_juridique": "SCI",
+"name_company": "Bouygues",
+"adress": "3 cite Falguiere",
+"postal_code": 75016,
+"city": "Paris",
+"country": "France",
+"legal_status": "SCI",
 "nb_emp": 15,
 "emp": "65a6971af045e1d0c14cdc9f",
 "admin": "65a6971af045e1d0c14cdc9f"
@@ -149,12 +149,12 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 
 curl -X PUT -H "Content-Type: application/json" -d '{
 "n_siret": "123 456 789 12345",
-"nom_entreprise": "Adaltas",
-"adresse": "3 cite Falguiere",
-"code_postal": 75016,
-"ville": "Paris",
-"pays": "France",
-"statut_juridique": "SCI",
+"name_company": "Adaltas",
+"adress": "3 cite Falguiere",
+"postal_code": 75016,
+"city": "Paris",
+"country": "France",
+"legal_status": "SCI",
 "nb_emp": 15,
 "emp": "65a6971af045e1d0c14cdc9f",
 "admin": "65a6971af045e1d0c14cdc9f"
