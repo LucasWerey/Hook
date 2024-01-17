@@ -13,7 +13,7 @@ use crate::models::companies_model::Companies;
 
 pub struct MongoRepo {
     col: Collection<User>,
-    col2: Collection<Students>
+    col2: Collection<Students>,
     col3: Collection<Companies>
 }
 
@@ -202,7 +202,7 @@ pub struct MongoRepo {
                 nb_emp: new_companies.nb_emp,
                 emp: new_companies.emp,
                 admin: new_companies.admin,
-                offre: new_companies.offre          
+              /*  offre: new_companies.offre */         
             };
             let companies = self
                 .col3
@@ -229,17 +229,17 @@ pub struct MongoRepo {
             let new_doc = doc! {
                 "$set":
                     {
-                        "n_siret": new_students.n_siret,
-                        "nom_entreprise": new_students.nom_entreprise,
-                        "adresse": new_students.adresse,
-                        "code_postal": new_students.code_postal,
-                        "ville": new_students.ville,
-                        "pays": new_students.pays,
-                        "statut_juridique": new_students.statut_juridique,
-                        "nb_emp": new_students.nb_emp,
-                        "emp": new_students.emp,
-                        "admin": new_students.admin,
-                        "offre": new_students.offre
+                        "n_siret": new_companies.n_siret,
+                        "nom_entreprise": new_companies.nom_entreprise,
+                        "adresse": new_companies.adresse,
+                        "code_postal": new_companies.code_postal,
+                        "ville": new_companies.ville,
+                        "pays": new_companies.pays,
+                        "statut_juridique": new_companies.statut_juridique,
+                        "nb_emp": new_companies.nb_emp,
+                        "emp": new_companies.emp,
+                        "admin": new_companies.admin,
+                      /*  "offre": new_companies.offre*/
                     },
             };
             let updated_doc = self

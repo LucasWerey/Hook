@@ -83,6 +83,20 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 }' http://127.0.0.1:8000/student
 
+curl -X POST -H "Content-Type: application/json" -d '{
+"n_siret": "123 456 789 12345",
+"nom_entreprise": "Bouygues",
+"adresse": "3 cite Falguiere",
+"code_postal": 75016,
+"ville": "Paris",
+"pays": "France",
+"statut_juridique": "SCI",
+"nb_emp": 15,
+"emp": "65a6971af045e1d0c14cdc9f",
+"admin": "65a6971af045e1d0c14cdc9f"
+
+}' http://127.0.0.1:8000/companie
+
 ### Get All Users - `GET /users`
 
 Returns a list of all users in the system. No request body is required for this endpoint.
@@ -120,7 +134,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 ```
 
 curl -X PUT -H "Content-Type: application/json" -d '{
-"duree":4,
+"duree":"4",
 "niveau": "BAC+4",
 "type_contrat": "stage",
 "date_debut": {
@@ -132,6 +146,19 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "recherche": false
 
 }' http://127.0.0.1:8000/student/65a17960c47012ed8f140bfe
+
+curl -X PUT -H "Content-Type: application/json" -d '{
+"n_siret": "123 456 789 12345",
+"nom_entreprise": "Adaltas",
+"adresse": "3 cite Falguiere",
+"code_postal": 75016,
+"ville": "Paris",
+"pays": "France",
+"statut_juridique": "SCI",
+"nb_emp": 15,
+"emp": "65a6971af045e1d0c14cdc9f",
+"admin": "65a6971af045e1d0c14cdc9f"
+}' http://127.0.0.1:8000/companie/65a7e00faed2ab6c22c958d1
 
 ### Delete User - `DELETE /user/<id>`
 
