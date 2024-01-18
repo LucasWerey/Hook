@@ -89,6 +89,24 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 > To create a student statut must be set to "student"
 
+#### Create Companie - `POST /company`
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+"n_siret": "123 456 789 12345",
+"name_company": "Bouygues",
+"adress": "3 cite Falguiere",
+"postal_code": 75016,
+"city": "Paris",
+"country": "France",
+"legal_status": "SCI",
+"nb_emp": 15,
+"emp": "65a6971af045e1d0c14cdc9f",
+"admin": "65a6971af045e1d0c14cdc9f"
+
+}' http://127.0.0.1:8000/companie
+```
+
 ### Get queries
 
 Returns a list of all users in the system. No request body is required for this endpoint.
@@ -159,6 +177,23 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "recherche": false
 
 }' http://127.0.0.1:8000/student/65a2c1f81cb256b4957fee3c
+```
+
+#### Update Company - `PUT /companie/<id>``
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{
+"n_siret": "123 456 789 12345",
+"name_company": "Adaltas",
+"adress": "3 cite Falguiere",
+"postal_code": 75016,
+"city": "Paris",
+"country": "France",
+"legal_status": "SCI",
+"nb_emp": 15,
+"emp": "65a6971af045e1d0c14cdc9f",
+"admin": "65a6971af045e1d0c14cdc9f"
+}' http://127.0.0.1:8000/companie/65a7e00faed2ab6c22c958d1
 ```
 
 ### Delete queries

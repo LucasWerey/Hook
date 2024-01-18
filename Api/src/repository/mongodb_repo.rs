@@ -9,10 +9,12 @@ use mongodb::{
 };
 use crate::models::user_model::User;
 use crate::models::students_model::Students;
+use crate::models::companies_model::Companies;
 
 pub struct MongoRepo {
     col: Collection<User>,
-    col2: Collection<Students>
+    col2: Collection<Students>,
+    col3: Collection<Companies>
 }
 
 
@@ -27,7 +29,8 @@ pub struct MongoRepo {
             let db = client.database("Pfe");
             let col: Collection<User> = db.collection("users");
             let col2: Collection<Students>=db.collection("students");
-            MongoRepo { col, col2 }
+            let col3: Collection<Companies>=db.collection("companies");
+            MongoRepo { col, col2, col3 }
         }
 
         pub fn create_user(&self, new_user: User) -> Result<InsertOneResult, Error> {
@@ -185,4 +188,88 @@ pub struct MongoRepo {
             let students = cursors.map(|doc| doc.unwrap()).collect();
             Ok(students)
         }
+
+        pub fn create_companies(&self, new_companies: Companies) -> Result<InsertOneResult, Error> {
+            let new_doc = Companies {
+                id: None,
+                n_siret: new_companies.n_siret,
+                name_company: new_companies.name_company,
+                adress: new_companies.adress,
+                postal_code: new_companies.postal_code,
+                city: new_companies.city,
+                country: new_companies.country,
+                legal_status: new_companies.legal_status,
+                nb_emp: new_companies.nb_emp,
+                emp: new_companies.emp,
+                admin: new_companies.admin,
+              /*  offre: new_companies.offre */         
+            };
+            let companies = self
+                .col3
+                .insert_one(new_doc, None)
+                .ok()
+                .expect("Error creating companies");
+            Ok(companies)
+        }
+
+        pub fn get_companies(&self, id: &String) -> Result<Companies, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let companies_detail = self
+                .col3
+                .find_one(filter, None)
+                .ok()
+                .expect("Error getting companies detail");
+            Ok(companies_detail.unwrap())
+        }
+
+        pub fn update_companies(&self, id: &String, new_companies: Companies) -> Result<UpdateResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let new_doc = doc! {
+                "$set":
+                    {
+                    "id": new_companies.id,
+                    "n_siret": new_companies.n_siret,
+                    "name_company": new_companies.name_company,
+                    "adress": new_companies.adress,
+                    "postal_code": new_companies.postal_code,
+                    "city": new_companies.city,
+                    "country": new_companies.country,
+                    "legal_status": new_companies.legal_status,
+                    "nb_emp": new_companies.nb_emp,
+                     "emp": new_companies.emp,
+                    "admin": new_companies.admin,
+                      /*  "offre": new_companies.offre*/
+                    },
+            };
+            let updated_doc = self
+                .col3
+                .update_one(filter, new_doc, None)
+                .ok()
+                .expect("Error updating companies");
+            Ok(updated_doc)
+        }
+
+        pub fn delete_companies(&self, id: &String) -> Result<DeleteResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let companies_detail = self
+                .col3
+                .delete_one(filter, None)
+                .ok()
+                .expect("Error deleting companies");
+            Ok(companies_detail)
+        }
+
+        pub fn get_all_companies(&self) -> Result<Vec<Companies>, Error> {
+            let cursors = self
+                .col3
+                .find(None, None)
+                .ok()
+                .expect("Error getting list of companies");
+            let companies = cursors.map(|doc| doc.unwrap()).collect();
+            Ok(companies)
+        }
+
     }
