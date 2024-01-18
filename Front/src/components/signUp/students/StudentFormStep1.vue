@@ -27,7 +27,7 @@
     <hr class="my-8 h-px w-full border-0 bg-basic-black" />
   </div>
   <form class="flex w-full flex-col justify-center gap-6 lg:w-1/2">
-    <div class="items-start lg:w-1/2">
+    <div class="flex flex-col gap-6 md:flex-row">
       <InputField
         class="w-full"
         v-model="emailModel"
@@ -36,7 +36,9 @@
         :hint="emailHint"
         :state="emailFailed ? 'error' : 'default'"
         @blur="isEmailValid"
+        inputType="email"
       />
+      <p class="invisible w-full" />
     </div>
     <div class="flex flex-col gap-6 md:flex-row">
       <InputField
@@ -47,7 +49,7 @@
         :hint="studentSignup.passwordHint"
         :state="passwordFailed ? 'error' : 'default'"
         @blur="checkPasswordFields"
-        password
+        inputType="password"
       />
       <InputField
         class="w-full"
@@ -57,7 +59,7 @@
         :hint="studentSignup.confirmPasswordHint"
         :state="confirmPasswordFailed ? 'error' : 'default'"
         @blur="checkPasswordFields"
-        password
+        inputType="password"
       />
     </div>
     <div class="flex w-fit items-center gap-2">
@@ -115,14 +117,29 @@ const isConfirmPasswordValid = () => {
     confirmPasswordModel.value !== ''
 }
 
+const isFormValid = () => {
+  if (emailModel.value === '' || passwordModel.value === '' || confirmPasswordModel.value === '') {
+    return false
+  }
+
+  if (emailFailed.value || passwordFailed.value || confirmPasswordFailed.value) {
+    return false
+  }
+
+  return true
+}
 const handleSubmit = () => {
-  store.updateForm1({
-    email: emailModel.value,
-    password: passwordModel.value,
-    keepLogged: keepLogged.value
-  })
-  emit('submit')
+  if (isFormValid()) {
+    store.updateForm1({
+      email: emailModel.value,
+      keepLogged: keepLogged.value,
+      password: passwordModel.value
+    })
+    emit('submit')
+  } else {
+    emit('failed')
+  }
 }
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'failed'])
 </script>

@@ -1,24 +1,15 @@
-use crate::{models::user_model::User,models::user_model::LoginData,models::students_model::Students, repository::mongodb_repo::MongoRepo};
+use crate::{models::user_model::User,models::user_model::LoginData, models::user_model::Claims, models::students_model::Students, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
 use bcrypt::verify;
-use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
+use jsonwebtoken::{encode, EncodingKey, Header, Algorithm, DecodingKey, Validation, decode, errors::ErrorKind::ExpiredSignature};
 use std::collections::BTreeMap;
-use rocket::serde::Serialize;
-use rocket::serde::Deserialize;
 use chrono::{Utc, Duration};
 use std::env;
 use dotenv::dotenv;
 use mongodb::bson::DateTime as BsonDateTime;
 
-
-
-#[derive(Serialize, Deserialize)]
-struct Claims {
-    sub: String,
-    exp: usize,
-}
 
 #[post("/user", data = "<new_user>")]
 pub fn create_user(
@@ -37,22 +28,21 @@ pub fn create_user(
         statut: new_user.statut.to_owned(),
         date: Some(BsonDateTime::from_millis(Utc::now().timestamp_millis())),
     };
-    let user_clone = data.clone(); 
+    let user_clone = data.clone();
     let user_detail = db.create_user(user_clone);
     match user_detail {
         Ok(user) =>{
             if data.statut == "student" {
                 let student_data = Students {
-                    id: data.id.as_ref().map(|id| id).copied(), // Utilisez le même ID que l'utilisateur
-                    duree: 0, // Vous devez définir une valeur par défaut ou récupérer cette information ailleurs
+                    user_id: Some(user.inserted_id.as_object_id().unwrap().clone()), // Use the same ID as the user
+                    duree: String::new(), // You need to set a default value or get this information from somewhere else
                     niveau: String::new(),
                     type_contrat: String::new(),
                     date_debut: BsonDateTime::now(),
                     lieu: String::new(),
                     recherche: false,
                 };
-                
-                // Créez l'étudiant
+
                 let _ = db.create_students(student_data);
             }
         Ok(Json(user))
@@ -157,7 +147,7 @@ pub fn login(
 
                 let claims = Claims {
                     sub: user.email,
-                    exp: (Utc::now() + Duration::hours(24)).timestamp() as usize,
+                    exp: (Utc::now() + Duration::minutes(30)).timestamp() as usize,
                 };
                 let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
                 let key = EncodingKey::from_secret(secret_key.as_ref());
@@ -173,6 +163,45 @@ pub fn login(
                 Err(Status::Unauthorized)
             }
         },
-        Err(_) => Err(Status::InternalServerError),
+        Err(e) => {
+            println!("Error: {:?}", e);
+            Err(Status::InternalServerError)
+        },
+    }
+}
+
+#[get("/user/email/<token>")]
+pub fn get_email_from_token(token: String) -> Result<Json<String>, Status> {
+    dotenv().ok();
+    let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
+    let key = DecodingKey::from_secret(secret_key.as_ref());
+    let validation = Validation::new(Algorithm::HS512);
+    match decode::<Claims>(&token, &key, &validation) {
+        Ok(c) => Ok(Json(c.claims.sub)),
+        Err(err) => match *err.kind() {
+            ExpiredSignature => Err(Status::Unauthorized),
+            _ => Err(Status::InternalServerError),
+        },
+    }
+}
+
+#[get("/user/info/<token>")]
+pub fn get_user_info_from_token(db: &State<MongoRepo>, token: String) -> Result<Json<User>, Status> {
+    dotenv().ok();
+    let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
+    let key = DecodingKey::from_secret(secret_key.as_ref());
+    let validation = Validation::new(Algorithm::HS512);
+    match decode::<Claims>(&token, &key, &validation) {
+        Ok(c) => {
+            let user_detail = db.get_user_by_email(&c.claims.sub);
+            match user_detail {
+                Ok(user) => Ok(Json(user)),
+                Err(_) => Err(Status::InternalServerError),
+            }
+        },
+        Err(err) => match *err.kind() {
+            ExpiredSignature => Err(Status::Unauthorized),
+            _ => Err(Status::InternalServerError),
+        },
     }
 }

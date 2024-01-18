@@ -1,16 +1,7 @@
-use crate::{models::students_model::Students, models::user_model::User,models::companies_model::Companies, repository::mongodb_repo::MongoRepo};
+use crate::{models::companies_model::Companies, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
-use bcrypt::{hash, DEFAULT_COST};
-use bcrypt::verify;
-use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
-use std::collections::BTreeMap;
-use rocket::serde::Serialize;
-use rocket::serde::Deserialize;
-use chrono::{Utc, Duration};
-use std::env;
-use dotenv::dotenv;
-use mongodb::bson::DateTime as BsonDateTime;
+
 
 #[post("/companie", data = "<new_companies>")]
 pub fn create_companies(

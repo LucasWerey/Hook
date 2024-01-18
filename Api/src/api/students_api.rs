@@ -1,16 +1,7 @@
-use crate::{models::students_model::Students, models::user_model::User, repository::mongodb_repo::MongoRepo};
+use crate::{models::students_model::Students,  repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
-use bcrypt::{hash, DEFAULT_COST};
-use bcrypt::verify;
-use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
-use std::collections::BTreeMap;
-use rocket::serde::Serialize;
-use rocket::serde::Deserialize;
-use chrono::{Utc, Duration};
-use std::env;
-use dotenv::dotenv;
-use mongodb::bson::DateTime as BsonDateTime;
+
 
 #[post("/student", data = "<new_students>")]
 pub fn create_students(
@@ -18,14 +9,14 @@ pub fn create_students(
     new_students: Json<Students>,
 ) -> Result<Json<InsertOneResult>, Status> {
     let data = Students {
-        id: None,
-        duree: new_students.duree,
+        user_id: new_students.user_id,
+        duree: new_students.duree.to_owned(),
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
         date_debut: new_students.date_debut,
         lieu: new_students.lieu.to_owned(),
         recherche: new_students.recherche,
-        
+
     };
     let students_detail = db.create_students(data);
     match students_detail {
@@ -59,8 +50,8 @@ pub fn update_students(
         return Err(Status::BadRequest);
     };
     let data = Students {
-        id: Some(ObjectId::parse_str(&id).unwrap()),
-        duree: new_students.duree,
+        user_id: Some(ObjectId::parse_str(&id).unwrap()),
+        duree: new_students.duree.to_owned(),
         niveau: new_students.niveau.to_owned(),
         type_contrat: new_students.type_contrat.to_owned(),
         date_debut: new_students.date_debut,

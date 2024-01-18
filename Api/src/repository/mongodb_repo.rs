@@ -118,14 +118,14 @@ pub struct MongoRepo {
 
         pub fn create_students(&self, new_students: Students) -> Result<InsertOneResult, Error> {
             let new_doc = Students {
-                id: None,
+                user_id: new_students.user_id,
                 duree: new_students.duree,
                 niveau: new_students.niveau,
                 type_contrat: new_students.type_contrat,
                 date_debut: new_students.date_debut,
                 lieu: new_students.lieu,
                 recherche: new_students.recherche
-                
+
             };
             let students = self
                 .col2

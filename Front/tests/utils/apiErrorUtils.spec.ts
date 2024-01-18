@@ -4,8 +4,8 @@ test('handleApiError handles response errors correctly', () => {
   const error = {
     response: {
       data: 'Not Found',
-      status: 404,
-      headers: {}
+      headers: {},
+      status: 404
     }
   }
   const result = handleApiError(error)

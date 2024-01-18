@@ -1,8 +1,8 @@
 const breakpoints = {
-  mobile: 425,
-  tablet: 768,
   desktop: 1024,
-  largeDesktop: 1440
+  largeDesktop: 1440,
+  mobile: 425,
+  tablet: 768
 }
 
 /**
@@ -45,5 +45,5 @@ export function useScreenSize() {
     window.removeEventListener('resize', updateScreenSize)
   })
 
-  return { isMobile, isTablet, isDesktop, isLargeDesktop }
+  return { isDesktop, isLargeDesktop, isMobile, isTablet }
 }

@@ -1,26 +1,15 @@
 import { RegistrationState, Form1State, Form2State } from './types/studentRegistrationTypes'
 
 export const useRegistrationStore = defineStore({
-  id: 'registration',
-  state: (): RegistrationState => ({
-    step: 1,
-    form1: {
-      email: '',
-      password: '',
-      keepLogged: false
-    },
-    form2: {
-      name: '',
-      firstname: '',
-      schoolGrade: '',
-      contractType: 'stage',
-      duration: '',
-      start: new Date(),
-      location: '',
-      actualLookingFor: false
-    }
-  }),
   actions: {
+    nextStep() {
+      this.step += 1
+    },
+    prevStep() {
+      if (this.step > 1) {
+        this.step -= 1
+      }
+    },
     setStep(step: number) {
       this.step = step
     },
@@ -29,14 +18,26 @@ export const useRegistrationStore = defineStore({
     },
     updateForm2(payload: Partial<Form2State>) {
       this.form2 = { ...this.form2, ...payload }
-    },
-    nextStep() {
-      this.step += 1
-    },
-    prevStep() {
-      if (this.step > 1) {
-        this.step -= 1
-      }
     }
-  }
+  },
+  id: 'registration',
+  state: (): RegistrationState => ({
+    form1: {
+      email: '',
+      keepLogged: false,
+      password: '',
+      userType: 'Student'
+    },
+    form2: {
+      actualLookingFor: false,
+      contractType: 'stage',
+      duration: 0,
+      firstname: '',
+      location: '',
+      name: '',
+      schoolGrade: '',
+      start: new Date()
+    },
+    step: 1
+  })
 })

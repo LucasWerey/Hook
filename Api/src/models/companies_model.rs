@@ -1,6 +1,5 @@
 use mongodb::bson::oid::ObjectId;
 use serde::{Serialize, Deserialize};
-use mongodb::bson::DateTime as BsonDateTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Companies {
@@ -15,6 +14,6 @@ pub struct Companies {
     pub legal_status: String,
     pub nb_emp: i32,
     pub emp: ObjectId,
-    pub admin: ObjectId, 
-    /*pub offre: ObjectId,*/ 
+    pub admin: ObjectId,
+    /*pub offre: ObjectId,*/
 }

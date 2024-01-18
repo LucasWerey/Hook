@@ -20,7 +20,7 @@ export async function getAllUsers() {
  */
 export async function getUser(id: string) {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/users/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/user/${id}`)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -35,7 +35,7 @@ export async function getUser(id: string) {
  */
 export async function createUser(userData: any) {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/users', userData)
+    const response = await axios.post('http://127.0.0.1:8000/user', userData)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -51,7 +51,7 @@ export async function createUser(userData: any) {
  */
 export async function updateUser(id: string, userData: any) {
   try {
-    const response = await axios.put(`http://127.0.0.1:8000/users/${id}`, userData)
+    const response = await axios.put(`http://127.0.0.1:8000/user/${id}`, userData)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -66,7 +66,7 @@ export async function updateUser(id: string, userData: any) {
  */
 export async function deleteUser(id: string) {
   try {
-    const response = await axios.delete(`http://127.0.0.1:8000/users/${id}`)
+    const response = await axios.delete(`http://127.0.0.1:8000/user/${id}`)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -87,4 +87,28 @@ export async function loginUser(email: string, password: string) {
   } catch (error) {
     throw handleApiError(error)
   }
+}
+
+import axios from 'axios'
+
+/**
+ * Fetches the email from a JWT token by making a GET request to the /user/email endpoint.
+ *
+ * @param {string} token - The JWT token.
+ * @returns {Promise<string>} The email from the JWT token.
+ */
+export async function getEmailFromToken(token: string): Promise<string> {
+  const response = await axios.get(`http://127.0.0.1:8000/user/email/${token}`)
+  return response.data
+}
+
+/**
+ * Fetches the user information from a JWT token by making a GET request to the /user/info endpoint.
+ *
+ * @param {string} token - The JWT token.
+ * @returns {Promise<any>} The user information from the JWT token.
+ */
+export async function getUserInfoFromToken(token: string): Promise<any> {
+  const response = await axios.get(`http://127.0.0.1:8000/user/info/${token}`)
+  return response.data
 }

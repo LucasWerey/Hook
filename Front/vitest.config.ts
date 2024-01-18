@@ -17,12 +17,13 @@ export default mergeConfig(
           'src/App.vue',
           'src/main.ts',
           'src/utils/screenSizeUtils.ts',
-          'src/utils/userApiUtils.ts'
+          'src/utils/userApiUtils.ts',
+          'src/utils/studentApiUtils.ts'
         ]
       },
       environment: 'jsdom',
-      include: ['./tests/**/*.ts'],
       exclude: [...configDefaults.exclude, 'e2e/*', './tests/setup.ts'],
+      include: ['./tests/**/*.ts'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       setupFiles: './tests/setup.ts'
     }
