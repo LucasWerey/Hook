@@ -47,12 +47,11 @@
       </div>
       <div class="flex items-start gap-6">
         <SelectField
-          title="Niveau d'études"
+          title="Niveau d'études*"
           v-model="schoolGradeModel"
           :options="schoolGradeOptions"
           default="Selectionner"
-          class="w-full"
-          isRequired
+          class="max-h-[200px] w-full"
         />
         <InputField
           isDateInput
@@ -352,6 +351,7 @@ const isAllInputFilled = computed(() => {
     schoolModel.value !== '' &&
     formationTitleModel.value !== '' &&
     schoolGradeModel.value !== '' &&
+    schoolGradeModel.value !== 'Selectionner' &&
     startingDateModel.value !== '' &&
     lastExpPost.value !== '' &&
     lastExpCompany.value !== '' &&

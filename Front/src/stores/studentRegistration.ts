@@ -56,11 +56,16 @@ export const useRegistrationStore = defineStore({
       softSkills: []
     },
     form3: {
-      diplomas: [],
-      experiences: [],
-      hobbies: [],
-      languages: [],
-      skills: []
+      contractDuration: '',
+      contractEndDate: new Date(),
+      contractLocation: '',
+      contractStartDate: new Date(),
+      contractType: '',
+      keyWords: [],
+      postLookingFor: '',
+      spokenLanguages: [],
+      transportAvailable: [],
+      transportDuration: ''
     },
     step: 1
   })

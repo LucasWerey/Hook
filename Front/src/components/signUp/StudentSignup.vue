@@ -24,7 +24,7 @@
         <StudentFormStep2 @submit="handleSubmit" @failed="onFailed" key="2" />
       </div>
       <div v-show="store.step === 3" class="flex w-full flex-col items-center gap-4 lg:gap-12">
-        <StudentFormStep2 @submit="handleSubmit" @failed="onFailed" key="3" />
+        <StudentFormStep3 @submit="handleSubmit" @failed="onFailed" key="3" />
       </div>
     </div>
     <div class="absolute left-9 top-9">

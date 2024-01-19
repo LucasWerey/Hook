@@ -26,11 +26,16 @@ export interface Form2State {
 }
 
 export interface Form3State {
-  skills: string[]
-  languages: string[]
-  experiences: string[]
-  diplomas: string[]
-  hobbies: string[]
+  postLookingFor: string
+  contractType: string
+  contractDuration: string
+  contractLocation: string
+  spokenLanguages: string[]
+  contractStartDate: Date
+  contractEndDate: Date
+  keyWords: string[]
+  transportAvailable: string[]
+  transportDuration: string
 }
 
 export interface RegistrationState {
