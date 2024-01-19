@@ -122,12 +122,13 @@ pub struct MongoRepo {
         pub fn create_students(&self, new_students: Students) -> Result<InsertOneResult, Error> {
             let new_doc = Students {
                 user_id: new_students.user_id,
-                duree: new_students.duree,
-                niveau: new_students.niveau,
-                type_contrat: new_students.type_contrat,
-                date_debut: new_students.date_debut,
-                lieu: new_students.lieu,
-                recherche: new_students.recherche
+                duration: new_students.duration,
+                level: new_students.level,
+                contract_type: new_students.contract_type,
+                start_date: new_students.start_date,
+                location: new_students.location,
+                research: new_students.research,
+                profile: new_students.profile
 
             };
             let students = self
@@ -155,12 +156,13 @@ pub struct MongoRepo {
             let new_doc = doc! {
                 "$set":
                     {
-                        "duree": new_students.duree,
-                        "niveau": new_students.niveau,
-                        "type_contrat": new_students.type_contrat,
-                        "date_debut": new_students.date_debut,
-                        "lieu": new_students.lieu,
-                        "recherche": new_students.recherche
+                        "duration": new_students.duration,
+                        "level": new_students.level,
+                        "contract_type": new_students.contract_type,
+                        "start_date": new_students.start_date,
+                        "location": new_students.location,
+                        "research": new_students.research,
+                        "profile": new_students.profile
                     },
             };
             let updated_doc = self

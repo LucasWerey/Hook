@@ -1,5 +1,6 @@
 use crate::{models::user_model::User,models::user_model::LoginData, models::user_model::Claims, models::students_model::Students, repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
+use mongodb::bson::{Bson};
 use rocket::{http::Status, serde::json::Json, State};
 use bcrypt::{hash, DEFAULT_COST};
 use bcrypt::verify;
@@ -35,12 +36,13 @@ pub fn create_user(
             if data.statut == "student" {
                 let student_data = Students {
                     user_id: Some(user.inserted_id.as_object_id().unwrap().clone()), // Use the same ID as the user
-                    duree: String::new(), // You need to set a default value or get this information from somewhere else
-                    niveau: String::new(),
-                    type_contrat: String::new(),
-                    date_debut: BsonDateTime::now(),
-                    lieu: String::new(),
-                    recherche: false,
+                    duration: String::new(), // You need to set a default value or get this information from somewhere else
+                    level: String::new(),
+                    contract_type: String::new(),
+                    start_date: BsonDateTime::now(),
+                    location: String::new(),
+                    research: false,
+                    profile: Bson::Null
                 };
 
                 let _ = db.create_students(student_data);
