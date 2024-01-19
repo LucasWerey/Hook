@@ -89,7 +89,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 > To create a student statut must be set to "student"
 
-#### Create Companie - `POST /company`
+#### Create Companie - `POST /companie`
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -107,6 +107,16 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/companie
 ```
 
+#### Create Offer - `POST /offer`
+
+````bash
+curl -X POST -H "Content-Type: application/json" -d '{
+"id_company": "65a6971af045e1d0c14cdc9f",
+"matching": {"company":"Bouygues"},
+"tags": "IT project management"
+}' http://127.0.0.1:8000/offer
+```
+
 ### Get queries
 
 Returns a list of all users in the system. No request body is required for this endpoint.
@@ -117,7 +127,7 @@ Examples:
 
 ```bash
 curl -X GET http://127.0.0.1:8000/users
-```
+````
 
 #### Get All Students - `GET /students`
 
@@ -194,6 +204,16 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "emp": "65a6971af045e1d0c14cdc9f",
 "admin": "65a6971af045e1d0c14cdc9f"
 }' http://127.0.0.1:8000/companie/65a7e00faed2ab6c22c958d1
+```
+
+#### Update Offer - `PUT /offer/<id>``
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{
+"id_company": "65a6971af045e1d0c14cdc9f",
+"matching": {"company":"Bouygues Telecom"},
+"tags": "IT project management"
+}' http://127.0.0.1:8000/offer/65aaa64351bc57dc19f0a92c
 ```
 
 ### Delete queries

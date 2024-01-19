@@ -10,11 +10,13 @@ use mongodb::{
 use crate::models::user_model::User;
 use crate::models::students_model::Students;
 use crate::models::companies_model::Companies;
+use crate::models::offers_model::Offers;
 
 pub struct MongoRepo {
     col: Collection<User>,
     col2: Collection<Students>,
-    col3: Collection<Companies>
+    col3: Collection<Companies>,
+    col4: Collection<Offers>
 }
 
 
@@ -30,7 +32,8 @@ pub struct MongoRepo {
             let col: Collection<User> = db.collection("users");
             let col2: Collection<Students>=db.collection("students");
             let col3: Collection<Companies>=db.collection("companies");
-            MongoRepo { col, col2, col3 }
+            let col4: Collection<Offers>=db.collection("offers");
+            MongoRepo { col, col2, col3,col4 }
         }
 
         pub fn create_user(&self, new_user: User) -> Result<InsertOneResult, Error> {
@@ -202,7 +205,7 @@ pub struct MongoRepo {
                 nb_emp: new_companies.nb_emp,
                 emp: new_companies.emp,
                 admin: new_companies.admin,
-              /*  offre: new_companies.offre */         
+                offers: new_companies.offers       
             };
             let companies = self
                 .col3
@@ -240,7 +243,7 @@ pub struct MongoRepo {
                     "nb_emp": new_companies.nb_emp,
                      "emp": new_companies.emp,
                     "admin": new_companies.admin,
-                      /*  "offre": new_companies.offre*/
+                    "offers": new_companies.offers
                     },
             };
             let updated_doc = self
@@ -270,6 +273,73 @@ pub struct MongoRepo {
                 .expect("Error getting list of companies");
             let companies = cursors.map(|doc| doc.unwrap()).collect();
             Ok(companies)
+        }
+
+        pub fn create_offers(&self, new_offers: Offers) -> Result<InsertOneResult, Error> {
+            let new_doc = Offers {
+                id: None,
+                id_company: new_offers.id_company,
+                matching: new_offers.matching,
+                tags: new_offers.tags,
+            };
+            let offers = self
+                .col4
+                .insert_one(new_doc, None)
+                .ok()
+                .expect("Error creating offers");
+            Ok(offers)
+        }
+
+        pub fn get_offers(&self, id: &String) -> Result<Offers, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let offers_detail = self
+                .col4
+                .find_one(filter, None)
+                .ok()
+                .expect("Error getting offers detail");
+            Ok(offers_detail.unwrap())
+        }
+
+        pub fn update_offers(&self, id: &String, new_offers: Offers) -> Result<UpdateResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let new_doc = doc! {
+                "$set":
+                    {
+                    "id": new_offers.id,
+                    "id_company": new_offers.id_company,
+                    "matching": new_offers.matching,
+                    "tags": new_offers.tags,
+                    },
+            };
+            let updated_doc = self
+                .col4
+                .update_one(filter, new_doc, None)
+                .ok()
+                .expect("Error updating offers");
+            Ok(updated_doc)
+        }
+
+        pub fn delete_offers(&self, id: &String) -> Result<DeleteResult, Error> {
+            let obj_id = ObjectId::parse_str(id).unwrap();
+            let filter = doc! {"_id": obj_id};
+            let offers_detail = self
+                .col4
+                .delete_one(filter, None)
+                .ok()
+                .expect("Error deleting offers");
+            Ok(offers_detail)
+        }
+
+        pub fn get_all_offers(&self) -> Result<Vec<Offers>, Error> {
+            let cursors = self
+                .col4
+                .find(None, None)
+                .ok()
+                .expect("Error getting list of offers");
+            let offers = cursors.map(|doc| doc.unwrap()).collect();
+            Ok(offers)
         }
 
     }
