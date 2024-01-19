@@ -1,4 +1,9 @@
-import { RegistrationState, Form1State, Form2State } from './types/studentRegistrationTypes'
+import {
+  RegistrationState,
+  Form1State,
+  Form2State,
+  Form3State
+} from './types/studentRegistrationTypes'
 
 export const useRegistrationStore = defineStore({
   actions: {
@@ -10,7 +15,7 @@ export const useRegistrationStore = defineStore({
         this.step -= 1
       }
     },
-    setStep(step: number) {
+    setStep(step: 1 | 2 | 3 | 4) {
       this.step = step
     },
     updateForm1(payload: Partial<Form1State>) {
@@ -18,6 +23,9 @@ export const useRegistrationStore = defineStore({
     },
     updateForm2(payload: Partial<Form2State>) {
       this.form2 = { ...this.form2, ...payload }
+    },
+    updateForm3(payload: Partial<Form3State>) {
+      this.form3 = { ...this.form3, ...payload }
     }
   },
   id: 'registration',
@@ -29,14 +37,30 @@ export const useRegistrationStore = defineStore({
       userType: 'Student'
     },
     form2: {
-      actualLookingFor: false,
-      contractType: 'stage',
-      duration: 0,
+      currentPost: false,
+      description: '',
       firstname: '',
-      location: '',
-      name: '',
-      schoolGrade: '',
-      start: new Date()
+      formationName: '',
+      formationYear: '',
+      hardSkills: [],
+      lastExpCompany: '',
+      lastExpDescription: '',
+      lastExpEndDate: new Date(),
+      lastExpLocation: '',
+      lastExpPoste: '',
+      lastExpStartDate: new Date(),
+      lastname: '',
+      school: '',
+      schoolResult: '',
+      schoolStartDate: new Date(),
+      softSkills: []
+    },
+    form3: {
+      diplomas: [],
+      experiences: [],
+      hobbies: [],
+      languages: [],
+      skills: []
     },
     step: 1
   })

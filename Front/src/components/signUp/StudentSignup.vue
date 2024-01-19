@@ -1,7 +1,7 @@
 <template>
   <div
     ref="loginForm"
-    class="relative flex h-[100vh] w-full flex-col items-center gap-4 self-stretch bg-basic-verylightgrey p-2 lg:gap-6 lg:p-0 lg:pt-1"
+    class="relative flex min-h-[100vh] w-full flex-col items-center gap-4 self-stretch bg-basic-verylightgrey p-2 lg:gap-6 lg:p-0 lg:pt-1"
   >
     <div class="flex flex-col items-center gap-2">
       <IconsBase name="logo" size="medium" class="min-h-32 min-w-32" />
@@ -23,6 +23,9 @@
       <div v-show="store.step === 2" class="flex w-full flex-col items-center gap-4 lg:gap-12">
         <StudentFormStep2 @submit="handleSubmit" @failed="onFailed" key="2" />
       </div>
+      <div v-show="store.step === 3" class="flex w-full flex-col items-center gap-4 lg:gap-12">
+        <StudentFormStep2 @submit="handleSubmit" @failed="onFailed" key="3" />
+      </div>
     </div>
     <div class="absolute left-9 top-9">
       <IconsBase name="moveLeft" class="h-9 w-9 cursor-pointer" color="powder" @click="goBack" />
@@ -33,7 +36,7 @@
         :type="success ? 'validation' : 'error'"
         close="no"
         size="small"
-        class="absolute bottom-2 right-2 top-5 z-50 md:w-auto"
+        class="fixed bottom-2 right-2 top-5 z-50 md:w-auto"
       >
         {{ success ? successMessage : errorMessage }}
       </SnackBar>
@@ -42,9 +45,9 @@
 </template>
 
 <script setup lang="ts">
-type StepNumber = 1 | 2 | undefined
+type StepNumber = 1 | 2 | 3 | 4
 
-const stepNumber: Ref<StepNumber> = ref(2)
+const stepNumber: Ref<StepNumber> = ref(3)
 const showSnackbar = ref(false)
 const success = ref(false)
 const successMessage = ref('')
@@ -54,14 +57,14 @@ const store = useRegistrationStore()
 
 const phaseWording = computed(() => {
   return store.step >= 1 && store.step <= 3
-    ? studentSignup.phase[`phase${store.step as 1 | 2}`]
+    ? studentSignup.phase[`phase${store.step as 1 | 2 | 3}`]
     : ''
 })
 
 const handleSubmit = () => {
-  if (store.step < 2) {
+  if (store.step < 3) {
     store.nextStep()
-  } else if (store.step === 2) {
+  } else if (store.step === 3) {
     createUserStudent()
   }
 }
@@ -73,7 +76,7 @@ const createUserStudent = async () => {
   const data = {
     email: store.form1.email,
     firstname: store.form2.firstname,
-    lastname: store.form2.name,
+    lastname: store.form2.lastname,
     password: store.form1.password,
     statut: 'student'
   }
@@ -89,20 +92,28 @@ const createUserStudent = async () => {
   }
 }
 
+/*
+  lastname: string
+  firstname: string
+  school: string
+  formationName: string
+  formationYear: string
+  schoolStartDate: Date
+  description: string
+  schoolResult: string
+  lastExpPoste: string
+  lastExpCompany: string
+  currentPost: boolean
+  lastExpStartDate: Date
+  lastExpEndDate: Date
+  lastExpLocation: string
+  lastExpDescription: string
+  hardSkills: string[]
+  softSkills: string[]
+  */
+
 const updateUserStudent = async () => {
-  const data = {
-    date_debut: {
-      $date: {
-        $numberLong: String(store.form2.start.getTime())
-      }
-    },
-    duree: store.form2.duration,
-    lieu: store.form2.location,
-    niveau: store.form2.schoolGrade,
-    recherche: store.form2.actualLookingFor,
-    type_contrat: store.form2.contractType
-  }
-  console.log(store.form2.start.toISOString(), typeof store.form2.start.toISOString())
+  const data = {}
   try {
     response.value = await updateStudent(studentId.value, data)
     console.log(response.value)

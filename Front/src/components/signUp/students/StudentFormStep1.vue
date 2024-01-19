@@ -76,7 +76,7 @@
     </div>
     <Button
       type="default"
-      class="max-w-[160px] self-center"
+      class="max-w-[160px] self-center uppercase"
       icon="moveRight"
       iconPosition="trailing"
       styled="fill"

@@ -39,7 +39,8 @@ export const studentSignup = reactive({
   passwordPlaceholder: 'motdepasse',
   phase: {
     phase1: `1. Informations d'authentification`,
-    phase2: `2. Informations générales et recherche`
+    phase2: `2. Informations générales et situation actuelle`,
+    phase3: `3. Première demande`
   },
   rememberMe: 'Se souvenir de moi ?',
   title: 'Inscription'

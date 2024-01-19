@@ -6,18 +6,36 @@ export interface Form1State {
 }
 
 export interface Form2State {
-  name: string
+  lastname: string
   firstname: string
-  schoolGrade: string
-  contractType: 'stage' | 'alternance'
-  duration: string
-  start: Date
-  location: string
-  actualLookingFor: boolean
+  school: string
+  formationName: string
+  formationYear: string
+  schoolStartDate: Date
+  description: string
+  schoolResult: string
+  lastExpPoste: string
+  lastExpCompany: string
+  currentPost: boolean
+  lastExpStartDate: Date
+  lastExpEndDate: Date
+  lastExpLocation: string
+  lastExpDescription: string
+  hardSkills: string[]
+  softSkills: string[]
+}
+
+export interface Form3State {
+  skills: string[]
+  languages: string[]
+  experiences: string[]
+  diplomas: string[]
+  hobbies: string[]
 }
 
 export interface RegistrationState {
   step: 1 | 2 | 3 | 4
   form1: Form1State
   form2: Form2State
+  form3: Form3State
 }
