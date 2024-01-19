@@ -16,7 +16,7 @@
           type="default"
           state="active"
           styled="fill"
-          class="max-w-3/4 max-w-fit shadow-md sm:max-w-none"
+          class="max-w-3/4 max-w-fit text-nowrap text-3 uppercase shadow-md sm:max-w-[205px]"
           @click="onRecruiterClick"
         >
           {{ homeWords.recruiter }}
@@ -25,7 +25,7 @@
           type="default"
           state="active"
           styled="outlined"
-          class="max-w-fit border-basic-white shadow-md sm:max-w-none"
+          class="max-w-fit text-nowrap border-basic-white text-3 uppercase shadow-md sm:max-w-[205px]"
           style="color: white"
           @click="onStudentClick"
           >{{ homeWords.student }}

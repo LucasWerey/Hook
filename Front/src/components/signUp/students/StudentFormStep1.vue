@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full flex-col gap-6 lg:w-1/2 lg:flex-row">
     <Button
-      class="w-full bg-basic-white font-eina1 text-4 font-normal"
+      class="w-full text-nowrap bg-basic-white font-eina1 text-4 font-normal"
       type="socialMedia"
       icon="google"
       icon-position="leading"
@@ -11,7 +11,7 @@
       {{ studentSignup.google }}
     </Button>
     <Button
-      class="w-full bg-basic-white font-eina1 text-4 font-normal"
+      class="w-full text-nowrap bg-basic-white font-eina1 text-4 font-normal"
       type="socialMedia"
       icon="linkedin"
       icon-position="leading"
@@ -70,11 +70,13 @@
         color="transparent"
         form="square"
       />
-      <p class="w-full font-eina1 text-4 font-normal">{{ studentSignup.rememberMe }}</p>
+      <p class="w-full font-eina1 text-4" :class="{ 'font-700': keepLogged }">
+        {{ studentSignup.rememberMe }}
+      </p>
     </div>
     <Button
       type="default"
-      class="w-full max-w-md self-center"
+      class="max-w-[160px] self-center"
       icon="moveRight"
       iconPosition="trailing"
       styled="fill"

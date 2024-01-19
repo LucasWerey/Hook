@@ -5,13 +5,7 @@
       <Button type="default" state="active" styled="off" @click="onClickSignUp">
         {{ wording.inscription }}
       </Button>
-      <Button
-        type="default"
-        state="active"
-        styled="off"
-        class="text-primary-powder"
-        @click="onClickLogin"
-      >
+      <Button type="default" state="active" styled="off" @click="onClickLogin">
         {{ wording.connexion }}
       </Button>
     </div>

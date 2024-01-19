@@ -18,7 +18,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@lucaswerey/dslib-pfe": "0.0.54",
+    "@lucaswerey/dslib-pfe": "0.0.61",
     "@vueuse/core": "^10.4.1",
     "axios": "^1.6.5",
     "dotenv": "^16.3.1",
