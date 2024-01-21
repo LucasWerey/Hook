@@ -94,8 +94,6 @@ onBeforeRouteLeave((to, _, next) => {
     next()
   }
 })
-
-const emit = defineEmits(['success'])
 </script>
 
 <style scoped>
