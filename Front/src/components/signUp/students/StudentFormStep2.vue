@@ -244,8 +244,6 @@
 </template>
 
 <script setup lang="ts">
-import { ChipContainer } from '@lucaswerey/dslib-pfe'
-
 const store = useRegistrationStore()
 
 const lastNameModel: Ref<string> = ref('')

@@ -10,6 +10,7 @@ declare global {
   const DateUtils: typeof import('./utils/dateUtils')['DateUtils']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
+  const addChip: typeof import('./utils/chipUtils')['addChip']
   const afterAll: typeof import('vitest')['afterAll']
   const afterEach: typeof import('vitest')['afterEach']
   const areFieldsEqual: (typeof import('./utils/inputValidationUtils'))['areFieldsEqual']
@@ -49,6 +50,7 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
+  const deleteChip: typeof import('./utils/chipUtils')['deleteChip']
   const deleteStudent: typeof import('./utils/studentApiUtils')['deleteStudent']
   const deleteUser: typeof import('./utils/userApiUtils')['deleteUser']
   const describe: typeof import('vitest')['describe']
@@ -72,6 +74,9 @@ declare global {
   const getUserInfoFromToken: typeof import('./utils/userApiUtils')['getUserInfoFromToken']
   const h: typeof import('vue')['h']
   const handleApiError: typeof import('./utils/apiErrorUtils')['handleApiError']
+  const handleDragOver: typeof import('./utils/dragNdropUtils')['handleDragOver']
+  const handleDragStart: typeof import('./utils/dragNdropUtils')['handleDragStart']
+  const handleDrop: typeof import('./utils/dragNdropUtils')['handleDrop']
   const homeWords: typeof import('./data/wording')['homeWords']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const includesAll: typeof import('./utils/arrayUtils')['includesAll']
@@ -374,6 +379,7 @@ declare module 'vue' {
     readonly DateUtils: UnwrapRef<typeof import('./utils/dateUtils')['DateUtils']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly addChip: UnwrapRef<typeof import('./utils/chipUtils')['addChip']>
     readonly afterAll: UnwrapRef<typeof import('vitest')['afterAll']>
     readonly afterEach: UnwrapRef<typeof import('vitest')['afterEach']>
     readonly areStringsEqual: UnwrapRef<typeof import('./utils/inputValidationUtils')['areStringsEqual']>
@@ -412,6 +418,7 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
@@ -725,6 +732,7 @@ declare module '@vue/runtime-core' {
     readonly DateUtils: UnwrapRef<typeof import('./utils/dateUtils')['DateUtils']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly addChip: UnwrapRef<typeof import('./utils/chipUtils')['addChip']>
     readonly afterAll: UnwrapRef<typeof import('vitest')['afterAll']>
     readonly afterEach: UnwrapRef<typeof import('vitest')['afterEach']>
     readonly areStringsEqual: UnwrapRef<typeof import('./utils/inputValidationUtils')['areStringsEqual']>
@@ -763,6 +771,7 @@ declare module '@vue/runtime-core' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
