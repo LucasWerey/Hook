@@ -12,7 +12,16 @@
           label="Cle d'identification"
           inputType="text"
         />
-        <Button type="default" state="active" class="max-w-[160px]" styled="fill" @click.prevent=""
+        <Button
+          type="default"
+          state="active"
+          class="max-w-[160px]"
+          styled="fill"
+          @click.prevent="
+            () => {
+              console.log('Not implemented yet')
+            }
+          "
           >Valider</Button
         >
       </div>
@@ -106,10 +115,12 @@
     <Button
       state="active"
       type="default"
-      class="max-w-[160px]"
+      class="max-w-[160px] uppercase"
       styled="fill"
+      icon="moveRight"
+      iconPosition="trailing"
       @click.prevent="handleSubmit"
-      >Valider</Button
+      >Suivant</Button
     >
   </form>
 </template>

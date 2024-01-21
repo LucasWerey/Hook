@@ -12,7 +12,7 @@ pub struct Companies {
     pub city: String,
     pub country: String,
     pub legal_status: String,
-    pub nb_emp: i32,
+    pub nb_emp: String,
     pub emp: Bson,
     pub admin: ObjectId,
     pub offers: Bson,

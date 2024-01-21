@@ -135,7 +135,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 "city": "Paris",
 "country": "France",
 "legal_status": "SCI",
-"nb_emp": 15,
+"nb_emp": '>15',
 "emp": ["em1", "emp2"],
 "admin": "65a6971af045e1d0c14cdc9f",
 "offers": ["offer1", "offer2", "offer3"]

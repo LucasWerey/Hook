@@ -1,7 +1,5 @@
-type ObjectId = string
-
 type Companies = {
-  id?: ObjectId
+  id?: string
   n_siret: string
   name_company: string
   adress: string
@@ -9,9 +7,9 @@ type Companies = {
   city: string
   country: string
   legal_status: string
-  nb_emp: number
+  nb_emp: string
   emp: any
-  admin: ObjectId
+  admin: string
   offers: any
 }
 

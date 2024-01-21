@@ -49,6 +49,8 @@ const showSnackbar = ref(false)
 const success = ref(false)
 const successMessage = ref('')
 const errorMessage = ref('')
+const response = ref<any>(null)
+const adminId = ref<string>('')
 
 const store = useRegistrationRecruiterStore()
 
@@ -60,7 +62,50 @@ const handleSubmit = () => {
   if (store.step < 2) {
     store.nextStep()
   } else if (store.step === 2) {
-    console.log(store.step)
+    createUserAdmin()
+  }
+}
+const createUserAdmin = async () => {
+  const data = {
+    email: store.form2.recruiterEmail,
+    firstname: store.form2.recruiterFirstname,
+    lastname: store.form2.recruiterLastname,
+    password: store.form2.recruiterPassword,
+    statut: 'admin'
+  }
+  try {
+    response.value = await createUser(data)
+    adminId.value = (response.value as any)?.insertedId['$oid']
+    if (adminId.value) {
+      createNewCompany()
+    }
+  } catch (error) {
+    const apiError = handleApiError(error)
+    console.log(apiError)
+  }
+}
+
+const createNewCompany = async () => {
+  const data = {
+    admin: adminId.value,
+    adress: store.form1.companyAddress,
+    city: store.form1.companyCity,
+    country: store.form1.companyCountry,
+    emp: [''],
+    legal_status: store.form1.companyJuridicCategory,
+    n_siret: store.form1.companySiret,
+    name_company: store.form1.companyName,
+    nb_emp: store.form1.companyNbEmployees,
+    offers: [''],
+    postal_code: store.form1.companyPostalCode
+  }
+  try {
+    response.value = await createCompany(data)
+    console.log(response.value)
+    onSuccess()
+  } catch (error) {
+    const apiError = handleApiError(error)
+    console.log(apiError)
   }
 }
 
@@ -75,6 +120,16 @@ const onFailed = () => {
   successMessage.value = ''
   errorMessage.value = 'Veuillez remplir tous les champs'
   setTimeout(resetSnackbar, 5000)
+  emit('failed')
+}
+
+const onSuccess = () => {
+  showSnackbar.value = true
+  success.value = true
+  successMessage.value = 'Votre compte a bien été créé'
+  errorMessage.value = ''
+  setTimeout(resetSnackbar, 5000)
+  emit('success')
 }
 
 const resetSnackbar = () => {
@@ -94,6 +149,8 @@ onBeforeRouteLeave((to, _, next) => {
     next()
   }
 })
+
+const emit = defineEmits(['success', 'failed'])
 </script>
 
 <style scoped>
