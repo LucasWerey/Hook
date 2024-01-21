@@ -35,17 +35,25 @@
     </div>
     <div>
       <div class="flex h-full w-full items-center justify-center gap-4 align-middle">
-        <IconsBase name="notif" size="medium" color="grey" class="cursor-pointer" />
+        <IconsBase name="notif" size="medium" color="grey" />
         <hr class="m-0 w-6 rotate-90 border border-basic-lightgrey bg-basic-lightgrey" />
-        <div class="flex items-center justify-center gap-4 align-middle">
+        <div class="flex cursor-pointer items-center justify-center gap-4 align-middle">
           <div class="font-eina1 text-4 font-normal text-basic-black">{{ data }}</div>
           <Avatar
             type="photo"
-            src="https://api.dicebear.com/7.x/micah/svg?seed=Hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf"
+            :src="avatarUrl"
             alt="avatar photo"
             size="small"
+            class="select-none"
           />
-          <IconsBase name="chevronDown" color="darkgrey" class="cursor-pointer" />
+          <IconsBase
+            name="chevronDown"
+            color="darkgrey"
+            :rotate="isDropdownOpen ? 180 : 0"
+            class="cursor-pointer"
+            @click.prevent="openDropDown"
+          />
+          <DropDown class="absolute top-full" v-if="isDropdownOpen" />
         </div>
       </div>
     </div>
@@ -56,9 +64,22 @@
 import { RouterLink } from 'vue-router'
 const recruiterStore = useRecruiterStore()
 
+const isDropdownOpen = ref(false)
+
+const openDropDown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
 const data = computed(() => {
   if (recruiterStore.recruiters.length === 0) return
   return recruiterStore.recruiters[0].email
+})
+
+const avatarUrl = computed(() => {
+  if (recruiterStore.recruiters.length > 0 && recruiterStore.recruiters[0].firstname) {
+    return `https://api.dicebear.com/7.x/micah/svg?seed=${recruiterStore.recruiters[0].firstname}&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf`
+  }
+  return 'https://api.dicebear.com/7.x/micah/svg?seed=hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf'
 })
 
 const onLogoClick = () => {

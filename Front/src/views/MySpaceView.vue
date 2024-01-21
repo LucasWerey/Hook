@@ -1,6 +1,7 @@
 <template>
   <div class="flex h-full w-full px-12 py-6">
     <SpaceStudent v-if="isStudent" />
+    <SpaceRecruiter v-if="isCompany" />
   </div>
   <!--  <div class="flex w-full flex-col items-center justify-center gap-4 bg-error text-primary-light">
     <p>{{ email }}</p>

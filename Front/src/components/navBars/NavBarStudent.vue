@@ -34,11 +34,19 @@
           <div class="font-eina1 text-4 font-normal text-basic-black">{{ data }}</div>
           <Avatar
             type="photo"
-            src="https://api.dicebear.com/7.x/micah/svg?seed=Hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf"
+            :src="avatarUrl"
             alt="avatar photo"
             size="small"
+            class="select-none"
           />
-          <IconsBase name="chevronDown" color="darkgrey" class="cursor-pointer" />
+          <IconsBase
+            name="chevronDown"
+            color="darkgrey"
+            :rotate="isDropdownOpen ? 180 : 0"
+            class="cursor-pointer"
+            @click.prevent="openDropDown"
+          />
+          <DropDown class="absolute top-full" v-if="isDropdownOpen" />
         </div>
       </div>
     </div>
@@ -49,9 +57,22 @@
 import { RouterLink } from 'vue-router'
 const studentStore = useStudentsStore()
 
+const isDropdownOpen = ref(false)
+
+const openDropDown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
 const data = computed(() => {
   if (studentStore.students.length === 0) return
   return studentStore.students[0].email
+})
+
+const avatarUrl = computed(() => {
+  if (studentStore.students.length > 0 && studentStore.students[0].firstname) {
+    return `https://api.dicebear.com/7.x/micah/svg?seed=${studentStore.students[0].firstname}&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf`
+  }
+  return 'https://api.dicebear.com/7.x/micah/svg?seed=hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf'
 })
 
 const onLogoClick = () => {
