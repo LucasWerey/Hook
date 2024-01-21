@@ -53,7 +53,7 @@ const errorMessage = ref('')
 const store = useRegistrationRecruiterStore()
 
 const phaseWording = computed(() => {
-  return store.step >= 1 && store.step <= 3 ? RecruiterSignup.phase[`phase${store.step}`] : ''
+  return store.step >= 1 && store.step <= 2 ? RecruiterSignup.phase[`phase${store.step}`] : ''
 })
 
 const handleSubmit = () => {
@@ -84,14 +84,18 @@ const resetSnackbar = () => {
   errorMessage.value = ''
 }
 
-onBeforeRouteLeave((_, __, next) => {
-  if (store.step > 1) {
+onBeforeRouteLeave((to, _, next) => {
+  if (to.name === 'login') {
+    next()
+  } else if (store.step > 1) {
     store.prevStep()
     next(false)
   } else {
     next()
   }
 })
+
+const emit = defineEmits(['success'])
 </script>
 
 <style scoped>

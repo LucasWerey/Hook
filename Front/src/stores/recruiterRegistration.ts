@@ -28,7 +28,7 @@ export const useRegistrationRecruiterStore = defineStore({
       companyCountry: '',
       companyJuridicCategory: '',
       companyName: '',
-      companyNbEmployees: 0,
+      companyNbEmployees: '',
       companyPostalCode: 0,
       companySiret: '',
       idKey: ''

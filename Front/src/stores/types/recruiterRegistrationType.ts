@@ -7,7 +7,7 @@ export interface Form1State {
   companyCountry: string
   companyJuridicCategory: string
   companySiret: string
-  companyNbEmployees: number
+  companyNbEmployees: string
 }
 
 export interface Form2State {

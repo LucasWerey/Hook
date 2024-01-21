@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <component :is="currentSignupComponent" @success="goLoginPage" />
-  </div>
+  <component :is="currentSignupComponent" @success="goLoginPage" />
 </template>
 
 <script setup lang="ts">
