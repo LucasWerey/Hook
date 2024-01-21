@@ -68,6 +68,7 @@ declare global {
   const getAllStudents: typeof import('./utils/studentApiUtils')['getAllStudents']
   const getAllUsers: typeof import('./utils/userApiUtils')['getAllUsers']
   const getCompany: typeof import('./utils/companyApiUtils')['getCompany']
+  const getCompanyByAdmin: typeof import('./utils/companyApiUtils')['getCompanyByAdmin']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getEmailFromToken: typeof import('./utils/userApiUtils')['getEmailFromToken']
@@ -130,6 +131,12 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const populateCompanyStore: typeof import('./utils/populateCompanyStore')['populateCompanyStore']
+  const populateCompanyStoreByAdmin: typeof import('./utils/populateCompanyStore')['populateCompanyStoreByAdmin']
+  const populateRecr: typeof import('./utils/populateRecruiterStore')['populateRecr']
+  const populateRecruiter: typeof import('./utils/populateRecruiterStore')['populateRecruiter']
+  const populateRecruiterStore: typeof import('./utils/populateRecruiterStore')['populateRecruiterStore']
+  const populateStudentStore: typeof import('./utils/populateStudentUtils')['populateStudentStore']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
   const reactify: typeof import('@vueuse/core')['reactify']
@@ -214,6 +221,7 @@ declare global {
   const useClipboardItems: typeof import('@vueuse/core')['useClipboardItems']
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
+  const useCompanyStore: typeof import('./stores/companyStore')['useCompanyStore']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
   const useCounter: typeof import('@vueuse/core')['useCounter']
   const useCounterStore: (typeof import('./stores/counter'))['useCounterStore']
@@ -296,6 +304,7 @@ declare global {
   const usePreferredReducedMotion: typeof import('@vueuse/core')['usePreferredReducedMotion']
   const usePrevious: typeof import('@vueuse/core')['usePrevious']
   const useRafFn: typeof import('@vueuse/core')['useRafFn']
+  const useRecruiterStore: typeof import('./stores/recruiterStore')['useRecruiterStore']
   const useRefHistory: typeof import('@vueuse/core')['useRefHistory']
   const useRegistrationRecruiterStore: typeof import('./stores/recruiterRegistration')['useRegistrationRecruiterStore']
   const useRegistrationStore: typeof import('./stores/studentRegistration')['useRegistrationStore']
@@ -318,6 +327,7 @@ declare global {
   const useStepper: typeof import('@vueuse/core')['useStepper']
   const useStorage: typeof import('@vueuse/core')['useStorage']
   const useStorageAsync: typeof import('@vueuse/core')['useStorageAsync']
+  const useStudentsStore: typeof import('./stores/studentStore')['useStudentsStore']
   const useStyleTag: typeof import('@vueuse/core')['useStyleTag']
   const useSupported: typeof import('@vueuse/core')['useSupported']
   const useSwipe: typeof import('@vueuse/core')['useSwipe']
@@ -444,6 +454,7 @@ declare module 'vue' {
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
+    readonly getCompanyByAdmin: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompanyByAdmin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
@@ -500,6 +511,9 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly populateCompanyStoreByAdmin: UnwrapRef<typeof import('./utils/populateCompanyStore')['populateCompanyStoreByAdmin']>
+    readonly populateRecruiterStore: UnwrapRef<typeof import('./utils/populateRecruiterStore')['populateRecruiterStore']>
+    readonly populateStudentStore: UnwrapRef<typeof import('./utils/populateStudentUtils')['populateStudentStore']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -583,6 +597,7 @@ declare module 'vue' {
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
+    readonly useCompanyStore: UnwrapRef<typeof import('./stores/companyStore')['useCompanyStore']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useCounter: UnwrapRef<typeof import('@vueuse/core')['useCounter']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
@@ -664,6 +679,7 @@ declare module 'vue' {
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
     readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
+    readonly useRecruiterStore: UnwrapRef<typeof import('./stores/recruiterStore')['useRecruiterStore']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
     readonly useRegistrationRecruiterStore: UnwrapRef<typeof import('./stores/recruiterRegistration')['useRegistrationRecruiterStore']>
     readonly useRegistrationStudentStore: UnwrapRef<typeof import('./stores/studentRegistration')['useRegistrationStudentStore']>
@@ -685,6 +701,7 @@ declare module 'vue' {
     readonly useStepper: UnwrapRef<typeof import('@vueuse/core')['useStepper']>
     readonly useStorage: UnwrapRef<typeof import('@vueuse/core')['useStorage']>
     readonly useStorageAsync: UnwrapRef<typeof import('@vueuse/core')['useStorageAsync']>
+    readonly useStudentsStore: UnwrapRef<typeof import('./stores/studentStore')['useStudentsStore']>
     readonly useStyleTag: UnwrapRef<typeof import('@vueuse/core')['useStyleTag']>
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>
@@ -804,6 +821,7 @@ declare module '@vue/runtime-core' {
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
+    readonly getCompanyByAdmin: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompanyByAdmin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
@@ -860,6 +878,9 @@ declare module '@vue/runtime-core' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly populateCompanyStoreByAdmin: UnwrapRef<typeof import('./utils/populateCompanyStore')['populateCompanyStoreByAdmin']>
+    readonly populateRecruiterStore: UnwrapRef<typeof import('./utils/populateRecruiterStore')['populateRecruiterStore']>
+    readonly populateStudentStore: UnwrapRef<typeof import('./utils/populateStudentUtils')['populateStudentStore']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -943,6 +964,7 @@ declare module '@vue/runtime-core' {
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
+    readonly useCompanyStore: UnwrapRef<typeof import('./stores/companyStore')['useCompanyStore']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useCounter: UnwrapRef<typeof import('@vueuse/core')['useCounter']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
@@ -1024,6 +1046,7 @@ declare module '@vue/runtime-core' {
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
     readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
+    readonly useRecruiterStore: UnwrapRef<typeof import('./stores/recruiterStore')['useRecruiterStore']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
     readonly useRegistrationRecruiterStore: UnwrapRef<typeof import('./stores/recruiterRegistration')['useRegistrationRecruiterStore']>
     readonly useRegistrationStudentStore: UnwrapRef<typeof import('./stores/studentRegistration')['useRegistrationStudentStore']>
@@ -1045,6 +1068,7 @@ declare module '@vue/runtime-core' {
     readonly useStepper: UnwrapRef<typeof import('@vueuse/core')['useStepper']>
     readonly useStorage: UnwrapRef<typeof import('@vueuse/core')['useStorage']>
     readonly useStorageAsync: UnwrapRef<typeof import('@vueuse/core')['useStorageAsync']>
+    readonly useStudentsStore: UnwrapRef<typeof import('./stores/studentStore')['useStudentsStore']>
     readonly useStyleTag: UnwrapRef<typeof import('@vueuse/core')['useStyleTag']>
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>

@@ -7,7 +7,7 @@ import {
 
 const routes = [
   {
-    beforeEnter: redirectToAboutIfUserExists,
+    beforeEnter: redirectToMySpaceIfUserExists,
     component: () => import('../views/HomeView.vue'),
     meta: { requiresAuth: false },
     name: 'home',
@@ -20,12 +20,20 @@ const routes = [
     path: '/about'
   },
   {
+    component: () => import('../views/MySpaceView.vue'),
+    meta: { requiresAuth: true },
+    name: 'myspace',
+    path: '/myspace'
+  },
+  {
+    beforeEnter: redirectToMySpaceIfUserExists,
     component: () => import('../views/LoginView.vue'),
     meta: { requiresAuth: false },
     name: 'login',
     path: '/login'
   },
   {
+    beforeEnter: redirectToMySpaceIfUserExists,
     component: () => import('../views/SignupView.vue'),
     meta: { requiresAuth: false },
     name: 'signup',
@@ -40,13 +48,13 @@ const router = createRouter({
 
 router.beforeEach(redirectToHomeIfUserNotExists)
 
-function redirectToAboutIfUserExists(
+function redirectToMySpaceIfUserExists(
   to: RouteLocationNormalized,
   _: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  if (AuthenticationUtils.getToken() && to.name !== 'login') {
-    next({ name: 'about' })
+  if (AuthenticationUtils.getToken()) {
+    next({ name: 'myspace' })
   } else {
     next()
   }

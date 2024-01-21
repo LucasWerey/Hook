@@ -277,6 +277,18 @@ pub struct MongoRepo {
             Ok(companies)
         }
 
+        pub fn get_company_by_admin(&self, admin_id: &String) -> Result<Companies, Error> {
+            let obj_id = ObjectId::parse_str(admin_id).unwrap();
+            let filter = doc! {"admin": obj_id};
+            let companies_detail = self
+                .col3
+                .find_one(filter, None)
+                .ok()
+                .expect("Error getting companies detail");
+            let companies = companies_detail.unwrap();
+            Ok(companies)
+        }
+
         pub fn create_offers(&self, new_offers: Offers) -> Result<InsertOneResult, Error> {
             let new_doc = Offers {
                 id: None,

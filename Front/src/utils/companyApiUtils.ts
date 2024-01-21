@@ -34,3 +34,8 @@ export const deleteCompany = async (id: string) => {
 export const getAllCompanies = async () => {
   return await axios.get(`${baseURL}/companies`)
 }
+
+export const getCompanyByAdmin = async (admin: string) => {
+  const response = await axios.get(`${baseURL}/companie/admin/${admin}`)
+  return response.data
+}

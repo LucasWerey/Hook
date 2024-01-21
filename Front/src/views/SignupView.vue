@@ -24,8 +24,4 @@ const goLoginPage = () => {
   console.log('goLoginPage')
   router.push({ name: 'login' })
 }
-
-onMounted(() => {
-  console.log(route.query.userType)
-})
 </script>

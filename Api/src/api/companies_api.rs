@@ -111,3 +111,12 @@ pub fn get_all_companies(db: &State<MongoRepo>) -> Result<Json<Vec<Companies>>, 
         Err(_) => Err(Status::InternalServerError),
     }
 }
+
+#[get("/companie/admin/<admin_id>")]
+pub fn get_company_by_admin(db: &State<MongoRepo>, admin_id: String) -> Result<Json<Companies>, Status> {
+    let company_detail = db.get_company_by_admin(&admin_id);
+    match company_detail {
+        Ok(company) => Ok(Json(company)),
+        Err(_) => Err(Status::InternalServerError),
+    }
+}

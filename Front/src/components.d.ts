@@ -24,6 +24,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SelectField: typeof import('@lucaswerey/dslib-pfe')['SelectField']
     SnackBar: typeof import('@lucaswerey/dslib-pfe')['SnackBar']
+    SpaceStudent: typeof import('./components/mySpace/students/SpaceStudent.vue')['default']
     StepIndicator: typeof import('@lucaswerey/dslib-pfe')['StepIndicator']
     StudentFormStep1: typeof import('./components/signUp/students/StudentFormStep1.vue')['default']
     StudentFormStep2: typeof import('./components/signUp/students/StudentFormStep2.vue')['default']

@@ -6,7 +6,7 @@
         <div
           class="relative flex h-full items-center align-middle text-3 font-700 uppercase text-primary-powder"
         >
-          <router-link :to="{ name: 'about' }" active-class="text-primary-moonstone active-route"
+          <router-link :to="{ name: 'myspace' }" active-class="text-primary-moonstone active-route"
             >MON ESPACE</router-link
           >
         </div>
@@ -28,10 +28,10 @@
     </div>
     <div>
       <div class="flex h-full w-full items-center justify-center gap-4 align-middle">
-        <IconsBase name="close" size="medium" color="grey" class="cursor-pointer" />
+        <IconsBase name="notif" size="medium" color="grey" class="cursor-pointer" />
         <hr class="m-0 w-6 rotate-90 border border-basic-lightgrey bg-basic-lightgrey" />
         <div class="flex items-center justify-center gap-4 align-middle">
-          <div class="font-eina1 text-4 font-normal text-basic-black">Email@lulu.com</div>
+          <div class="font-eina1 text-4 font-normal text-basic-black">{{ data }}</div>
           <Avatar
             type="photo"
             src="https://api.dicebear.com/7.x/micah/svg?seed=Hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf"
@@ -47,6 +47,12 @@
 
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
+const studentStore = useStudentsStore()
+
+const data = computed(() => {
+  if (studentStore.students.length === 0) return
+  return studentStore.students[0].email
+})
 
 const onLogoClick = () => {
   // handle logo click
