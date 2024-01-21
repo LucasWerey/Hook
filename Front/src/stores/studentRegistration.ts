@@ -5,7 +5,7 @@ import {
   Form3State
 } from './types/studentRegistrationTypes'
 
-export const useRegistrationStore = defineStore({
+export const useRegistrationStudentStore = defineStore({
   actions: {
     nextStep() {
       this.step += 1

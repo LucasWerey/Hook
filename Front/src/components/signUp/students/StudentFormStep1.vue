@@ -89,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-const store = useRegistrationStore()
+const store = useRegistrationStudentStore()
 
 const emailModel = ref('')
 const passwordModel = ref('')

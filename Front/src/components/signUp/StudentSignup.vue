@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-type StepNumber = 1 | 2 | 3 | 4
+type StepNumber = 1 | 2 | 3
 
 const stepNumber: Ref<StepNumber> = ref(3)
 const showSnackbar = ref(false)
@@ -53,7 +53,7 @@ const success = ref(false)
 const successMessage = ref('')
 const errorMessage = ref('')
 
-const store = useRegistrationStore()
+const store = useRegistrationStudentStore()
 
 const phaseWording = computed(() => {
   return store.step >= 1 && store.step <= 3

@@ -226,7 +226,7 @@
 </template>
 
 <script setup lang="ts">
-const store = useRegistrationStore()
+const store = useRegistrationStudentStore()
 
 const lookForJobModel: Ref<string> = ref('')
 const lookForContractTypeModel: Ref<string> = ref('')

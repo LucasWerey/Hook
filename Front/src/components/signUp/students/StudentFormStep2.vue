@@ -244,7 +244,7 @@
 </template>
 
 <script setup lang="ts">
-const store = useRegistrationStore()
+const store = useRegistrationStudentStore()
 
 const lastNameModel: Ref<string> = ref('')
 const firstNameModel: Ref<string> = ref('')
