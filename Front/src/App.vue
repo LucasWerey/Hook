@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="h-[100dvh]">
+  <div id="app" class="max-h-[100dvh]">
     <NavBarWelcome class="fixed z-50" v-if="showNavBar && !isStudent && !isRecruiter" />
     <NavBarStudent class="fixed z-50" v-if="showNavBar && isStudent" />
     <NavBarCompany class="fixed z-50" v-if="showNavBar && isRecruiter" />
 
-    <RouterView :class="{ 'pt-20': showNavBar }" />
+    <RouterView />
   </div>
 </template>
 
@@ -25,12 +25,10 @@ const route = useRoute()
 const showNavBar = computed(() => {
   return route.path !== '/login' && route.path !== '/signup'
 })
-
 </script>
 
 <style>
 body {
   @apply bg-basic-verylightgrey;
-  min-width: 100dvw;
 }
 </style>

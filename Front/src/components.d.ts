@@ -13,6 +13,9 @@ declare module 'vue' {
     ChipContainer: typeof import('@lucaswerey/dslib-pfe')['ChipContainer']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
+    MyDemand: typeof import('./components/mySpace/students/MyDemand.vue')['default']
+    MyMatch: typeof import('./components/mySpace/students/MyMatch.vue')['default']
+    MyRefused: typeof import('./components/mySpace/students/MyRefused.vue')['default']
     NavBarCompany: typeof import('./components/navBars/NavBarCompany.vue')['default']
     NavBarStudent: typeof import('./components/navBars/NavBarStudent.vue')['default']
     NavBarWelcome: typeof import('./components/navBars/NavBarWelcome.vue')['default']
@@ -30,5 +33,6 @@ declare module 'vue' {
     StudentFormStep2: typeof import('./components/signUp/students/StudentFormStep2.vue')['default']
     StudentFormStep3: typeof import('./components/signUp/students/StudentFormStep3.vue')['default']
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
+    SubnavStudent: typeof import('./components/mySpace/students/SubnavStudent.vue')['default']
   }
 }

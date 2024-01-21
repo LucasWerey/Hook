@@ -1,5 +1,5 @@
 <template>
-  <div class="background-image flex h-full w-full flex-col items-center justify-center">
+  <div class="background-image flex h-[100vh] w-full flex-col items-center justify-center">
     <div class="flex w-2/3 flex-col items-center justify-center gap-8">
       <DarkLogo class="w-22" />
       <h1 class="text-center text-6 font-800 text-basic-white lg:text-24">
