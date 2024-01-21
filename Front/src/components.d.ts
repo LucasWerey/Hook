@@ -17,7 +17,6 @@ declare module 'vue' {
     NavBarStudent: typeof import('./components/navBars/NavBarStudent.vue')['default']
     NavBarWelcome: typeof import('./components/navBars/NavBarWelcome.vue')['default']
     RankingContainer: typeof import('@lucaswerey/dslib-pfe')['RankingContainer']
-    Recr: typeof import('@lucaswerey/dslib-pfe')['Recr']
     RecruiterFormStep1: typeof import('./components/signUp/recruiter/RecruiterFormStep1.vue')['default']
     RecruiterFormStep2: typeof import('./components/signUp/recruiter/RecruiterFormStep2.vue')['default']
     RecruiterSignup: typeof import('./components/signUp/RecruiterSignup.vue')['default']

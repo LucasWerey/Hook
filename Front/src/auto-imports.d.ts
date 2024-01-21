@@ -34,6 +34,7 @@ declare global {
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const convertYearsToMonths: typeof import('./utils/convertUtils')['convertYearsToMonths']
   const createApp: typeof import('vue')['createApp']
+  const createCompany: typeof import('./utils/companyApiUtils')['createCompany']
   const createEventHook: typeof import('@vueuse/core')['createEventHook']
   const createGlobalState: typeof import('@vueuse/core')['createGlobalState']
   const createInjectionState: typeof import('@vueuse/core')['createInjectionState']
@@ -52,6 +53,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
   const deleteChip: typeof import('./utils/chipUtils')['deleteChip']
+  const deleteCompany: typeof import('./utils/companyApiUtils')['deleteCompany']
   const deleteStudent: typeof import('./utils/studentApiUtils')['deleteStudent']
   const deleteUser: typeof import('./utils/userApiUtils')['deleteUser']
   const describe: typeof import('vitest')['describe']
@@ -62,8 +64,10 @@ declare global {
   const expect: typeof import('vitest')['expect']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const getActivePinia: typeof import('pinia')['getActivePinia']
+  const getAllCompanies: typeof import('./utils/companyApiUtils')['getAllCompanies']
   const getAllStudents: typeof import('./utils/studentApiUtils')['getAllStudents']
   const getAllUsers: typeof import('./utils/userApiUtils')['getAllUsers']
+  const getCompany: typeof import('./utils/companyApiUtils')['getCompany']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getEmailFromToken: typeof import('./utils/userApiUtils')['getEmailFromToken']
@@ -179,6 +183,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const unrefElement: typeof import('@vueuse/core')['unrefElement']
   const until: typeof import('@vueuse/core')['until']
+  const updateCompany: typeof import('./utils/companyApiUtils')['updateCompany']
   const updateStudent: typeof import('./utils/studentApiUtils')['updateStudent']
   const updateUser: typeof import('./utils/userApiUtils')['updateUser']
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
@@ -405,6 +410,7 @@ declare module 'vue' {
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly convertYearsToMonths: UnwrapRef<typeof import('./utils/convertUtils')['convertYearsToMonths']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['createCompany']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
@@ -423,6 +429,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
+    readonly deleteCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['deleteCompany']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
@@ -433,8 +440,10 @@ declare module 'vue' {
     readonly expect: UnwrapRef<typeof import('vitest')['expect']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getAllCompanies: UnwrapRef<typeof import('./utils/companyApiUtils')['getAllCompanies']>
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
+    readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
@@ -543,6 +552,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly updateCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['updateCompany']>
     readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
@@ -760,6 +770,7 @@ declare module '@vue/runtime-core' {
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly convertYearsToMonths: UnwrapRef<typeof import('./utils/convertUtils')['convertYearsToMonths']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['createCompany']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
@@ -778,6 +789,7 @@ declare module '@vue/runtime-core' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
+    readonly deleteCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['deleteCompany']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
@@ -788,8 +800,10 @@ declare module '@vue/runtime-core' {
     readonly expect: UnwrapRef<typeof import('vitest')['expect']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getAllCompanies: UnwrapRef<typeof import('./utils/companyApiUtils')['getAllCompanies']>
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
+    readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
@@ -898,6 +912,7 @@ declare module '@vue/runtime-core' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly updateCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['updateCompany']>
     readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
