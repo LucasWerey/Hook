@@ -15,5 +15,5 @@ pub struct Companies {
     pub nb_emp: i32,
     pub emp: ObjectId,
     pub admin: ObjectId,
-    /*pub offre: ObjectId,*/
+    pub offers: ObjectId,
 }

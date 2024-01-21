@@ -20,7 +20,7 @@ pub fn create_companies(
         nb_emp: new_companies.nb_emp,
         emp: new_companies.emp,
         admin: new_companies.admin,
-        /*offre: new_companies.offre, */
+        offers: new_companies.offers, 
     };
     let companies_detail = db.create_companies(data);
     match companies_detail {
@@ -65,7 +65,7 @@ pub fn update_companies(
         nb_emp: new_companies.nb_emp,
         emp: new_companies.emp,
         admin: new_companies.admin,
-       /* offre: new_companies.offre, */
+        offers: new_companies.offers, 
     };
     let update_result = db.update_companies(&id, data);
     match update_result {

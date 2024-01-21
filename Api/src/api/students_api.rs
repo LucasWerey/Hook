@@ -10,12 +10,13 @@ pub fn create_students(
 ) -> Result<Json<InsertOneResult>, Status> {
     let data = Students {
         user_id: new_students.user_id,
-        duree: new_students.duree.to_owned(),
-        niveau: new_students.niveau.to_owned(),
-        type_contrat: new_students.type_contrat.to_owned(),
-        date_debut: new_students.date_debut,
-        lieu: new_students.lieu.to_owned(),
-        recherche: new_students.recherche,
+        duration: new_students.duration.to_owned(),
+        level: new_students.level.to_owned(),
+        contract_type: new_students.contract_type.to_owned(),
+        start_date: new_students.start_date,
+        location: new_students.location.to_owned(),
+        research: new_students.research,
+        profile: new_students.profile.clone(),
 
     };
     let students_detail = db.create_students(data);
@@ -51,12 +52,13 @@ pub fn update_students(
     };
     let data = Students {
         user_id: Some(ObjectId::parse_str(&id).unwrap()),
-        duree: new_students.duree.to_owned(),
-        niveau: new_students.niveau.to_owned(),
-        type_contrat: new_students.type_contrat.to_owned(),
-        date_debut: new_students.date_debut,
-        lieu: new_students.lieu.to_owned(),
-        recherche: new_students.recherche,
+        duration: new_students.duration.to_owned(),
+        level: new_students.level.to_owned(),
+        contract_type: new_students.contract_type.to_owned(),
+        start_date: new_students.start_date,
+        location: new_students.location.to_owned(),
+        research: new_students.research,
+        profile: new_students.profile.clone(),
     };
     let update_result = db.update_students(&id, data);
     match update_result {
