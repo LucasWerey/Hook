@@ -1,3 +1,17 @@
+type ObjectId = string // replace with actual ObjectId type if available
+type BsonDateTime = any // replace with actual BsonDateTime type if available
+
+type Students = {
+  user_id?: ObjectId
+  duration: string
+  level: string
+  contract_type: string
+  start_date: BsonDateTime
+  location: string
+  research: boolean
+  profile: Object
+}
+
 /**
  * Fetches all students.
  * @returns {Promise<any>} The users data.
@@ -33,9 +47,9 @@ export async function getStudent(id: string) {
  * @returns {Promise<any>} The created user data.
  * @throws {Error} When an error occurs.
  */
-export async function createStudent(userData: any) {
+export async function createStudent(studentData: Students) {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/student', userData)
+    const response = await axios.post('http://127.0.0.1:8000/student', studentData)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -49,9 +63,9 @@ export async function createStudent(userData: any) {
  * @returns {Promise<any>} The updated user data.
  * @throws {Error} When an error occurs.
  */
-export async function updateStudent(id: string, userData: any) {
+export async function updateStudent(id: string, studentData: Students) {
   try {
-    const response = await axios.put(`http://127.0.0.1:8000/student/${id}`, userData)
+    const response = await axios.put(`http://127.0.0.1:8000/student/${id}`, studentData)
     return response.data
   } catch (error) {
     throw handleApiError(error)

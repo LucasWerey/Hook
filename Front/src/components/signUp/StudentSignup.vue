@@ -92,31 +92,43 @@ const createUserStudent = async () => {
   }
 }
 
-/*
-  lastname: string
-  firstname: string
-  school: string
-  formationName: string
-  formationYear: string
-  schoolStartDate: Date
-  description: string
-  schoolResult: string
-  lastExpPoste: string
-  lastExpCompany: string
-  currentPost: boolean
-  lastExpStartDate: Date
-  lastExpEndDate: Date
-  lastExpLocation: string
-  lastExpDescription: string
-  hardSkills: string[]
-  softSkills: string[]
-  */
-
 const updateUserStudent = async () => {
-  const data = {}
+  const data = {
+    contract_type: store.form3.contractType,
+    duration: store.form3.contractDuration,
+    level: store.form2.formationYear,
+    location: store.form3.contractLocation,
+    profile: {
+      currentPost: store.form2.currentPost,
+      description: store.form2.description,
+      formationName: store.form2.formationName,
+      formationYear: store.form2.formationYear,
+      hardSkills: store.form2.hardSkills,
+      keyWords: store.form3.keyWords,
+      lastExpCompany: store.form2.lastExpCompany,
+      lastExpDescription: store.form2.lastExpDescription,
+      lastExpEndDate: store.form2.lastExpEndDate,
+      lastExpLocation: store.form2.lastExpLocation,
+      lastExpPoste: store.form2.lastExpPoste,
+      lastExpStartDate: store.form2.lastExpStartDate,
+      school: store.form2.school,
+      schoolResult: store.form2.schoolResult,
+      schoolStartDate: store.form2.schoolStartDate,
+      softSkills: store.form2.softSkills,
+      transportDuration: store.form3.transportDuration,
+      transportType: store.form3.transportAvailable
+    },
+    research: true,
+    start_date: {
+      $date: {
+        $numberLong: String(store.form3.contractStartDate.getTime())
+      }
+    }
+  }
   try {
     response.value = await updateStudent(studentId.value, data)
     console.log(response.value)
+    onSuccess()
   } catch (error) {
     const apiError = handleApiError(error)
     console.log(apiError)
@@ -134,6 +146,16 @@ const onFailed = () => {
   successMessage.value = ''
   errorMessage.value = 'Veuillez remplir tous les champs'
   setTimeout(resetSnackbar, 5000)
+  emit('failed')
+}
+
+const onSuccess = () => {
+  showSnackbar.value = true
+  success.value = true
+  successMessage.value = 'Votre compte a bien été créé'
+  errorMessage.value = ''
+  setTimeout(resetSnackbar, 5000)
+  emit('success')
 }
 
 const resetSnackbar = () => {
@@ -143,14 +165,18 @@ const resetSnackbar = () => {
   errorMessage.value = ''
 }
 
-onBeforeRouteLeave((_, __, next) => {
-  if (store.step > 1) {
+onBeforeRouteLeave((to, _, next) => {
+  if (to.name === 'login') {
+    next()
+  } else if (store.step > 1) {
     store.prevStep()
     next(false)
   } else {
     next()
   }
 })
+
+const emit = defineEmits(['success', 'failed'])
 </script>
 
 <style scoped>

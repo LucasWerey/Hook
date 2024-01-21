@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component :is="currentSignupComponent" />
+    <component :is="currentSignupComponent" @success="goLoginPage" />
   </div>
 </template>
 
@@ -21,6 +21,11 @@ const currentSignupComponent = computed(() => {
       return null
   }
 })
+
+const goLoginPage = () => {
+  console.log('goLoginPage')
+  router.push({ name: 'login' })
+}
 
 onMounted(() => {
   console.log(route.query.userType)
