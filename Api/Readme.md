@@ -61,12 +61,13 @@ The `Student` model represents a user in the system. Here's the structure of the
 ```rust
 pub struct Students {
     pub user_id: Option<ObjectId>, // The student id linked to user ID
-    pub duree: i32,                // The duration of the stage/internship
-    pub niveau: String,            // The graduation level
-    pub type_contrat: String,      // Type of contract
-    pub date_debut: BsonDateTime,  // Date of start
-    pub lieu: String,              // Place of stage
-    pub recherche: bool,           // Currently looking for ?
+    pub duration: i32,                // The duration of the stage/internship
+    pub level: String,            // The graduation level
+    pub contract_type: String,      // Type of contract
+    pub start_date: BsonDateTime,  // Date of start
+    pub location: String,              // Place of stage
+    pub research: bool,           // Currently looking for ?
+    pub profile: Bson,          //Profile informations
 }
 ```
 
@@ -175,16 +176,17 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
-"duree":"4 mois",
-"niveau": "BAC+4",
-"type_contrat": "stage",
-"date_debut": {
+"duration":"4 mois",
+"level": "BAC+4",
+"contract_type": "stage",
+"start_date": {
 "$date": {
             "$numberLong": "1704712581950"
 }
 },
-"lieu": "Paris",
-"recherche": false
+"location": "Paris",
+"research": false,
+"profile": {"music":"Blabla"}
 
 }' http://127.0.0.1:8000/student/65a2c1f81cb256b4957fee3c
 ```
