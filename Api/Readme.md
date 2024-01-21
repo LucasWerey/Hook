@@ -71,6 +71,40 @@ pub struct Students {
 }
 ```
 
+## Company Model
+
+The `Company` model represents a user in the system. Here's the structure of the `Company` model:
+
+```rust
+pub struct Companies {
+    pub id: Option<ObjectId>,
+    pub n_siret: String,
+    pub name_company: String,
+    pub adress: String,
+    pub postal_code: i32,
+    pub city: String,
+    pub country: String,
+    pub legal_status: String,
+    pub nb_emp: i32,
+    pub emp: Bson,
+    pub admin: ObjectId,
+    pub offers: Bson,
+}
+```
+
+## Offer Model
+
+The `Offer` model represents a user in the system. Here's the structure of the `Offer` model:
+
+```rust
+pub struct Offers {
+    pub id: Option<ObjectId>,
+    pub id_company: ObjectId,
+    pub matching: Bson,
+    pub tags: String,
+}
+```
+
 ## Endpoints
 
 ### Create User - `POST /user`
@@ -102,9 +136,9 @@ curl -X POST -H "Content-Type: application/json" -d '{
 "country": "France",
 "legal_status": "SCI",
 "nb_emp": 15,
-"emp": "65a6971af045e1d0c14cdc9f",
-"admin": "65a6971af045e1d0c14cdc9f"
-
+"emp": ["em1", "emp2"],
+"admin": "65a6971af045e1d0c14cdc9f",
+"offers": ["offer1", "offer2", "offer3"]
 }' http://127.0.0.1:8000/companie
 ```
 
@@ -188,7 +222,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "research": false,
 "profile": {"music":"Blabla"}
 
-}' http://127.0.0.1:8000/student/65a2c1f81cb256b4957fee3c
+}' http://127.0.0.1:8000/student/65a688c23c303d0a501add11
 ```
 
 #### Update Company - `PUT /companie/<id>`
@@ -203,9 +237,10 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "country": "France",
 "legal_status": "SCI",
 "nb_emp": 15,
-"emp": "65a6971af045e1d0c14cdc9f",
-"admin": "65a6971af045e1d0c14cdc9f"
-}' http://127.0.0.1:8000/companie/65a7e00faed2ab6c22c958d1
+"emp": ["em1", "emp2"],
+"admin": "65a6971af045e1d0c14cdc9f",
+"offers": ["offer1", "offer2", "offer3"]
+}' http://127.0.0.1:8000/companie/65ad31f91370388a775b9b44
 ```
 
 #### Update Offer - `PUT /offer/<id>`

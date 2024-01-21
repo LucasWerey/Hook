@@ -1,4 +1,4 @@
-use mongodb::bson::oid::ObjectId;
+use mongodb::bson::{oid::ObjectId, Bson};
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -13,7 +13,7 @@ pub struct Companies {
     pub country: String,
     pub legal_status: String,
     pub nb_emp: i32,
-    pub emp: ObjectId,
+    pub emp: Bson,
     pub admin: ObjectId,
-    pub offers: ObjectId,
+    pub offers: Bson,
 }

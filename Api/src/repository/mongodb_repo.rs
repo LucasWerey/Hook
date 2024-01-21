@@ -207,7 +207,7 @@ pub struct MongoRepo {
                 nb_emp: new_companies.nb_emp,
                 emp: new_companies.emp,
                 admin: new_companies.admin,
-                offers: new_companies.offers       
+                offers: new_companies.offers
             };
             let companies = self
                 .col3

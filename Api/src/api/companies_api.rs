@@ -18,9 +18,9 @@ pub fn create_companies(
         country: new_companies.country.to_owned(),
         legal_status: new_companies.legal_status.to_owned(),
         nb_emp: new_companies.nb_emp,
-        emp: new_companies.emp,
+        emp: new_companies.emp.clone(),
         admin: new_companies.admin,
-        offers: new_companies.offers, 
+        offers: new_companies.offers.clone(),
     };
     let companies_detail = db.create_companies(data);
     match companies_detail {
@@ -63,9 +63,9 @@ pub fn update_companies(
         country: new_companies.country.to_owned(),
         legal_status: new_companies.legal_status.to_owned(),
         nb_emp: new_companies.nb_emp,
-        emp: new_companies.emp,
+        emp: new_companies.emp.clone(),
         admin: new_companies.admin,
-        offers: new_companies.offers, 
+        offers: new_companies.offers.clone(),
     };
     let update_result = db.update_companies(&id, data);
     match update_result {
