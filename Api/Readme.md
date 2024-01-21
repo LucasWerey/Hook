@@ -110,7 +110,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 #### Create Offer - `POST /offer`
 
-````bash
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{
 "id_company": "65a6971af045e1d0c14cdc9f",
 "matching": {"company":"Bouygues"},
@@ -118,7 +118,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/offer
 ```
 
-### Get queries
+### Get all queries
 
 Returns a list of all users in the system. No request body is required for this endpoint.
 
@@ -128,7 +128,7 @@ Examples:
 
 ```bash
 curl -X GET http://127.0.0.1:8000/users
-````
+```
 
 #### Get All Students - `GET /students`
 
@@ -191,7 +191,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/student/65a2c1f81cb256b4957fee3c
 ```
 
-#### Update Company - `PUT /companie/<id>``
+#### Update Company - `PUT /companie/<id>`
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -208,7 +208,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/companie/65a7e00faed2ab6c22c958d1
 ```
 
-#### Update Offer - `PUT /offer/<id>``
+#### Update Offer - `PUT /offer/<id>`
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
