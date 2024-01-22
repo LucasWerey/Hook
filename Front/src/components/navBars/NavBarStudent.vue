@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex h-20 w-full items-center justify-between bg-basic-white px-8 shadow">
+  <div class="fixed flex min-h-20 w-full items-center justify-between bg-basic-white px-8 shadow">
     <div class="flex h-full items-center justify-center gap-2 align-middle">
       <IconsBase name="logo" size="large" @click="onLogoClick" class="cursor-pointer md:w-40" />
       <div class="relative inline-flex h-full items-center gap-8">
@@ -35,9 +35,11 @@
           @click.prevent="openDropDown"
           ref="dropdownTrigger"
           tabindex="0"
-          @blur.prevent="openDropDown"
+          @blur="isDropdownOpen ? openDropDown : null"
         >
-          <div class="font-eina1 text-4 font-normal text-basic-black">{{ data }}</div>
+          <div class="cursor-pointer font-eina1 text-4 font-normal text-basic-black">
+            {{ data }}
+          </div>
           <Avatar
             type="photo"
             :src="avatarUrl"
@@ -50,7 +52,6 @@
             color="darkgrey"
             :rotate="isDropdownOpen ? 180 : 0"
             class="cursor-pointer"
-            @click.prevent="openDropDown"
           />
           <transition name="fade">
             <DropDown

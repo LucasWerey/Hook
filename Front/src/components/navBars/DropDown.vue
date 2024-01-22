@@ -3,7 +3,7 @@
     <div
       v-for="(item, index) in menuItems"
       :key="index"
-      class="h-12 w-full border-b border-t border-b-basic-lightgrey border-t-basic-lightgrey px-4 py-3 font-eina1 text-4 font-normal hover:bg-basic-lightgrey"
+      class="h-12 w-full cursor-pointer border-b border-t border-b-basic-lightgrey border-t-basic-lightgrey px-4 py-3 font-eina1 text-4 font-normal hover:bg-basic-lightgrey"
       :class="item.additionalClass"
       @click="item.action"
     >
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 const seeProfile = () => {
-  alert('see profile')
+  router.push({ name: 'profile' })
 }
 
 const disconnect = () => {

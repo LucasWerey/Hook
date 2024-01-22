@@ -49,14 +49,12 @@ watch(
     await nextTick()
     const activeElement = document.querySelector('.active-page')
     if (activeElement) {
-      underlineWidth.value = activeElement.offsetWidth
-      underlineLeft.value = activeElement.offsetLeft
+      underlineWidth.value = (activeElement as HTMLElement).offsetWidth;
+      underlineLeft.value = (activeElement as HTMLElement).offsetLeft;
     }
   },
   { immediate: true }
 )
 
-onMounted(() => {
-  changePage(activePage.value, direction.value)
-})
+onMounted(() => changePage(activePage.value, direction.value as 'ltr' | 'rtl'))
 </script>

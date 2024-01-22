@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="max-h-[100dvh]">
-    <NavBarWelcome class="fixed z-50" v-if="showNavBar && !isStudent && !isRecruiter" />
-    <NavBarStudent class="fixed z-50" v-if="showNavBar && isStudent" />
-    <NavBarCompany class="fixed z-50" v-if="showNavBar && isRecruiter" />
+    <NavBarWelcome v-if="showNavBar && !isStudent && !isRecruiter" />
+    <NavBarStudent class="z-50" v-if="showNavBar && isStudent" />
+    <NavBarCompany class="z-50" v-if="showNavBar && isRecruiter" />
 
     <RouterView />
   </div>

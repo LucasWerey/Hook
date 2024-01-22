@@ -26,6 +26,7 @@
           state="active"
           styled="outlined"
           class="max-w-fit text-nowrap border-basic-white text-3 uppercase shadow-md sm:max-w-[205px]"
+          isLight
           style="color: white"
           @click="onStudentClick"
           >{{ homeWords.student }}
