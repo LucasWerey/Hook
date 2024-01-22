@@ -35,6 +35,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SelectField: typeof import('@lucaswerey/dslib-pfe')['SelectField']
     SnackBar: typeof import('@lucaswerey/dslib-pfe')['SnackBar']
+    SpacePersonnalization: typeof import('./components/mySpace/recruiter/newOffer/SpacePersonnalization.vue')['default']
     SpaceRecruiter: typeof import('./components/mySpace/recruiter/SpaceRecruiter.vue')['default']
     SpaceStudent: typeof import('./components/mySpace/students/SpaceStudent.vue')['default']
     StepIndicator: typeof import('@lucaswerey/dslib-pfe')['StepIndicator']

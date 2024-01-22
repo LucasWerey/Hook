@@ -215,7 +215,10 @@
             </div>
           </div>
           <div class="flex w-full flex-col gap-2">
-            <MoreCrits @update:criteria="formData.moreCriteriasModel = $event" />
+            <MoreCrits
+              :value="formData.moreCriteriasModel"
+              @update:criteria="formData.moreCriteriasModel = $event"
+            />
           </div>
           <div class="flex min-h-[110px] flex-col gap-4">
             <div class="flex flex-col items-end gap-2 lg:flex-row">
@@ -269,9 +272,27 @@
         </div>
       </div>
       <div class="flex w-full flex-col gap-3">
-        <CompatibilityInput />
+        <CompatibilityInput
+          :value="formData.minimumCompatibilityModel"
+          @update:value="newValue => (formData.minimumCompatibilityModel = newValue)"
+        />
       </div>
       <hr class="border-b border-basic-lightgrey" />
+      <div class="flex w-full flex-col gap-3">
+        <SpacePersonnalization />
+      </div>
+      <span class="font-eina1 text-3 text-error">*Champs obligatoires</span>
+      <div class="flex w-full items-center justify-center">
+        <Button
+          type="default"
+          :state="areAllRequiredFieldsFilled ? 'active' : 'disabled'"
+          styled="fill"
+          class="uppercase"
+          icon-position="trailing"
+        >
+          Enregistrer mon offre
+        </Button>
+      </div>
     </form>
   </div>
 </template>
@@ -288,6 +309,7 @@ const formData = reactive({
   gratificationModel: ref(''),
   lookForContractTypeModel: ref(''),
   lookingForModel: ref(''),
+  minimumCompatibilityModel: ref(''),
   missionModel: ref(''),
   moreCriteriasModel: ref([]),
   personnalityCriteriaModel: ref(''),
@@ -436,6 +458,20 @@ const handleDrop = (event: any, index: number) => {
     itemsRank.value = controlsCopy
   }
 }
+
+const areAllRequiredFieldsFilled = computed(() => {
+  return (
+    formData.lookingForModel !== '' &&
+    formData.lookForContractTypeModel !== '' &&
+    formData.contractDurationModel !== '' &&
+    formData.contractLocationModel !== '' &&
+    formData.expirationDateModel !== '' &&
+    formData.gratificationModel !== '' &&
+    formData.descriptionModel !== '' &&
+    formData.missionModel !== '' &&
+    formData.avantagesModel !== ''
+  )
+})
 
 const emit = defineEmits(['closeModal'])
 </script>

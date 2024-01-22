@@ -1,5 +1,7 @@
 <template>
-  <h4>Taux de compatibilité<span class="text-error">*</span></h4>
+  <h4 class="font-eina1 text-2 font-700 uppercase">
+    Taux de compatibilité<span class="text-error">*</span>
+  </h4>
   <div class="flex w-full items-baseline gap-14">
     <div class="relative w-1/2">
       <input
@@ -34,9 +36,11 @@ import { ref, computed } from 'vue'
 const min = 0
 const max = 100
 const value = ref(0)
+const emit = defineEmits(['update:value'])
 
 const updateValue = (newValue: string) => {
   value.value = Number(newValue)
+  emit('update:value', value.value)
 }
 
 const valueLabelClass = computed(() => {
