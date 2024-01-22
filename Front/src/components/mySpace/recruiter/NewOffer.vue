@@ -3,9 +3,9 @@
     class="absolute left-1/2 top-[15%] z-50 flex h-4/5 max-h-[75%] w-full -translate-x-1/2 flex-col items-center overflow-hidden overflow-y-auto rounded-lg bg-basic-white shadow lg:w-[822px]"
   >
     <NewofferHeader @closeModal="emit('closeModal')" />
-    <form class="flex w-full flex-col gap-8 overflow-y-auto px-6 py-6">
+    <form class="flex w-full flex-col gap-8 overflow-y-auto px-6 py-6" @submit.prevent>
       <InputField
-        v-model="lookingForModel"
+        v-model="formData.lookingForModel"
         :placeholder="'Développeur Web'"
         :label="'Poste Recherché'"
         :hint="'hint'"
@@ -17,59 +17,28 @@
         @blur="() => console.log('blur')"
       />
       <div class="flex w-full flex-col gap-2">
-        <h2 class="text-nowrap text-2 font-bold uppercase">
-          Type de contrat recherché <span class="text-error">*</span>
-        </h2>
-        <div class="flex h-full w-full items-center gap-4 align-middle">
-          <input
-            type="radio"
-            id="stage"
-            name="lookForJob"
-            value="stage"
-            v-model="lookForContractTypeModel"
-            class="cursor-pointer"
-          />
-          <label
-            :class="{ 'font-800': lookForContractTypeModel === 'stage' }"
-            for="stage"
-            class="cursor-pointer font-eina1"
-            >Stage</label
-          >
-          <input
-            type="radio"
-            id="alternance"
-            name="lookForJob"
-            value="alternance"
-            class="cursor-pointer"
-            v-model="lookForContractTypeModel"
-          />
-          <label
-            :class="{ 'font-800': lookForContractTypeModel === 'alternance' }"
-            for="alternance"
-            class="cursor-pointer font-eina1"
-            >Alternance</label
-          >
-        </div>
+        <ContractTypeinput v-model="formData.lookForContractTypeModel" />
       </div>
       <div class="flex w-full flex-col gap-6 lg:flex-row">
         <SelectField
           title="Durée*"
-          v-model="contractDurationModel"
-          :options="contractDurationOptions"
+          v-model="formData.contractDurationModel"
+          :options="newOfferContractDurationOptions"
           default="Selectionner"
           class="max-h-[200px] min-w-[200px] max-w-[200px] text-nowrap"
         />
-        <SelectField
-          title="Localisation*"
-          v-model="contractLocationModel"
-          :options="contractLocationOptions"
+        <InputField
+          label="Localisation"
+          v-model="formData.contractLocationModel"
           default="Selectionner"
           class="w-full text-nowrap"
+          placeholder="Paris"
+          isRequired
         />
       </div>
       <div class="flex w-full flex-col gap-6 lg:flex-row">
         <InputField
-          v-model="expirationDateModel"
+          v-model="formData.expirationDateModel"
           :placeholder="'placeholder'"
           :label="`Date d'expiration`"
           :hint="'hint'"
@@ -79,7 +48,7 @@
           state="default"
         />
         <InputField
-          v-model="gratificationModel"
+          v-model="formData.gratificationModel"
           :placeholder="'1000€ - 2000€'"
           :label="'Salaire/gratification'"
           :hint="'hint'"
@@ -93,7 +62,7 @@
         />
       </div>
       <InputField
-        v-model="descriptionModel"
+        v-model="formData.descriptionModel"
         :placeholder="largeInputPlaceholder"
         :label="`Description de l'offre`"
         :hint="'hint'"
@@ -107,7 +76,7 @@
         @blur="() => console.log('blur')"
       />
       <InputField
-        v-model="missionModel"
+        v-model="formData.missionModel"
         :placeholder="largeInputPlaceholder"
         :label="`Missions associées`"
         :hint="'hint'"
@@ -121,7 +90,7 @@
         @blur="() => console.log('blur')"
       />
       <InputField
-        v-model="avantagesModel"
+        v-model="formData.avantagesModel"
         :placeholder="largeInputPlaceholder"
         :label="`Avantages`"
         :hint="'hint'"
@@ -142,9 +111,10 @@
             <div class="flex flex-col items-end gap-2 lg:flex-row">
               <InputField
                 class="w-3/4"
-                v-model="formationsWantedModel"
+                v-model="formData.formationsWantedModel"
                 placeholder="Ecole d'ingénieur"
                 label="Formations souhaitées"
+                @keyup.enter="addChipFormation"
               />
               <Button
                 type="default"
@@ -171,8 +141,8 @@
           <div class="flex min-h-[110px] flex-col gap-4 lg:flex-row">
             <SelectField
               title="Expériences professionnelles"
-              v-model="professionalExperienceDurantionModel"
-              :options="professionalExperienceDurationOptions"
+              v-model="formData.professionalExperienceDurantionModel"
+              :options="newOfferProfessionalExperienceDurationOptions"
               default="Selectionner"
               class="max-h-[200px] min-w-[250px] max-w-[250px] text-nowrap"
             />
@@ -180,9 +150,10 @@
               <div class="flex flex-col items-end gap-2 lg:flex-row">
                 <InputField
                   class="w-full"
-                  v-model="certificationsModel"
+                  v-model="formData.certificationsModel"
                   placeholder="Jsp l'ékip"
                   label="Certification souhaitées"
+                  @keyup.enter="addChipCertification"
                 />
                 <Button
                   type="default"
@@ -216,9 +187,10 @@
             <div class="flex flex-col items-end gap-2 lg:flex-row">
               <InputField
                 class="w-3/4"
-                v-model="softSkillsModel"
+                v-model="formData.softSkillsModel"
                 placeholder="Agilité"
                 label="Soft skills"
+                @keyup.enter="addChipSoftSkill"
               />
               <Button
                 type="default"
@@ -249,42 +221,21 @@
 </template>
 
 <script setup lang="ts">
-const lookingForModel: Ref<string> = ref('')
-const lookForContractTypeModel: Ref<string> = ref('')
-const contractDurationModel: Ref<string> = ref('')
-const contractLocationModel: Ref<string> = ref('')
-const expirationDateModel: Ref<string> = ref('')
-const gratificationModel: Ref<string> = ref('')
-const descriptionModel: Ref<string> = ref('')
-const missionModel: Ref<string> = ref('')
-const avantagesModel: Ref<string> = ref('')
-const formationsWantedModel: Ref<string> = ref('')
-const professionalExperienceDurantionModel: Ref<string> = ref('')
-const certificationsModel: Ref<string> = ref('')
-const softSkillsModel: Ref<string> = ref('')
-
-const contractDurationOptions = [
-  { label: '1 semaine', value: '1 semaine' },
-  { label: '2 semaines', value: '2 semaines' },
-  { label: '3 semaines', value: '3 semaines' },
-  { label: '4 semaines', value: '4 semaines' },
-  { label: '5 semaines', value: '5 semaines' },
-  { label: '6 semaines', value: '6 semaines' },
-  { label: '7 semaines', value: '7 semaines' }
-]
-
-const contractLocationOptions = [
-  { label: 'Paris', value: 'Paris' },
-  { label: 'Lyon', value: 'Lyon' },
-  { label: 'Marseille', value: 'Marseille' },
-  { label: 'Toulouse', value: 'Toulouse' }
-]
-
-const professionalExperienceDurationOptions = [
-  { label: '< 6 mois', value: '< 6 mois' },
-  { label: '> 6 mois', value: '> 6 mois' },
-  { label: '> 1 an', value: '> 1 an' }
-]
+const formData = reactive({
+  avantagesModel: ref(''),
+  certificationsModel: ref(''),
+  contractDurationModel: ref(''),
+  contractLocationModel: ref(''),
+  descriptionModel: ref(''),
+  expirationDateModel: ref(''),
+  formationsWantedModel: ref(''),
+  gratificationModel: ref(''),
+  lookForContractTypeModel: ref(''),
+  lookingForModel: ref(''),
+  missionModel: ref(''),
+  professionalExperienceDurantionModel: ref(''),
+  softSkillsModel: ref('')
+})
 
 const largeInputPlaceholder =
   'Lorem ipsum dolor sit amet consectetur. Malesuada sit quis nec sed phasellus dui gravida. Magna varius tortor sed nisl augue. Mauris massa morbi aliquam nunc molestie adipiscing. '
@@ -293,8 +244,9 @@ const formationsWantedRef: Ref<string[]> = ref([])
 const formationsWanted = computed(() => formationsWantedRef.value)
 
 const addChipFormation = () => {
-  addChip(formationsWantedRef, formationsWantedModel.value)
-  formationsWantedModel.value = ''
+  if (formData.formationsWantedModel === '') return
+  addChip(formationsWantedRef, formData.formationsWantedModel)
+  formData.formationsWantedModel = ''
 }
 
 const deleteChipFormation = (label: string) => {
@@ -305,8 +257,9 @@ const certificationsRef: Ref<string[]> = ref([])
 const certifications = computed(() => certificationsRef.value)
 
 const addChipCertification = () => {
-  addChip(certificationsRef, certificationsModel.value)
-  certificationsModel.value = ''
+  if (formData.certificationsModel === '') return
+  addChip(certificationsRef, formData.certificationsModel)
+  formData.certificationsModel = ''
 }
 
 const deleteChipCertification = (label: string) => {
@@ -317,8 +270,9 @@ const softSkillsRef: Ref<string[]> = ref([])
 const softSkills = computed(() => softSkillsRef.value)
 
 const addChipSoftSkill = () => {
-  addChip(softSkillsRef, softSkillsModel.value)
-  softSkillsModel.value = ''
+  if (formData.softSkillsModel === '') return
+  addChip(softSkillsRef, formData.softSkillsModel)
+  formData.softSkillsModel = ''
 }
 
 const deleteChipSoftSkill = (label: string) => {

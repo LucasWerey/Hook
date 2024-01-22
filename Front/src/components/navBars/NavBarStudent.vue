@@ -30,7 +30,13 @@
       <div class="flex h-full w-full items-center justify-center gap-4 align-middle">
         <IconsBase name="notif" size="medium" color="grey" class="cursor-pointer" />
         <hr class="m-0 w-6 rotate-90 border border-basic-lightgrey bg-basic-lightgrey" />
-        <div class="flex items-center justify-center gap-4 align-middle">
+        <div
+          class="flex items-center justify-center gap-4 align-middle"
+          @click.prevent="openDropDown"
+          ref="dropdownTrigger"
+          tabindex="0"
+          @blur.prevent="openDropDown"
+        >
           <div class="font-eina1 text-4 font-normal text-basic-black">{{ data }}</div>
           <Avatar
             type="photo"
@@ -47,7 +53,11 @@
             @click.prevent="openDropDown"
           />
           <transition name="fade">
-            <DropDown class="absolute top-full" v-if="isDropdownOpen" />
+            <DropDown
+              :style="{ width: dropdownWidth + 'px' }"
+              class="absolute right-0 top-full"
+              v-if="isDropdownOpen"
+            />
           </transition>
         </div>
       </div>
@@ -75,6 +85,17 @@ const avatarUrl = computed(() => {
     return `https://api.dicebear.com/7.x/micah/svg?seed=${studentStore.students[0].firstname}&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf`
   }
   return 'https://api.dicebear.com/7.x/micah/svg?seed=hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf'
+})
+
+const dropdownTrigger = ref<HTMLElement | null>(null)
+
+const dropdownWidth = computed(() => {
+  return dropdownTrigger.value ? dropdownTrigger.value.offsetWidth + 48 : 0
+})
+
+onMounted(async () => {
+  await nextTick()
+  dropdownTrigger.value = document.querySelector('.dropdown-trigger')
 })
 
 const onLogoClick = () => {

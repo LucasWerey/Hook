@@ -1,26 +1,34 @@
 <template>
-  <div
-    class="flex h-[15rem] w-[15rem] select-none flex-col justify-between gap-2 rounded-b-md bg-basic-white p-2 shadow"
-  >
-    <div></div>
-    <Button
-      :type="'default'"
-      :icon="'none'"
-      :state="'active'"
-      :iconPosition="'none'"
-      :styled="'fill'"
-      :isLight="true"
-      class="w-full"
-      @click="disconnect"
+  <div class="flex w-full select-none flex-col bg-basic-white">
+    <div
+      v-for="(item, index) in menuItems"
+      :key="index"
+      class="h-12 w-full border-b border-t border-b-basic-lightgrey border-t-basic-lightgrey px-4 py-3 font-eina1 text-4 font-normal hover:bg-basic-lightgrey"
+      :class="item.additionalClass"
+      @click="item.action"
     >
-      Se déconnecter
-    </Button>
+      {{ item.text }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const seeProfile = () => {
+  alert('see profile')
+}
+
 const disconnect = () => {
   AuthenticationUtils.removeToken()
   router.push({ name: 'home' })
 }
+
+const deleteAccount = () => {
+  alert('delete account')
+}
+
+const menuItems = ref([
+  { action: seeProfile, text: 'Voir mon profil' },
+  { action: disconnect, text: 'Me déconnecter' },
+  { action: deleteAccount, additionalClass: 'text-error', text: 'Supprimer mon compte' }
+])
 </script>

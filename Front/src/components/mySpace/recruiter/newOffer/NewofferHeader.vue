@@ -5,7 +5,7 @@
     <h3 class="font-eina1 text-4 font-bold">Déposer une nouvelle offre</h3>
     <IconsBase
       name="close"
-      color="dark"
+      color="darkgrey"
       class="h-6 w-6 cursor-pointer"
       @click="emit('closeModal')"
     />

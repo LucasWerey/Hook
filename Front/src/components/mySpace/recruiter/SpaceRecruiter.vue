@@ -6,6 +6,8 @@
     <div
       v-if="openModal"
       class="absolute bottom-0 left-0 z-50 h-[100dvh] w-full bg-basic-black bg-opacity-30"
+      @keyup.esc="handleCloseModal"
+      tabindex="0"
     >
       <NewOffer @closeModal="handleCloseModal" />
     </div>
