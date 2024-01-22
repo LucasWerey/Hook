@@ -53,7 +53,9 @@
             class="cursor-pointer"
             @click.prevent="openDropDown"
           />
-          <DropDown class="absolute top-full" v-if="isDropdownOpen" />
+          <transition name="fade">
+            <DropDown class="absolute top-full" v-if="isDropdownOpen" />
+          </transition>
         </div>
       </div>
     </div>
@@ -96,5 +98,24 @@ const onLogoClick = () => {
   width: 100%;
   height: 0.2rem;
   @apply bg-primary-moonstone;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+  z-index: -1;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
 }
 </style>

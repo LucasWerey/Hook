@@ -11,9 +11,14 @@
         :iconPosition="'none'"
         :styled="'outlined'"
         class="max-w-[375px] bg-primary-lightmoonstone uppercase"
+        @click="emit('openModal')"
       >
         Rédiger ma première offre
       </Button>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const emit = defineEmits(['openModal'])
+</script>
