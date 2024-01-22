@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full w-full flex-col items-center gap-6 rounded-xl bg-basic-white p-6">
     <div class="item relative flex h-fit w-full flex-col items-center gap-2 overflow-hidden">
-      <Avatar :type="'notConnected'" :size="'xlarge'" :src="''" :alt="''" />
+      <Avatar type="photo" alt="avatar" :src="avatarUrl" />
       <p class="text-nowrap text-8 font-500 text-basic-black">
         {{ dataInfo.firstname + ' ' + dataInfo.lastname }}
       </p>
@@ -102,5 +102,12 @@ const progress = computed(() => {
     if (dataInfo.address) progress += 100 / 6
   }
   return progress.toFixed(0)
+})
+
+const avatarUrl = computed(() => {
+  if (studentStore.students.length > 0 && studentStore.students[0].firstname) {
+    return `https://api.dicebear.com/7.x/micah/svg?seed=${studentStore.students[0].firstname}&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf`
+  }
+  return 'https://api.dicebear.com/7.x/micah/svg?seed=hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf'
 })
 </script>

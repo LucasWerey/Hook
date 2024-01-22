@@ -91,7 +91,9 @@ const createUserStudent = async () => {
     console.log(apiError)
   }
 }
-
+/**
+ * TODO: update the data to send to the backend
+ */
 const updateUserStudent = async () => {
   const data = {
     contract_type: store.form3.contractType,
