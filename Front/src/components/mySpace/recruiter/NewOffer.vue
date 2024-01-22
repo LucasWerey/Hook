@@ -141,9 +141,9 @@
           <div class="flex min-h-[110px] flex-col gap-4 lg:flex-row">
             <SelectField
               title="Expériences professionnelles"
-              v-model="formData.professionalExperienceDurantionModel"
+              v-model="formData.professionalExperienceDurationModel"
               :options="newOfferProfessionalExperienceDurationOptions"
-              default="Selectionner"
+              :default="newOfferProfessionalExperienceDurationOptions[0].label"
               class="max-h-[200px] min-w-[250px] max-w-[250px] text-nowrap"
             />
             <div class="flex w-full flex-col gap-4">
@@ -214,8 +214,64 @@
               />
             </div>
           </div>
+          <div class="flex w-full flex-col gap-2">
+            <MoreCrits @update:criteria="formData.moreCriteriasModel = $event" />
+          </div>
+          <div class="flex min-h-[110px] flex-col gap-4">
+            <div class="flex flex-col items-end gap-2 lg:flex-row">
+              <InputField
+                class="w-3/4"
+                v-model="formData.personnalityCriteriaModel"
+                placeholder="Agilité"
+                label="Personnalités souhaitées"
+                @keyup.enter="addChipPersolanityCriteria"
+              />
+              <Button
+                type="default"
+                styled="fill"
+                class="w-1/4"
+                state="active"
+                @click.prevent="addChipPersolanityCriteria"
+                isLight
+              >
+                Ajouter
+              </Button>
+            </div>
+            <div class="flex w-full flex-row gap-2 overflow-auto">
+              <ChipContainer
+                v-for="label in persolanityCriterias"
+                :label="label"
+                :key="label"
+                hasIcon
+                iconPosition="trailing"
+                @deleteChip="deleteChipPersolanityCriteria(label)"
+              />
+            </div>
+          </div>
         </div>
       </div>
+      <hr class="border-b border-basic-lightgrey" />
+      <div class="flex w-full flex-col gap-2">
+        <h2 class="font-eina1 text-3 font-bold uppercase">Classer ces facteurs par priorité</h2>
+        <div class="space-y-4">
+          <RankingContainer
+            v-for="(container, index) in itemsRank.values()"
+            :key="index"
+            :title="container.title"
+            :labels="container.labels"
+            :topRank="container.topRank"
+            draggable="true"
+            isDraggable
+            @dragstart="(event: DragEvent) => handleDragStart(event, index)"
+            @dragover="handleDragOver"
+            @drop="(event: DragEvent) => handleDrop(event, index)"
+          />
+        </div>
+      </div>
+      <div class="flex w-full flex-col gap-3">
+        <CompatibilityInput />
+      </div>
+      <hr class="border-b border-basic-lightgrey" />
     </form>
   </div>
 </template>
@@ -233,7 +289,9 @@ const formData = reactive({
   lookForContractTypeModel: ref(''),
   lookingForModel: ref(''),
   missionModel: ref(''),
-  professionalExperienceDurantionModel: ref(''),
+  moreCriteriasModel: ref([]),
+  personnalityCriteriaModel: ref(''),
+  professionalExperienceDurationModel: ref(''),
   softSkillsModel: ref('')
 })
 
@@ -277,6 +335,106 @@ const addChipSoftSkill = () => {
 
 const deleteChipSoftSkill = (label: string) => {
   deleteChip(softSkillsRef, label)
+}
+
+const persolanityCriteriaRef: Ref<string[]> = ref([])
+const persolanityCriterias = computed(() => persolanityCriteriaRef.value)
+
+const addChipPersolanityCriteria = () => {
+  if (formData.personnalityCriteriaModel === '') return
+  addChip(persolanityCriteriaRef, formData.personnalityCriteriaModel)
+  formData.personnalityCriteriaModel = ''
+}
+
+const deleteChipPersolanityCriteria = (label: string) => {
+  deleteChip(persolanityCriteriaRef, label)
+}
+
+const professionalExperiencedurationRef: Ref<string[]> = ref([])
+const professionalExperienceduration = computed(() => professionalExperiencedurationRef.value)
+
+watch(
+  () => formData.professionalExperienceDurationModel,
+  newVal => {
+    professionalExperiencedurationRef.value = []
+    professionalExperiencedurationRef.value.push(newVal)
+  }
+)
+
+const moreCriteriasRef: Ref<string[]> = ref([])
+const moreCriterias = computed(() => moreCriteriasRef.value)
+
+watch(
+  () => formData.moreCriteriasModel,
+  newVal => {
+    moreCriteriasRef.value = [...newVal]
+  }
+)
+
+const itemsRank = ref([
+  {
+    draggable: true,
+    labels: formationsWanted.value,
+    title: 'Formations souhaitées',
+    topRank: true
+  },
+  {
+    draggable: true,
+    labels: persolanityCriterias.value,
+    title: 'Personnalités souhaitées',
+    topRank: true
+  },
+  {
+    draggable: true,
+    labels: professionalExperienceduration,
+    title: 'Expériences professionnelles',
+    topRank: true
+  },
+  {
+    draggable: true,
+    labels: certifications.value,
+    title: 'Certifications souhaitées',
+    topRank: false
+  },
+  {
+    draggable: true,
+    labels: moreCriterias,
+    title: 'Critères supplémentaires',
+    topRank: false
+  },
+  {
+    draggable: true,
+    labels: softSkills.value,
+    title: 'Soft skills',
+    topRank: false
+  }
+])
+
+let draggedItem: Ref<number | null> = ref(null)
+
+const handleDragStart = async (event: any, index: number) => {
+  event.stopPropagation()
+  await new Promise(resolve => setTimeout(resolve, 0))
+  draggedItem.value = index
+}
+
+const handleDragOver = (event: any) => {
+  event.preventDefault()
+  event.stopPropagation()
+}
+
+const handleDrop = (event: any, index: number) => {
+  event.stopPropagation()
+  if (draggedItem.value !== null) {
+    const controlsCopy = [...itemsRank.value]
+    const draggedContainer = controlsCopy[draggedItem.value]
+    controlsCopy.splice(draggedItem.value, 1)
+    controlsCopy.splice(index, 0, draggedContainer)
+    for (let i = 0; i < controlsCopy.length; i++) {
+      controlsCopy[i].topRank = i < 3
+    }
+    itemsRank.value = controlsCopy
+  }
 }
 
 const emit = defineEmits(['closeModal'])
