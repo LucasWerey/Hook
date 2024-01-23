@@ -9,21 +9,26 @@
         <SingularityEmpty />
         <PersonnalityEmpty />
         <ExperiencesContainer />
-        <FormationsContainer />
+        <FormationsContainer @addFormation="handleAddFormation" />
         <CompetenciesContainer @addCompetence="handleAddCompetence" />
         <CertificationsContainer />
         <CuriculumContainer />
       </div>
     </div>
     <div
-      v-if="openModalCompetence"
+      v-if="openModal"
       class="fixed inset-0 z-[59] h-full w-full bg-basic-black bg-opacity-30"
-      @keyup.esc="handleAddCompetence"
       tabindex="0"
     >
       <AddCompetencies
+        v-if="openModalCompetence"
         class="fixed left-1/2 top-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 transform"
         @closeModal="handleAddCompetence"
+      />
+      <AddFormations
+        v-if="openModalFormation"
+        class="fixed left-1/2 top-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 transform"
+        @closeModal="handleAddFormation"
       />
     </div>
   </div>
@@ -35,12 +40,24 @@
 <script setup lang="ts">
 const studentStore = useStudentsStore()
 const isStoreReady = computed(() => studentStore.students.length > 0)
+const openModal = ref(false)
 const openModalCompetence = ref(false)
+const openModalFormation = ref(false)
 
 const handleAddCompetence = () => {
-  console.log('handleAddCompetence')
   openModalCompetence.value = !openModalCompetence.value
+  openModal.value = openModalCompetence.value
   if (openModalCompetence.value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+}
+
+const handleAddFormation = () => {
+  openModalFormation.value = !openModalFormation.value
+  openModal.value = openModalFormation.value
+  if (openModalFormation.value) {
     document.body.style.overflow = 'hidden'
   } else {
     document.body.style.overflow = ''

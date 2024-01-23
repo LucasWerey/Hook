@@ -6,8 +6,10 @@ export const useStudentsStore = defineStore({
     removeStudent(studentId: string) {
       this.students = this.students.filter(student => student._id.$oid !== studentId)
     },
+    updateFormation(updatedFormation: any) {
+      this.students[0].profile.formation = updatedFormation
+    },
     updateSkills(hardSkills: any, softSkills: any) {
-      console.log(hardSkills)
       this.students[0].profile.hardSkills = hardSkills
       this.students[0].profile.softSkills = softSkills
     },

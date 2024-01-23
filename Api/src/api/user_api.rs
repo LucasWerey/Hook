@@ -35,8 +35,8 @@ pub fn create_user(
         Ok(user) =>{
             if data.statut == "student" {
                 let student_data = Students {
-                    user_id: Some(user.inserted_id.as_object_id().unwrap().clone()), // Use the same ID as the user
-                    duration: String::new(), // You need to set a default value or get this information from somewhere else
+                    user_id: Some(user.inserted_id.as_object_id().unwrap().clone()),
+                    duration: String::new(),
                     level: String::new(),
                     contract_type: String::new(),
                     start_date: BsonDateTime::now(),
@@ -149,7 +149,7 @@ pub fn login(
 
                 let claims = Claims {
                     sub: user.email,
-                    exp: (Utc::now() + Duration::minutes(30)).timestamp() as usize,
+                    exp: (Utc::now() + Duration::hours(10)).timestamp() as usize,
                 };
                 let secret_key = env::var("JWT_SECRET").expect("JWT_SECRET must be set");
                 let key = EncodingKey::from_secret(secret_key.as_ref());

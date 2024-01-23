@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
+    AddFormations: typeof import('./components/profile/student/subComponents/AddFormations.vue')['default']
     Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CertificationsContainer: typeof import('./components/profile/student/subComponents/CertificationsContainer.vue')['default']
