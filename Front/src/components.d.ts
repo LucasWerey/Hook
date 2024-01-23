@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ActionCard: typeof import('@lucaswerey/dslib-pfe')['ActionCard']
     AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
     AddFormations: typeof import('./components/profile/student/subComponents/AddFormations.vue')['default']
     Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
@@ -17,6 +18,7 @@ declare module 'vue' {
     CompatibilityInput: typeof import('./components/mySpace/recruiter/newOffer/CompatibilityInput.vue')['default']
     CompetenciesContainer: typeof import('./components/profile/student/subComponents/CompetenciesContainer.vue')['default']
     ContractTypeinput: typeof import('./components/mySpace/recruiter/newOffer/ContractTypeinput.vue')['default']
+    CtaCard: typeof import('./components/profile/student/subComponents/CtaCard.vue')['default']
     CuriculumContainer: typeof import('./components/profile/student/subComponents/CuriculumContainer.vue')['default']
     DropDown: typeof import('./components/navBars/DropDown.vue')['default']
     ExperiencePresentation: typeof import('./components/profile/student/subComponents/ExperiencePresentation.vue')['default']

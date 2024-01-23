@@ -2,7 +2,9 @@
   <div v-if="isStoreReady" class="flex h-full w-full flex-col gap-6">
     <ProfileHeader title="Mon profil" />
     <div class="h-full w-full grid-cols-12 gap-12 md:grid md:grid-cols-12">
-      <div class="hidden h-fit max-w-fit flex-col gap-6 md:col-span-4 md:flex lg:col-span-3">
+      <div
+        class="sticky top-[90px] hidden h-fit max-w-fit flex-col gap-6 md:col-span-4 md:flex lg:col-span-3"
+      >
         <StudentCard /> <SettingsCard />
       </div>
       <div class="flex w-full flex-col gap-6 md:col-span-8 md:w-full lg:col-span-9">

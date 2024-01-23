@@ -22,39 +22,28 @@
           :style="{ width: progress + '%' }"
         />
       </div>
-      <div class="flex flex-col gap-2 rounded bg-basic-white p-4">
-        <p class="font-eina1 text-4 font-normal text-primary-moonstone">
-          Les profils qui parlent de leurs expériences professionnelles reçoivent jusqu’à 4,5 fois
-          plus d’offres.
-        </p>
-        <Button
-          :type="'default'"
-          :icon="'none'"
-          :state="'active'"
-          :iconPosition="'none'"
-          :styled="'outlined'"
-          :isLight="true"
-          class="w-full text-nowrap border-primary-moonstone bg-primary-lightmoonstone uppercase text-primary-moonstone"
-        >
-          Ajouter une expérience
-        </Button>
-      </div>
-      <div class="flex flex-col gap-2 rounded bg-basic-white p-4">
-        <p class="font-eina1 text-4 font-normal text-primary-moonstone">
-          Répondre à une série de questions sur votre personnalité vous permettra de vous
-          différencier des autres candidats.
-        </p>
-        <Button
-          :type="'default'"
-          :icon="'none'"
-          :state="'active'"
-          :iconPosition="'none'"
-          :styled="'outlined'"
-          :isLight="true"
-          class="w-full text-nowrap border-primary-moonstone bg-primary-lightmoonstone uppercase text-primary-moonstone"
-        >
-          Répondre aux questions
-        </Button>
+      <div class="cta-scrollbar flex max-h-[400px] flex-col gap-4 overflow-y-auto">
+        <CtaCard
+          v-if="!hasExperience"
+          text="Les profils qui parlent de leurs expériences professionnelles reçoivent jusqu’à 4,5 fois plus d’offres."
+          buttonText="Ajouter une expérience"
+        />
+        <CtaCard
+          text="Répondre à une série de questions sur votre personnalité vous permettra de vous différencier des autres candidats."
+          buttonText="Répondre aux questions"
+        />
+        <CtaCard
+          text="Le test Neris vous aide à mieux vous connaître et à vous distinguer des autres"
+          buttonText="Faire le quizz"
+        />
+        <CtaCard
+          text="Le test Neris vous aide à mieux vous connaître et à vous distinguer des autres"
+          buttonText="Ajouter une certification"
+        />
+        <CtaCard
+          text=" Ajouter une vidéo ou un audio de présentation vous permettra d'être original et de montrer votre créativité."
+          buttonText="Ajouter une vidéo/audio"
+        />
       </div>
     </div>
     <div class="flex w-full flex-col gap-6">
@@ -89,8 +78,13 @@ const dataInfo = reactive({
   firstname: studentStore.students[0].firstname,
   lastname: studentStore.students[0].lastname,
   phoneNumber: '',
-  schoolGrade: studentStore.students[0].profile.formationYear
+  schoolGrade: studentStore.students[0].profile.formation[0].degree
 })
+
+const hasExperience = computed(() => {
+  return studentStore.students[0].profile.experiences.length > 0
+})
+
 const progress = computed(() => {
   let progress = 0
   if (dataInfo) {
@@ -111,3 +105,23 @@ const avatarUrl = computed(() => {
   return 'https://api.dicebear.com/7.x/micah/svg?seed=hugo&radius=50&mouth=pucker,smile,smirk,laughing&backgroundColor=b6e3f4,ffd5dc,d1d4f9,c0aede,ffdfbf'
 })
 </script>
+
+<style scoped>
+.cta-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cta-scrollbar::-webkit-scrollbar-track {
+  @apply bg-primary-lightmoonstone;
+  border-radius: 10px;
+}
+
+.cta-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary-moonstone;
+  border-radius: 10px;
+}
+
+.cta-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-moonstone;
+}
+</style>
