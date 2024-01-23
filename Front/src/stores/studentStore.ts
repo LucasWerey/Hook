@@ -4,10 +4,15 @@ export const useStudentsStore = defineStore({
       this.students.push(student)
     },
     removeStudent(studentId: string) {
-      this.students = this.students.filter(student => student._id !== studentId)
+      this.students = this.students.filter(student => student._id.$oid !== studentId)
+    },
+    updateSkills(hardSkills: any, softSkills: any) {
+      console.log(hardSkills)
+      this.students[0].profile.hardSkills = hardSkills
+      this.students[0].profile.softSkills = softSkills
     },
     updateStudent(updatedStudent: any) {
-      const index = this.students.findIndex(student => student._id === updatedStudent._id)
+      const index = this.students.findIndex(student => student._id.$oid === updatedStudent._id)
       if (index !== -1) {
         this.students[index] = updatedStudent
       }
@@ -15,14 +20,16 @@ export const useStudentsStore = defineStore({
   },
   getters: {
     getStudentById: state => (id: string) => {
-      return state.students.find(student => student._id === id)
+      return state.students.find(student => student._id.$oid === id)
     }
   },
   id: 'students',
   state: () => ({
     students: [] as Array<{
       // TODO: Change the info of profile
-      _id: string
+      _id: {
+        $oid: string
+      }
       duration: string
       level: string
       contract_type: string

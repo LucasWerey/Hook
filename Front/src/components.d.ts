@@ -7,6 +7,9 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AddCompetences: typeof import('@lucaswerey/dslib-pfe')['AddCompetences']
+    AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
+    AddComptences: typeof import('./components/profile/student/subComponents/AddComptences.vue')['default']
     Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CertificationsContainer: typeof import('./components/profile/student/subComponents/CertificationsContainer.vue')['default']
@@ -27,6 +30,7 @@ declare module 'vue' {
     FormationsContainer: typeof import('./components/profile/student/subComponents/FormationsContainer.vue')['default']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
+    Loader: typeof import('@lucaswerey/dslib-pfe')['Loader']
     MoreCrits: typeof import('./components/mySpace/recruiter/newOffer/MoreCrits.vue')['default']
     MyDemand: typeof import('./components/mySpace/students/MyDemand.vue')['default']
     MyMatch: typeof import('./components/mySpace/students/MyMatch.vue')['default']

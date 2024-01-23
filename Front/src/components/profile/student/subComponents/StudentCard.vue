@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full w-full flex-col items-center gap-6 rounded-xl bg-basic-white p-6">
     <div class="item relative flex h-fit w-full flex-col items-center gap-2 overflow-hidden">
-      <Avatar type="photo" alt="avatar" :src="avatarUrl" />
+      <Avatar type="photo" alt="avatar" :src="avatarUrl" size="xlarge" />
       <p class="text-nowrap text-8 font-500 text-basic-black">
         {{ dataInfo.firstname + ' ' + dataInfo.lastname }}
       </p>

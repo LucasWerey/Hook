@@ -6,8 +6,13 @@
         <h2 class="text-8 font-500 text-primary-powder">Mes compétences</h2>
       </div>
       <div class="flex items-center gap-4">
-        <IconsBase name="plus" class="h-6 w-6" color="powder" />
-        <IconsBase name="pencil" class="h-6 w-6" color="powder" />
+        <IconsBase
+          name="plus"
+          class="h-6 w-6 cursor-pointer"
+          color="powder"
+          @click="emit('addCompetence')"
+        />
+        <IconsBase name="pencil" class="ursor-pointer h-6 w-6" color="powder" />
       </div>
     </div>
     <p class="font-eina1 text-4 font-normal text-basic-darkgrey">
@@ -45,8 +50,10 @@
 <script setup lang="ts">
 const studentStore = useStudentsStore()
 
-const dataInfo = reactive({
+const dataInfo = computed(() => ({
   hardskills: studentStore.students[0].profile.hardSkills,
   softskills: studentStore.students[0].profile.softSkills
-})
+}))
+
+const emit = defineEmits(['addCompetence'])
 </script>
