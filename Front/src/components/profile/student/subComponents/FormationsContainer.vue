@@ -20,8 +20,9 @@
       <FormationPresentation
         :dataInfo="formation"
         :duration="2"
-        :formattedEndDate="formation.endDate"
+        :formattedEndDate="formatDate(formation.endDate)"
         :formattedStartDate="formatDate(formation.startDate)"
+        @deleteFormation="() => handleDelete(index)"
       />
       <div
         v-if="index < dataInfo.formations.length - 1"
@@ -38,9 +39,24 @@ const dataInfo = computed(() => ({
   formations: studentStore.students[0].profile.formation
 }))
 
-const formatDate = (date: Date): string => {
-  const dateObj = new Date(date)
-  return dateObj.toLocaleString('en-US', { month: 'short', year: 'numeric' })
+const formatDate = (dateObj: any): string => {
+  if (!dateObj || !dateObj.$date || !dateObj.$date.$numberLong) {
+    return ''
+  }
+
+  const timestamp = parseInt(dateObj.$date.$numberLong)
+  const date = new Date(timestamp)
+  return date.toLocaleString('en-US', { month: 'short', year: 'numeric' })
+}
+
+const handleDelete = async (index: number) => {
+  studentStore.students[0].profile.formation.splice(index, 1)
+  const updatedStudent = studentStore.students[0]
+  try {
+    await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const emit = defineEmits(['addFormation'])

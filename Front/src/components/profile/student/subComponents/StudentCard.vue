@@ -37,6 +37,7 @@
           buttonText="Faire le quizz"
         />
         <CtaCard
+          v-if="!hasCertification"
           text="Le test Neris vous aide à mieux vous connaître et à vous distinguer des autres"
           buttonText="Ajouter une certification"
         />
@@ -83,6 +84,10 @@ const dataInfo = reactive({
 
 const hasExperience = computed(() => {
   return studentStore.students[0].profile.experiences.length > 0
+})
+
+const hasCertification = computed(() => {
+  return studentStore.students[0].profile.certifications.length > 0
 })
 
 const progress = computed(() => {

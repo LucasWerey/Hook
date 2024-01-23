@@ -10,7 +10,7 @@
       <div class="flex w-full flex-col gap-6 md:col-span-8 md:w-full lg:col-span-9">
         <SingularityEmpty />
         <PersonnalityEmpty />
-        <ExperiencesContainer />
+        <ExperiencesContainer @addExperience="handleAddExperience" />
         <FormationsContainer @addFormation="handleAddFormation" />
         <CompetenciesContainer @addCompetence="handleAddCompetence" />
         <CertificationsContainer />
@@ -32,6 +32,11 @@
         class="fixed left-1/2 top-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 transform"
         @closeModal="handleAddFormation"
       />
+      <AddExperiences
+        v-if="openModalExperience"
+        class="fixed left-1/2 top-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 transform"
+        @closeModal="handleAddExperience"
+      />
     </div>
   </div>
   <div v-else class="flex h-full w-full items-center justify-center">
@@ -45,6 +50,7 @@ const isStoreReady = computed(() => studentStore.students.length > 0)
 const openModal = ref(false)
 const openModalCompetence = ref(false)
 const openModalFormation = ref(false)
+const openModalExperience = ref(false)
 
 const handleAddCompetence = () => {
   openModalCompetence.value = !openModalCompetence.value
@@ -60,6 +66,17 @@ const handleAddFormation = () => {
   openModalFormation.value = !openModalFormation.value
   openModal.value = openModalFormation.value
   if (openModalFormation.value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+}
+
+const handleAddExperience = () => {
+  console.log('handleAddExperience')
+  openModalExperience.value = !openModalExperience.value
+  openModal.value = openModalExperience.value
+  if (openModalExperience.value) {
     document.body.style.overflow = 'hidden'
   } else {
     document.body.style.overflow = ''

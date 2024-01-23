@@ -3,7 +3,7 @@
     <div
       class="flex h-10 w-full flex-row items-center justify-between border-b border-b-basic-lightgrey px-4 py-2"
     >
-      <h3 class="font-eina1 text-4 font-bold">Ajouter une formation</h3>
+      <h3 class="font-eina1 text-4 font-bold">Ajouter une expérience</h3>
       <IconsBase
         name="close"
         color="darkgrey"
@@ -14,9 +14,9 @@
     <form class="flex w-full flex-col items-center gap-6 overflow-y-auto px-6 py-6" @submit.prevent>
       <div class="flex w-full gap-6">
         <InputField
-          v-model="dataInfo.schoolNameModel"
-          :placeholder="'Ece Paris'"
-          :label="'Ecole'"
+          v-model="dataInfo.postNameModel"
+          :placeholder="'Serveur'"
+          :label="'Intitulé du poste'"
           :hint="'hint'"
           :hasIcon="false"
           :isDateInput="false"
@@ -27,9 +27,9 @@
           @blur="() => console.log('blur')"
         />
         <InputField
-          v-model="dataInfo.formationNameModel"
-          placeholder="Etudes d'ingénieur"
-          :label="'Titre de la formation'"
+          v-model="dataInfo.companyNameModel"
+          placeholder="Hippopotamus"
+          label="Nom de l'entreprise"
           :hint="'hint'"
           :hasIcon="false"
           :isDateInput="false"
@@ -40,6 +40,14 @@
           @blur="() => console.log('blur')"
         />
       </div>
+      <CheckBox
+        state="unchecked"
+        v-model="dataInfo.currentJobModel"
+        color="transparent"
+        size="small"
+        class="flex items-center gap-2 self-start font-eina1"
+        >J'occupe actuellement ce poste</CheckBox
+      >
       <div class="flex w-full gap-6">
         <InputField
           v-model="dataInfo.startDateModel"
@@ -64,6 +72,19 @@
       </div>
       <div class="flex w-full gap-6">
         <InputField
+          v-model="dataInfo.loacationModel"
+          placeholder="Paris"
+          :label="'Lieu'"
+          :hint="'hint'"
+          :hasIcon="false"
+          :isDateInput="false"
+          :size="'default'"
+          :state="'default'"
+          :inputType="'text'"
+          isRequired
+          @blur="() => console.log('blur')"
+        />
+        <InputField
           v-model="dataInfo.descriptionModel"
           placeholder="Ajouter une description..."
           :label="'Description'"
@@ -74,18 +95,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
-        />
-        <InputField
-          v-model="dataInfo.resultModel"
-          placeholder="Rang: 122e/400"
-          :label="'Résultat'"
-          :hint="'hint'"
-          :hasIcon="false"
-          :isDateInput="false"
-          :size="'default'"
-          :state="'default'"
-          :inputType="'text'"
           @blur="() => console.log('blur')"
         />
       </div>
@@ -106,21 +115,23 @@
 const studentStore = useStudentsStore()
 
 const dataInfo = reactive({
+  companyNameModel: '',
+  currentJobModel: false,
   descriptionModel: '',
   endDateModel: '',
-  formationNameModel: '',
-  resultModel: '',
-  schoolNameModel: '',
+  loacationModel: '',
+  postNameModel: '',
   startDateModel: ''
 })
 
 const areRequiredFieldsFilled = computed(() => {
   return (
-    dataInfo.formationNameModel !== '' &&
-    dataInfo.schoolNameModel !== '' &&
+    dataInfo.postNameModel !== '' &&
+    dataInfo.companyNameModel !== '' &&
     dataInfo.startDateModel !== '' &&
     dataInfo.endDateModel !== '' &&
-    dataInfo.descriptionModel !== ''
+    dataInfo.descriptionModel !== '' &&
+    dataInfo.loacationModel !== ''
   )
 })
 
@@ -129,30 +140,31 @@ const saveChanges = async () => {
     ...studentStore.students[0],
     profile: {
       ...studentStore.students[0].profile,
-      formation: [
-        ...studentStore.students[0].profile.formation,
+      experiences: [
+        ...studentStore.students[0].profile.experiences,
         {
+          company: dataInfo.companyNameModel,
+          currentJob: dataInfo.currentJobModel,
           description: dataInfo.descriptionModel,
           endDate: {
             $date: {
               $numberLong: String(new Date(dataInfo.endDateModel).getTime())
             }
           },
-          name: dataInfo.formationNameModel,
-          result: dataInfo.resultModel,
+          jobTitle: dataInfo.postNameModel,
+          location: dataInfo.loacationModel,
           startDate: {
             $date: {
               $numberLong: String(new Date(dataInfo.startDateModel).getTime())
             }
-          },
-          university: dataInfo.schoolNameModel
+          }
         }
       ]
     }
   }
   try {
-    studentStore.updateFormation(updatedStudent.profile.formation)
-    console.log('updatedStudent', studentStore.students[0].profile.formation)
+    studentStore.updateExperiences(updatedStudent.profile.experiences)
+    console.log('updatedStudent', studentStore.students[0].profile.experiences)
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
     emit('closeModal')
   } catch (error) {

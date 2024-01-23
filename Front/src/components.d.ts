@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ActionCard: typeof import('@lucaswerey/dslib-pfe')['ActionCard']
     AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
+    AddExperiences: typeof import('./components/profile/student/subComponents/AddExperiences.vue')['default']
     AddFormations: typeof import('./components/profile/student/subComponents/AddFormations.vue')['default']
     Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
