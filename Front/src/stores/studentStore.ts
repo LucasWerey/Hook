@@ -26,7 +26,6 @@ export const useStudentsStore = defineStore({
   id: 'students',
   state: () => ({
     students: [] as Array<{
-      // TODO: Change the info of profile
       _id: {
         $oid: string
       }
@@ -37,24 +36,44 @@ export const useStudentsStore = defineStore({
       location: string
       research: boolean
       profile: {
-        currentPost: boolean
-        description: string
-        formationName: string
-        formationYear: string
-        hardSkills: Array<any>
-        keyWords: Array<any>
-        lastExpCompany: string
-        lastExpDescription: string
-        lastExpEndDate: Date
-        lastExpLocation: string
-        lastExpPoste: string
-        lastExpStartDate: Date
-        school: string
-        schoolResult: string
-        schoolStartDate: Date
-        softSkills: Array<any>
-        transportDuration: string
-        transportType: Array<any>
+        softSkills: Array<string>
+        hardSkills: Array<string>
+        experiences: Array<{
+          jobTitle: string
+          company: string
+          currentJob: boolean
+          startDate: Date
+          endDate: Date
+          location: string
+          description: string
+        }>
+        formation: Array<{
+          degree: string
+          university: string
+          name: string
+          currentFormation: boolean
+          startDate: Date
+          endDate: string
+          result: string
+          description: string
+        }>
+        certifications: Array<{
+          certificationName: string
+          issuedBy: string
+          certifId: string
+        }>
+        keyWords: Array<string>
+        jobWanted: Array<{
+          name: string
+          contract_type: string
+          duration: string
+          location: string
+          startDate: Date
+          endDate: Date
+          research: boolean
+          transportDuration: string
+          transportsUsed: [string]
+        }>
       }
       firstname: string
       lastname: string

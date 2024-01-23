@@ -27,7 +27,7 @@
       <div class="flex w-1/2 flex-col gap-1">
         <h4 class="font-eina1 text-4 font-bold text-primary-moonstone">Hard skills</h4>
         <ul class="ml-1">
-          <li v-for="skill in dataInfo.hardskills" :key="skill.id" class="flex items-center gap-3">
+          <li v-for="skill in dataInfo.hardskills" :key="skill" class="flex items-center gap-3">
             <div class="h-[6px] w-[6px] rounded-full bg-basic-black" />
 
             <p class="font-eina1 text-4 font-normal">{{ skill }}</p>
@@ -37,7 +37,7 @@
       <div class="gap1 flex w-1/2 flex-col">
         <h4 class="font-eina1 text-4 font-bold text-primary-moonstone">Soft skills</h4>
         <ul class="ml-1">
-          <li v-for="skill in dataInfo.softskills" :key="skill.id" class="flex items-center gap-3">
+          <li v-for="skill in dataInfo.softskills" :key="skill" class="flex items-center gap-3">
             <div class="h-[6px] w-[6px] rounded-full bg-basic-black" />
             <p class="font-eina1 text-4 font-normal">{{ skill }}</p>
           </li>

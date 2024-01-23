@@ -5,37 +5,42 @@
         <IconsBase name="briefcase" class="h-6 w-6" color="powder" />
         <h2 class="text-8 font-500 text-primary-powder">Mes expériences</h2>
       </div>
-      <IconsBase name="plus" class="h-6 w-6" color="powder" />
+      <IconsBase name="plus" class="h-6 w-6 cursor-pointer" color="powder" />
     </div>
-    <ExperiencePresentation
-      :dataInfo="dataInfo"
-      :formattedStartDate="formatDate(dataInfo.startDate)"
-      :formattedEndDate="formatDate(dataInfo.endDate)"
-      :duration="calculateDuration(dataInfo.startDate, dataInfo.endDate)"
-    />
+    <div
+      v-for="(experience, index) in dataInfo.experiences"
+      :key="index"
+      class="flex w-full flex-col gap-4"
+    >
+      <ExperiencePresentation
+        :dataInfo="experience"
+        :formattedStartDate="formatDate(experience.startDate)"
+        :formattedEndDate="formatDate(experience.endDate)"
+        :duration="calculateDuration(experience.startDate, experience.endDate)"
+      />
+      <div
+        v-if="index < dataInfo.experiences.length - 1"
+        class="h-[0.2px] w-full self-center bg-basic-lightgrey"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const studentStore = useStudentsStore()
 
-const dataInfo = reactive({
-  companyName: studentStore.students[0].profile.lastExpCompany,
-  description: studentStore.students[0].profile.lastExpDescription,
-  endDate: studentStore.students[0].profile.lastExpEndDate,
-  jobName: studentStore.students[0].profile.lastExpPoste,
-  location: studentStore.students[0].profile.lastExpLocation,
-  startDate: studentStore.students[0].profile.lastExpStartDate
-})
+const dataInfo = computed(() => ({
+  experiences: studentStore.students[0].profile.experiences
+}))
 
-const formatDate = (date: Date): string => {
-  const dateObj = new Date(date)
-  return dateObj.toLocaleString('en-US', { month: 'short', year: 'numeric' })
+const formatDate = (dateObj: any): string => {
+  const date = new Date(parseInt(dateObj.$date.$numberLong))
+  return date.toLocaleString('en-US', { month: 'short', year: 'numeric' })
 }
 
-const calculateDuration = (startDate: Date, endDate: Date): number => {
-  const dateStart = new Date(startDate)
-  const dateEnd = new Date(endDate)
+const calculateDuration = (startDateObj: any, endDateObj: any): number => {
+  const dateStart = new Date(parseInt(startDateObj.$date.$numberLong))
+  const dateEnd = new Date(parseInt(endDateObj.$date.$numberLong))
   const diff = dateEnd.getTime() - dateStart.getTime()
   return Math.floor(diff / (1000 * 60 * 60 * 24 * 30))
 }

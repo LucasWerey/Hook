@@ -220,9 +220,78 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 },
 "location": "Paris",
 "research": false,
-"profile": {"music":"Blabla"}
+"profile": {
+    "softSkills": ["communication", "teamwork", "problemSolving"],
+    "hardSkills": ["Java", "Python", "C++"],
+    "experiences": [
+        {
+            "jobTitle": "Software Developer",
+            "company": "XYZ Corp",
+            "currentJob": false,
+            "startDate": "14 juin 2019",
+            "endDate": "12 juillet 2020",
+            "location": "Paris",
+            "description": "eza"
+        },
+        {
+            "jobTitle": "UX Developer",
+            "company": "Google",
+            "currentJob": true,
+            "startDate": "14 juin 2022",
+            "endDate": "12 juillet 2023",
+            "location": "Paris",
+            "description": "eza "
+        }
+    ],
+    "formations": [
+        {
+            "degree": "Bachelors in Computer Science",
+            "university": "ABC University",
+            "currentFormation": false,
+            "startDate": "14 juin 2022",
+            "endDate": "12 juillet 2023",
+            "result": "102e/2000",
+            "description": "dsq"
+        },
+        {
+            "degree": "Ingé",
+            "university": "ECE Paris",
+            "currentFormation": false,
+            "startDate": "14 juin 2022",
+            "endDate": "12 juillet 2023",
+            "result": "102e/2000",
+            "description": "dqs"
+        }
+    ],
+    "certifications": [
+        {
+            "certificationName": "AWS Certified Developer",
+            "issuedBy": "Amazon",
+            "year": "2020",
+            "certifId": "232323"
+        },
+        {
+            "certificationName": "SUUU Certified Developer",
+            "issuedBy": "Amazon",
+            "year": "2020",
+            "certifId": "232323"
+        }
 
-}' http://127.0.0.1:8000/student/65a688c23c303d0a501add11
+    ],
+    "keywords": ["html", "css"],
+    "jobwatend": {
+        "name" : "développeur web",
+        "contract_type": "stage",
+        "duration": "4 mois",
+        "location": "Paris",
+        "startDate": "14 juin 2022",
+        "endDate": "12 juillet 2023",
+        "research": false,
+        "transportDuration": "<15min",
+        "transportsUsed": ["Bus", "Avion"]
+    }
+}
+}' http://127.0.0.1:8000/student/65af07ee284739d707b13590
 ```
 
 #### Update Company - `PUT /companie/<id>`

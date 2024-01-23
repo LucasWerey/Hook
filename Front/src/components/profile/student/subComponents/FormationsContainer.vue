@@ -7,27 +7,31 @@
       </div>
       <IconsBase name="plus" class="h-6 w-6" color="powder" />
     </div>
-    <FormationPresentation
-      :dataInfo="dataInfo"
-      :duration="2"
-      :formattedEndDate="dataInfo.endDate"
-      :formattedStartDate="formatDate(dataInfo.startDate)"
-    />
+    <div
+      v-for="(formation, index) in dataInfo.formations"
+      :key="index"
+      class="flex w-full flex-col gap-4"
+    >
+      <FormationPresentation
+        :dataInfo="formation"
+        :duration="2"
+        :formattedEndDate="formation.endDate"
+        :formattedStartDate="formatDate(formation.startDate)"
+      />
+      <div
+        v-if="index < dataInfo.formations.length - 1"
+        class="h-[0.2px] w-full self-center bg-basic-lightgrey"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const studentStore = useStudentsStore()
 
-const dataInfo = reactive({
-  description: studentStore.students[0].profile.description,
-  endDate: 'jai pas',
-  name: studentStore.students[0].profile.formationName,
-  result: studentStore.students[0].profile.schoolResult,
-  school: studentStore.students[0].profile.school,
-  startDate: studentStore.students[0].profile.schoolStartDate
-})
-
+const dataInfo = computed(() => ({
+  formations: studentStore.students[0].profile.formation
+}))
 const formatDate = (date: Date): string => {
   const dateObj = new Date(date)
   return dateObj.toLocaleString('en-US', { month: 'short', year: 'numeric' })

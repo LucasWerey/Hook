@@ -91,9 +91,7 @@ const createUserStudent = async () => {
     console.log(apiError)
   }
 }
-/**
- * TODO: update the data to send to the backend
- */
+
 const updateUserStudent = async () => {
   const data = {
     contract_type: store.form3.contractType,
@@ -101,24 +99,66 @@ const updateUserStudent = async () => {
     level: store.form2.formationYear,
     location: store.form3.contractLocation,
     profile: {
-      currentPost: store.form2.currentPost,
-      description: store.form2.description,
-      formationName: store.form2.formationName,
-      formationYear: store.form2.formationYear,
+      certifications: [{}],
+      experiences: [
+        {
+          company: store.form2.lastExpCompany,
+          currentJob: store.form2.currentPost,
+          description: store.form2.lastExpDescription,
+          endDate: {
+            $date: {
+              $numberLong: String(store.form2.lastExpEndDate.getTime())
+            }
+          },
+          jobTitle: store.form2.lastExpPoste,
+          location: store.form2.lastExpLocation,
+          startDate: {
+            $date: {
+              $numberLong: String(store.form2.lastExpStartDate.getTime())
+            }
+          }
+        }
+      ],
+      formation: [
+        {
+          currentFormation: false,
+          degree: store.form2.formationYear,
+          description: store.form2.description,
+          endDate: '',
+          name: store.form2.formationName,
+          result: store.form2.schoolResult,
+          startDate: {
+            $date: {
+              $numberLong: String(store.form2.schoolStartDate.getTime())
+            }
+          },
+          university: store.form2.school
+        }
+      ],
       hardSkills: store.form2.hardSkills,
+      jobWanted: [
+        {
+          contract_type: store.form3.contractType,
+          duration: store.form3.contractDuration,
+          endDate: {
+            $date: {
+              $numberLong: String(store.form3.contractEndDate.getTime())
+            }
+          },
+          location: store.form3.contractLocation,
+          name: store.form3.postLookingFor,
+          research: true,
+          startDate: {
+            $date: {
+              $numberLong: String(store.form3.contractStartDate.getTime())
+            }
+          },
+          transportDuration: store.form3.transportDuration,
+          transportsUsed: store.form3.transportAvailable
+        }
+      ],
       keyWords: store.form3.keyWords,
-      lastExpCompany: store.form2.lastExpCompany,
-      lastExpDescription: store.form2.lastExpDescription,
-      lastExpEndDate: store.form2.lastExpEndDate,
-      lastExpLocation: store.form2.lastExpLocation,
-      lastExpPoste: store.form2.lastExpPoste,
-      lastExpStartDate: store.form2.lastExpStartDate,
-      school: store.form2.school,
-      schoolResult: store.form2.schoolResult,
-      schoolStartDate: store.form2.schoolStartDate,
-      softSkills: store.form2.softSkills,
-      transportDuration: store.form3.transportDuration,
-      transportType: store.form3.transportAvailable
+      softSkills: store.form2.softSkills
     },
     research: true,
     start_date: {
