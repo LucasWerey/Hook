@@ -10,7 +10,7 @@ export const useStudentsStore = defineStore({
       this.students[0].profile.experiences = updatedExperiences
     },
     updateFormation(updatedFormation: any) {
-      this.students[0].profile.formation = updatedFormation
+      this.students[0].profile.formations = updatedFormation
     },
     updateSkills(hardSkills: any, softSkills: any) {
       this.students[0].profile.hardSkills = hardSkills
@@ -52,7 +52,7 @@ export const useStudentsStore = defineStore({
           location: string
           description: string
         }>
-        formation: Array<{
+        formations: Array<{
           degree: string
           university: string
           name: string
@@ -65,6 +65,7 @@ export const useStudentsStore = defineStore({
         certifications: Array<{
           certificationName: string
           issuedBy: string
+          deleveryDate: Date
           certifId: string
         }>
         keyWords: Array<string>

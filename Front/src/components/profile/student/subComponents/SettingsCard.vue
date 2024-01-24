@@ -1,11 +1,11 @@
 <template>
   <div class="flex w-full flex-col gap-2">
     <h2 class="w-full font-eina1 text-2 font-bold uppercase text-basic-darkgrey">Paramètres</h2>
-    <div class="flex w-full flex-col rounded-xl bg-basic-white">
+    <div class="flex w-full flex-col rounded-xl bg-basic-white ">
       <div
         v-for="option in options"
         :key="option.id"
-        class="flex h-14 w-full cursor-pointer items-center gap-4 border-b-2 border-b-basic-lightgrey px-4 text-3 font-700 uppercase"
+        class="flex h-14 w-full cursor-pointer items-center last:border-b-0 gap-4 border-b-2 border-b-basic-lightgrey px-4 text-3 font-700 uppercase"
         :class="option.color"
         @click.prevent="option.action"
       >

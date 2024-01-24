@@ -119,7 +119,7 @@ const updateUserStudent = async () => {
           }
         }
       ],
-      formation: [
+      formations: [
         {
           currentFormation: false,
           degree: store.form2.formationYear,
@@ -169,11 +169,10 @@ const updateUserStudent = async () => {
   }
   try {
     response.value = await updateStudent(studentId.value, data)
-    console.log(response.value)
     onSuccess()
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 

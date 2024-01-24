@@ -79,7 +79,7 @@ const dataInfo = reactive({
   firstname: studentStore.students[0].firstname,
   lastname: studentStore.students[0].lastname,
   phoneNumber: '',
-  schoolGrade: studentStore.students[0].profile.formation[0].degree
+  schoolGrade: studentStore.students[0].level
 })
 
 const hasExperience = computed(() => {

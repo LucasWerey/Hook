@@ -41,11 +41,13 @@
         />
       </div>
       <CheckBox
+        @change="() => (dataInfo.currentJobModel = !dataInfo.currentJobModel)"
         state="unchecked"
         v-model="dataInfo.currentJobModel"
         color="transparent"
         size="small"
         class="flex items-center gap-2 self-start font-eina1"
+        :class="dataInfo.currentJobModel ? 'font-bold' : 'font-normal'"
         >J'occupe actuellement ce poste</CheckBox
       >
       <div class="flex w-full gap-6">
@@ -67,7 +69,7 @@
           isDateInput
           isRequired
           :size="'default'"
-          state="active"
+          :state="dataInfo.currentJobModel ? 'disabled' : 'active'"
         />
       </div>
       <div class="flex w-full gap-6">
@@ -129,7 +131,7 @@ const areRequiredFieldsFilled = computed(() => {
     dataInfo.postNameModel !== '' &&
     dataInfo.companyNameModel !== '' &&
     dataInfo.startDateModel !== '' &&
-    dataInfo.endDateModel !== '' &&
+    (dataInfo.endDateModel !== '' || dataInfo.currentJobModel) &&
     dataInfo.descriptionModel !== '' &&
     dataInfo.loacationModel !== ''
   )
@@ -148,7 +150,9 @@ const saveChanges = async () => {
           description: dataInfo.descriptionModel,
           endDate: {
             $date: {
-              $numberLong: String(new Date(dataInfo.endDateModel).getTime())
+              $numberLong: String(
+                new Date(dataInfo.currentJobModel ? 0 : dataInfo.endDateModel).getTime()
+              )
             }
           },
           jobTitle: dataInfo.postNameModel,

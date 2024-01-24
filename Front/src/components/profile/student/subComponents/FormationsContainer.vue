@@ -36,7 +36,7 @@
 const studentStore = useStudentsStore()
 
 const dataInfo = computed(() => ({
-  formations: studentStore.students[0].profile.formation
+  formations: studentStore.students[0].profile.formations
 }))
 
 const formatDate = (dateObj: any): string => {
@@ -50,7 +50,7 @@ const formatDate = (dateObj: any): string => {
 }
 
 const handleDelete = async (index: number) => {
-  studentStore.students[0].profile.formation.splice(index, 1)
+  studentStore.students[0].profile.formations.splice(index, 1)
   const updatedStudent = studentStore.students[0]
   try {
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)

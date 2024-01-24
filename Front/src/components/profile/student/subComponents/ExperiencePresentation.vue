@@ -9,8 +9,8 @@
     </div>
     <p class="font-eina1 text-4">{{ company }}</p>
     <p class="font-eina1 text-4 font-normal italic text-basic-darkgrey">
-      {{ formattedStartDate }} - {{ formattedEndDate }} ({{
-        formattedEndDate === '' ? 'actuel' : duration + ' mois'
+      {{ formattedStartDate }} - {{ currentJob ? '' : formattedEndDate }} ({{
+        currentJob ? 'actuel' : duration + ' mois'
       }})
     </p>
     <p class="font-eina1 text-4 text-primary-powder">{{ location }}</p>
@@ -47,6 +47,7 @@ const jobTitle = computed(() => dataInfo.value.jobTitle)
 const company = computed(() => dataInfo.value.company)
 const location = computed(() => dataInfo.value.location)
 const description = computed(() => dataInfo.value.description)
+const currentJob = computed(() => dataInfo.value.currentJob)
 
 const handleDelete = () => {
   emit('deleteExperience')
