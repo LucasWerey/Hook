@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed flex h-20 w-full items-center justify-between bg-basic-white px-8 shadow">
+  <div class="fixed flex min-h-20 w-full items-center justify-between bg-basic-white px-8 shadow">
     <div class="flex h-full items-center justify-center gap-2 align-middle">
       <IconsBase name="logo" size="large" @click="onLogoClick" class="cursor-pointer md:w-40" />
       <div class="relative inline-flex h-full items-center gap-8">
@@ -35,7 +35,7 @@
     </div>
     <div>
       <div class="flex h-full w-full items-center justify-center gap-4 align-middle">
-        <IconsBase name="notif" size="medium" color="grey" />
+        <IconsBase name="notif" class="cursor-pointer" size="medium" color="grey" />
         <hr class="m-0 w-6 rotate-90 border border-basic-lightgrey bg-basic-lightgrey" />
         <div
           class="flex cursor-pointer items-center justify-center gap-4 align-middle"
@@ -124,7 +124,7 @@ const onLogoClick = () => {
 
 .fade-enter-from,
 .fade-leave-to {
-  transform: translateY(-2px);
+  transform: translateY(-20px);
   opacity: 0;
 }
 
@@ -136,6 +136,6 @@ const onLogoClick = () => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 </style>
