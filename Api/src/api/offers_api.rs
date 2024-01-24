@@ -11,9 +11,9 @@ pub fn create_offers(
     let data = Offers {
         id: None,
         id_company: new_offers.id_company,
-        matching: new_offers.matching.clone(),
-        tags: new_offers.tags.to_owned(),
-
+        id_recruiter: new_offers.id_recruiter,
+        details: new_offers.details.clone(),
+        matchs: new_offers.matchs.clone()
     };
     let offers_detail = db.create_offers(data);
     match offers_detail {
@@ -49,8 +49,9 @@ pub fn update_offers(
     let data = Offers {
         id: Some(ObjectId::parse_str(&id).unwrap()),
         id_company: new_offers.id_company,
-        matching: new_offers.matching.clone(),
-        tags: new_offers.tags.to_owned(),
+        id_recruiter: new_offers.id_recruiter,
+        details: new_offers.details.clone(),
+        matchs: new_offers.matchs.clone()
     };
     let update_result = db.update_offers(&id, data);
     match update_result {

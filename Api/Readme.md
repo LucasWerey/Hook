@@ -100,8 +100,9 @@ The `Offer` model represents a user in the system. Here's the structure of the `
 pub struct Offers {
     pub id: Option<ObjectId>,
     pub id_company: ObjectId,
-    pub matching: Bson,
-    pub tags: String,
+    pub id_recruiter: ObjectId,
+    pub matchs: Bson,
+    pub details: Bson
 }
 ```
 
@@ -146,9 +147,31 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
-"id_company": "65a6971af045e1d0c14cdc9f",
-"matching": {"company":"Bouygues"},
-"tags": "IT project management"
+"id_recruiter": "65ad7be1a8d7ccd20daa2661",
+"id_company": "65ad7be1a8d7ccd20daa2662",
+"details": {
+    "position_name": "Développeur Web",
+    "contract_type": "stage",
+    "salary": "1000-2000",
+    "exp_date": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
+    "contract_duration": "2 mois",
+    "location": "paris",
+    "description": "blabla",
+    "tasks": "blabla",
+    "benefits": "blabla",
+    "tags": ["tag1", "tag2"],
+    "compatibility_min": "80%"
+    },
+  "matchs": [
+    {
+      "student_name": "Lucas",
+      "globalMatch": "80%"
+    }
+  ]
 }' http://127.0.0.1:8000/offer
 ```
 
@@ -237,8 +260,16 @@ curl -X PUT -H "Content-Type: application/json" -d '{
             "jobTitle": "UX Developer",
             "company": "Google",
             "currentJob": true,
-            "startDate": "14 juin 2022",
-            "endDate": "12 juillet 2023",
+            "startDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
+            "endDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
             "location": "Paris",
             "description": "eza "
         }
@@ -248,8 +279,16 @@ curl -X PUT -H "Content-Type: application/json" -d '{
             "degree": "Bachelors in Computer Science",
             "university": "ABC University",
             "currentFormation": false,
-            "startDate": "14 juin 2022",
-            "endDate": "12 juillet 2023",
+            "startDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
+            "endDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
             "result": "102e/2000",
             "description": "dsq"
         },
@@ -257,8 +296,16 @@ curl -X PUT -H "Content-Type: application/json" -d '{
             "degree": "Ingé",
             "university": "ECE Paris",
             "currentFormation": false,
-            "startDate": "14 juin 2022",
-            "endDate": "12 juillet 2023",
+            "startDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
+            "endDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
             "result": "102e/2000",
             "description": "dqs"
         }
@@ -284,8 +331,16 @@ curl -X PUT -H "Content-Type: application/json" -d '{
         "contract_type": "stage",
         "duration": "4 mois",
         "location": "Paris",
-        "startDate": "14 juin 2022",
-        "endDate": "12 juillet 2023",
+        "startDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
+        "endDate": {
+                "$date": {
+                    "$numberLong": "1704712581950"
+                }
+            },
         "research": false,
         "transportDuration": "<15min",
         "transportsUsed": ["Bus", "Avion"]

@@ -292,9 +292,10 @@ pub struct MongoRepo {
         pub fn create_offers(&self, new_offers: Offers) -> Result<InsertOneResult, Error> {
             let new_doc = Offers {
                 id: None,
+                id_recruiter: new_offers.id_recruiter,
                 id_company: new_offers.id_company,
-                matching: new_offers.matching,
-                tags: new_offers.tags,
+                details: new_offers.details,
+                matchs: new_offers.matchs
             };
             let offers = self
                 .col4
@@ -322,9 +323,10 @@ pub struct MongoRepo {
                 "$set":
                     {
                     "id": new_offers.id,
+                    "id_recruiter": new_offers.id_recruiter,
                     "id_company": new_offers.id_company,
-                    "matching": new_offers.matching,
-                    "tags": new_offers.tags,
+                    "details": new_offers.details,
+                    "matchs": new_offers.matchs,
                     },
             };
             let updated_doc = self
