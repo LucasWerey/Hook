@@ -40,6 +40,7 @@ declare global {
   const createEventHook: typeof import('@vueuse/core')['createEventHook']
   const createGlobalState: typeof import('@vueuse/core')['createGlobalState']
   const createInjectionState: typeof import('@vueuse/core')['createInjectionState']
+  const createOffer: typeof import('./utils/offerApiUtils')['createOffer']
   const createPinia: typeof import('pinia')['createPinia']
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
   const createReusableTemplate: typeof import('@vueuse/core')['createReusableTemplate']
@@ -56,6 +57,7 @@ declare global {
   const defineStore: typeof import('pinia')['defineStore']
   const deleteChip: typeof import('./utils/chipUtils')['deleteChip']
   const deleteCompany: typeof import('./utils/companyApiUtils')['deleteCompany']
+  const deleteOffer: typeof import('./utils/offerApiUtils')['deleteOffer']
   const deleteStudent: typeof import('./utils/studentApiUtils')['deleteStudent']
   const deleteUser: typeof import('./utils/userApiUtils')['deleteUser']
   const describe: typeof import('vitest')['describe']
@@ -67,6 +69,7 @@ declare global {
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getAllCompanies: typeof import('./utils/companyApiUtils')['getAllCompanies']
+  const getAllOffers: typeof import('./utils/offerApiUtils')['getAllOffers']
   const getAllStudents: typeof import('./utils/studentApiUtils')['getAllStudents']
   const getAllUsers: typeof import('./utils/userApiUtils')['getAllUsers']
   const getCompany: typeof import('./utils/companyApiUtils')['getCompany']
@@ -75,6 +78,9 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getEmailFromToken: typeof import('./utils/userApiUtils')['getEmailFromToken']
   const getLocalStorage: typeof import('./utils/storageUtils')['getLocalStorage']
+  const getOffer: typeof import('./utils/offerApiUtils')['getOffer']
+  const getOfferByCompany: typeof import('./utils/offerApiUtils')['getOfferByCompany']
+  const getOfferByRecruiter: typeof import('./utils/offerApiUtils')['getOfferByRecruiter']
   const getQueryParameter: typeof import('./utils/getQueryRouteUtils')['getQueryParameter']
   const getSessionStorage: typeof import('./utils/storageUtils')['getSessionStorage']
   const getStudent: typeof import('./utils/studentApiUtils')['getStudent']
@@ -112,6 +118,7 @@ declare global {
   const mapStores: typeof import('pinia')['mapStores']
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
+  const name: typeof import('./utils/offerApiUtils')['name']
   const newOfferContractDurationOptions: typeof import('./data/newOfferConst')['newOfferContractDurationOptions']
   const newOfferContractLocationOptions: typeof import('./data/newOfferConst')['newOfferContractLocationOptions']
   const newOfferProfessionalExperienceDurationOptions: typeof import('./data/newOfferConst')['newOfferProfessionalExperienceDurationOptions']
@@ -197,6 +204,7 @@ declare global {
   const unrefElement: typeof import('@vueuse/core')['unrefElement']
   const until: typeof import('@vueuse/core')['until']
   const updateCompany: typeof import('./utils/companyApiUtils')['updateCompany']
+  const updateOffer: typeof import('./utils/offerApiUtils')['updateOffer']
   const updateStudent: typeof import('./utils/studentApiUtils')['updateStudent']
   const updateUser: typeof import('./utils/userApiUtils')['updateUser']
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
@@ -369,6 +377,7 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
+  const validateOfferData: typeof import('./utils/offerApiUtils')['validateOfferData']
   const vi: typeof import('vitest')['vi']
   const vitest: typeof import('vitest')['vitest']
   const watch: typeof import('vue')['watch']
@@ -430,6 +439,7 @@ declare module 'vue' {
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
+    readonly createOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['createOffer']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
@@ -446,6 +456,7 @@ declare module 'vue' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
     readonly deleteCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['deleteCompany']>
+    readonly deleteOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['deleteOffer']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
@@ -457,6 +468,7 @@ declare module 'vue' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAllCompanies: UnwrapRef<typeof import('./utils/companyApiUtils')['getAllCompanies']>
+    readonly getAllOffers: UnwrapRef<typeof import('./utils/offerApiUtils')['getAllOffers']>
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
@@ -465,6 +477,9 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
+    readonly getOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['getOffer']>
+    readonly getOfferByCompany: UnwrapRef<typeof import('./utils/offerApiUtils')['getOfferByCompany']>
+    readonly getOfferByRecruiter: UnwrapRef<typeof import('./utils/offerApiUtils')['getOfferByRecruiter']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
     readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
@@ -576,6 +591,7 @@ declare module 'vue' {
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly updateCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['updateCompany']>
+    readonly updateOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['updateOffer']>
     readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
@@ -746,6 +762,7 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
+    readonly validateOfferData: UnwrapRef<typeof import('./utils/offerApiUtils')['validateOfferData']>
     readonly vi: UnwrapRef<typeof import('vitest')['vi']>
     readonly vitest: UnwrapRef<typeof import('vitest')['vitest']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
@@ -800,6 +817,7 @@ declare module '@vue/runtime-core' {
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
+    readonly createOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['createOffer']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
@@ -816,6 +834,7 @@ declare module '@vue/runtime-core' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly deleteChip: UnwrapRef<typeof import('./utils/chipUtils')['deleteChip']>
     readonly deleteCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['deleteCompany']>
+    readonly deleteOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['deleteOffer']>
     readonly deleteStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['deleteStudent']>
     readonly deleteUser: UnwrapRef<typeof import('./utils/userApiUtils')['deleteUser']>
     readonly describe: UnwrapRef<typeof import('vitest')['describe']>
@@ -827,6 +846,7 @@ declare module '@vue/runtime-core' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAllCompanies: UnwrapRef<typeof import('./utils/companyApiUtils')['getAllCompanies']>
+    readonly getAllOffers: UnwrapRef<typeof import('./utils/offerApiUtils')['getAllOffers']>
     readonly getAllStudents: UnwrapRef<typeof import('./utils/studentApiUtils')['getAllStudents']>
     readonly getAllUsers: UnwrapRef<typeof import('./utils/userApiUtils')['getAllUsers']>
     readonly getCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['getCompany']>
@@ -835,6 +855,9 @@ declare module '@vue/runtime-core' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getEmailFromToken: UnwrapRef<typeof import('./utils/userApiUtils')['getEmailFromToken']>
     readonly getLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['getLocalStorage']>
+    readonly getOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['getOffer']>
+    readonly getOfferByCompany: UnwrapRef<typeof import('./utils/offerApiUtils')['getOfferByCompany']>
+    readonly getOfferByRecruiter: UnwrapRef<typeof import('./utils/offerApiUtils')['getOfferByRecruiter']>
     readonly getQueryParameter: UnwrapRef<typeof import('./utils/getQueryRouteUtils')['getQueryParameter']>
     readonly getSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['getSessionStorage']>
     readonly getStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['getStudent']>
@@ -946,6 +969,7 @@ declare module '@vue/runtime-core' {
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly updateCompany: UnwrapRef<typeof import('./utils/companyApiUtils')['updateCompany']>
+    readonly updateOffer: UnwrapRef<typeof import('./utils/offerApiUtils')['updateOffer']>
     readonly updateStudent: UnwrapRef<typeof import('./utils/studentApiUtils')['updateStudent']>
     readonly updateUser: UnwrapRef<typeof import('./utils/userApiUtils')['updateUser']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
@@ -1116,6 +1140,7 @@ declare module '@vue/runtime-core' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
+    readonly validateOfferData: UnwrapRef<typeof import('./utils/offerApiUtils')['validateOfferData']>
     readonly vi: UnwrapRef<typeof import('vitest')['vi']>
     readonly vitest: UnwrapRef<typeof import('vitest')['vitest']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

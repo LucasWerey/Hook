@@ -358,4 +358,28 @@ pub struct MongoRepo {
             Ok(offers)
         }
 
+        pub fn get_offers_by_company(&self, company_id: &String) -> Result<Vec<Offers>, Error> {
+            let obj_id = ObjectId::parse_str(company_id).unwrap();
+            let filter = doc! {"id_company": obj_id};
+            let cursors = self
+                .col4
+                .find(filter, None)
+                .ok()
+                .expect("Error getting list of offers");
+            let offers = cursors.map(|doc| doc.unwrap()).collect();
+            Ok(offers)
+        }
+
+        pub fn get_offers_by_recruiter(&self, recruiter_id: &String) -> Result<Vec<Offers>, Error> {
+            let obj_id = ObjectId::parse_str(recruiter_id).unwrap();
+            let filter = doc! {"id_recruiter": obj_id};
+            let cursors = self
+                .col4
+                .find(filter, None)
+                .ok()
+                .expect("Error getting list of offers");
+            let offers = cursors.map(|doc| doc.unwrap()).collect();
+            Ok(offers)
+        }
+
     }

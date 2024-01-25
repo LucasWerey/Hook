@@ -97,3 +97,30 @@ pub fn get_all_offers(db: &State<MongoRepo>) -> Result<Json<Vec<Offers>>, Status
         Err(_) => Err(Status::InternalServerError),
     }
 }
+
+#[get("/offers/company/<path>")]
+pub fn get_offers_by_company(db: &State<MongoRepo>, path: String) -> Result<Json<Vec<Offers>>, Status> {
+    let id = path;
+    if id.is_empty() {
+        return Err(Status::BadRequest);
+    };
+    let offers = db.get_offers_by_company(&id);
+    match offers {
+        Ok(offers) => Ok(Json(offers)),
+        Err(_) => Err(Status::InternalServerError),
+    }
+}
+
+#[get("/offers/recruiter/<path>")]
+pub fn get_offers_by_recruiter(db: &State<MongoRepo>, path: String) -> Result<Json<Vec<Offers>>, Status> {
+    let id = path;
+    if id.is_empty() {
+        return Err(Status::BadRequest);
+    };
+    let offers = db.get_offers_by_recruiter(&id);
+    match offers {
+        Ok(offers) => Ok(Json(offers)),
+        Err(_) => Err(Status::InternalServerError),
+    }
+}
+

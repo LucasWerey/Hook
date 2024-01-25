@@ -15,7 +15,7 @@ declare module 'vue' {
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CertifcationsPresentation: typeof import('./components/profile/student/subComponents/CertifcationsPresentation.vue')['default']
     CertificationsContainer: typeof import('./components/profile/student/subComponents/CertificationsContainer.vue')['default']
-    CertificationsPresentation: typeof import('@lucaswerey/dslib-pfe')['CertificationsPresentation']
+    CertificationsPresentation: typeof import('./components/profile/student/subComponents/CertificationsPresentation.vue')['default']
     CheckBox: typeof import('@lucaswerey/dslib-pfe')['CheckBox']
     ChipContainer: typeof import('@lucaswerey/dslib-pfe')['ChipContainer']
     CompatibilityInput: typeof import('./components/mySpace/recruiter/newOffer/CompatibilityInput.vue')['default']

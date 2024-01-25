@@ -89,8 +89,6 @@ export async function loginUser(email: string, password: string) {
   }
 }
 
-import axios from 'axios'
-
 /**
  * Fetches the email from a JWT token by making a GET request to the /user/email endpoint.
  *
