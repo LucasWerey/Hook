@@ -24,6 +24,8 @@ declare module 'vue' {
     CtaCard: typeof import('./components/profile/student/subComponents/CtaCard.vue')['default']
     CuriculumContainer: typeof import('./components/profile/student/subComponents/CuriculumContainer.vue')['default']
     DropDown: typeof import('./components/navBars/DropDown.vue')['default']
+    EmptyOffers: typeof import('./components/mySpace/recruiter/EmptyOffers.vue')['default']
+    EmptyProfils: typeof import('./components/mySpace/recruiter/EmptyProfils.vue')['default']
     ExperiencePresentation: typeof import('./components/profile/student/subComponents/ExperiencePresentation.vue')['default']
     ExperiencesContainer: typeof import('./components/profile/student/subComponents/ExperiencesContainer.vue')['default']
     FormationPresentation: typeof import('./components/profile/student/subComponents/FormationPresentation.vue')['default']

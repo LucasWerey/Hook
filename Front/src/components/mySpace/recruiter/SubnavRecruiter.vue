@@ -49,8 +49,8 @@ watch(
     await nextTick()
     const activeElement = document.querySelector('.active-page')
     if (activeElement) {
-      underlineWidth.value = (activeElement as HTMLElement).offsetWidth;
-      underlineLeft.value = (activeElement as HTMLElement).offsetLeft;
+      underlineWidth.value = (activeElement as HTMLElement).offsetWidth
+      underlineLeft.value = (activeElement as HTMLElement).offsetLeft
     }
   },
   { immediate: true }

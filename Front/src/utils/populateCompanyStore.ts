@@ -1,9 +1,11 @@
-export async function populateCompanyStoreByAdmin(companyId: string) {
+export async function populateCompanyStoreByAdmin(adminId: string) {
   const companyStore = useCompanyStore()
 
-  const companyData = await getCompanyByAdmin(companyId)
+  const companyData = await getCompanyByAdmin(adminId)
+  const offerData = await getOfferByCompany(companyData._id.$oid)
 
   companyStore.addCompany({
-    ...companyData
+    ...companyData,
+    detailed_offers: offerData
   })
 }

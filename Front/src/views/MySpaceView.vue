@@ -3,13 +3,6 @@
     <SpaceStudent v-if="isStudent" />
     <SpaceRecruiter v-if="isCompany" />
   </div>
-  <!--  <div class="flex w-full flex-col items-center justify-center gap-4 bg-error text-primary-light">
-    <p>{{ email }}</p>
-    <p>student ? : {{ isStudent }}</p>
-    <p>isCompany ? : {{ isCompany }}</p>
-    <p>infoUser = {{ isCompany ? recruiterStore.recruiters[0] : studentStore.students[0] }}</p>
-    <p>CompanyInfo = {{ isCompany ? companyStore.companies[0] : '' }}</p>
-  </div>-->
   <SnackBar v-if="showSnackbar" type="error" size="small" close="no">
     {{ errorMessage }}
   </SnackBar>
@@ -27,7 +20,6 @@ const hasToken = ref(false)
 const store = useUserTypeStore()
 const studentStore = useStudentsStore()
 const recruiterStore = useRecruiterStore()
-// const companyStore = useCompanyStore()
 
 onMounted(async () => {
   try {

@@ -30,7 +30,6 @@ onMounted(async () => {
       isStudent.value = true
       store.setUserType('student')
       await populateStudentStore(response.value._id.$oid)
-      console.log('student')
       email.value = studentStore.students[0].email
     } else {
       isCompany.value = true

@@ -68,7 +68,7 @@ export async function deleteOffer(id: string): Promise<Offer[]> {
 
 export async function getOfferByCompany(id: string): Promise<Offer[]> {
   try {
-    const response = await axios.get<Offer[]>(`http://127.0.0.1:8000/offer/company/${id}`)
+    const response = await axios.get<Offer[]>(`http://127.0.0.1:8000/offers/company/${id}`)
     return response.data
   } catch (error) {
     throw handleApiError(error)
@@ -77,7 +77,7 @@ export async function getOfferByCompany(id: string): Promise<Offer[]> {
 
 export async function getOfferByRecruiter(id: string): Promise<Offer[]> {
   try {
-    const response = await axios.get<Offer[]>(`http://127.0.0.1:8000/recruiter/${id}`)
+    const response = await axios.get<Offer[]>(`http://127.0.0.1:8000/offers/recruiter/${id}`)
     return response.data
   } catch (error) {
     throw handleApiError(error)

@@ -1,8 +1,29 @@
 <template>
   <div class="flex h-[80vh] w-full flex-col gap-10">
     <SubnavRecruiter @update-page="handleUpdatePage" />
-    <MyOffers v-show="currentPage === 'Les offres'" @openModal="handleOpenModal" />
-    <MyProfils v-show="currentPage === 'Profils'" @openModal="handleOpenModal" />
+    <div v-if="!isStoreReady" class="flex h-full w-full items-center justify-center">
+      <Loader />
+    </div>
+    <div
+      v-if="isStoreReady && hasMoreThanOneOffer"
+      class="flex h-full w-full flex-col items-center justify-center"
+    >
+      <MyOffers v-show="currentPage === 'Les offres' && isStoreReady && hasMoreThanOneOffer" />
+      <MyProfils v-show="currentPage === 'Profils' && isStoreReady && hasMoreThanOneOffer" />
+    </div>
+    <div
+      v-else-if="isStoreReady && !hasMoreThanOneOffer"
+      class="flex h-full w-full items-center justify-center"
+    >
+      <EmptyOffers
+        v-show="currentPage === 'Les offres' && isStoreReady && !hasMoreThanOneOffer"
+        @openModal="handleOpenModal"
+      />
+      <EmptyProfils
+        v-show="currentPage === 'Profils' && isStoreReady && !hasMoreThanOneOffer"
+        @openModal="handleOpenModal"
+      />
+    </div>
     <div
       v-if="openModal"
       class="absolute bottom-0 left-0 z-50 h-[100dvh] w-full bg-basic-black bg-opacity-30"
@@ -17,6 +38,13 @@
 <script setup lang="ts">
 const currentPage = ref('Les offres')
 const openModal = ref(false)
+
+const companyStore = useCompanyStore()
+const recruiterStore = useRecruiterStore()
+const isStoreReady = computed(() => recruiterStore.recruiters.length > 0)
+
+const companyDetailedOffers = computed(() => companyStore.companies[0].detailed_offers)
+const hasMoreThanOneOffer = computed(() => companyDetailedOffers.value.length > 0)
 
 const handleUpdatePage = (page: string) => {
   currentPage.value = page

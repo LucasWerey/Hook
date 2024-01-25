@@ -33,6 +33,7 @@ export const useCompanyStore = defineStore({
       emp: Array<string>
       admin: string
       offers: Array<any>
+      detailed_offers: Array<any>
     }>
   })
 })
