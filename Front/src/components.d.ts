@@ -44,6 +44,7 @@ declare module 'vue' {
     NavBarWelcome: typeof import('./components/navBars/NavBarWelcome.vue')['default']
     NewOffer: typeof import('./components/mySpace/recruiter/NewOffer.vue')['default']
     NewofferHeader: typeof import('./components/mySpace/recruiter/newOffer/NewofferHeader.vue')['default']
+    OfferCard: typeof import('@lucaswerey/dslib-pfe')['OfferCard']
     PersonnalityEmpty: typeof import('./components/profile/student/subComponents/PersonnalityEmpty.vue')['default']
     ProfileHeader: typeof import('./components/profile/ProfileHeader.vue')['default']
     ProfileRecruiter: typeof import('./components/profile/recruiter/ProfileRecruiter.vue')['default']

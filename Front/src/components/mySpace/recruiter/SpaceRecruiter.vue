@@ -8,7 +8,10 @@
       v-if="isStoreReady && hasMoreThanOneOffer"
       class="flex h-full w-full flex-col items-center justify-center"
     >
-      <MyOffers v-show="currentPage === 'Les offres' && isStoreReady && hasMoreThanOneOffer" />
+      <MyOffers
+        v-show="currentPage === 'Les offres' && isStoreReady && hasMoreThanOneOffer"
+        @createOffer="handleOpenModal"
+      />
       <MyProfils v-show="currentPage === 'Profils' && isStoreReady && hasMoreThanOneOffer" />
     </div>
     <div

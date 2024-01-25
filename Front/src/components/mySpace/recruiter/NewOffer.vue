@@ -215,10 +215,7 @@
             </div>
           </div>
           <div class="flex w-full flex-col gap-2">
-            <MoreCrits
-              :value="formData.moreCriteriasModel"
-              @update:criteria="formData.moreCriteriasModel = $event"
-            />
+            <MoreCrits @update:criteria="formData.moreCriteriasModel = $event" />
           </div>
           <div class="flex min-h-[110px] flex-col gap-4">
             <div class="flex flex-col items-end gap-2 lg:flex-row">
@@ -273,7 +270,6 @@
       </div>
       <div class="flex w-full flex-col gap-3">
         <CompatibilityInput
-          :value="formData.minimumCompatibilityModel"
           @update:value="newValue => (formData.minimumCompatibilityModel = newValue)"
         />
       </div>

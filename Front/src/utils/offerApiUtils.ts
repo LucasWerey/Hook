@@ -1,4 +1,5 @@
 export interface Match {
+  student_id: any
   student_name: string
   globalMatch: string
 }

@@ -48,8 +48,22 @@
         />
       </div>
     </div>
-    <div v-if="isStoreReady" class="flex h-full w-full items-center justify-center">
-      <p v-for="(offer, index) in detailedOffers" :key="index">{{ offer.details }}</p>
+    <div v-if="isStoreReady" class="inline-flex w-full flex-wrap gap-6">
+      <OfferCard type="empty" class="min-h-full" @createOffer="emit('createOffer')" />
+      <OfferCard
+        v-for="(offer, index) in detailedOffers"
+        :key="index"
+        type="fill"
+        :title="offer.details.position_name"
+        :location="offer.details.location"
+        :contract-type="offer.details.contract_type"
+        :contract-duration="offer.details.contract_duration"
+        :id="offer._id.$oid"
+        :nCandidates="offer.matchs[0] ? offer.matchs.length : 0"
+        :student-names="offer.matchs.map((match: any) => match.studentName).slice(0, 4)"
+        :desktopColor="offer.details.color"
+        @seeOffer="() => console.log(offer)"
+      />
     </div>
   </div>
 </template>
@@ -119,8 +133,9 @@ const handleFilterByType = () => {
   const filteredOffers = companyDetailedOffers.value.filter(
     offer => offer.details.contract_type === typeFilterModel.value.toLocaleLowerCase()
   )
-  console.log(companyDetailedOffers.value)
   detailedOffers.value = filteredOffers
   return filteredOffers
 }
+
+const emit = defineEmits(['createOffer'])
 </script>
