@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="flex min-h-80 w-full shrink-0 flex-col items-center gap-16 bg-primary-moonstone pb-12 pt-16"
+    class="flex min-h-80 w-full shrink-0 flex-col items-center gap-16 text-nowrap bg-primary-moonstone pb-12 pt-16"
   >
     <nav class="flex w-full flex-col items-center gap-8">
       <DarkLogo class="h-12 cursor-pointer" alt="Company Logo" />

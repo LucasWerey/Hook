@@ -29,6 +29,7 @@ declare module 'vue' {
     EmptyProfils: typeof import('./components/mySpace/recruiter/EmptyProfils.vue')['default']
     ExperiencePresentation: typeof import('./components/profile/student/subComponents/ExperiencePresentation.vue')['default']
     ExperiencesContainer: typeof import('./components/profile/student/subComponents/ExperiencesContainer.vue')['default']
+    Foot: typeof import('@lucaswerey/dslib-pfe')['Foot']
     FooterCompany: typeof import('./components/footers/FooterCompany.vue')['default']
     FooterStudent: typeof import('./components/footers/FooterStudent.vue')['default']
     FooterWelcome: typeof import('./components/footers/FooterWelcome.vue')['default']
