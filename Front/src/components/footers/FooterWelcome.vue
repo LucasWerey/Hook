@@ -1,8 +1,8 @@
 <template>
   <footer
-    class="flex h-40 w-full shrink-0 items-center justify-between gap-16 text-nowrap bg-primary-moonstone px-20 py-12"
+    class="flex h-40 shrink-0 items-center justify-between gap-16 text-nowrap bg-primary-moonstone px-20 py-12"
   >
-    <nav class="flex items-center gap-12">
+    <nav class="flex items-center gap-12 overflow-hidden">
       <DarkLogo class="h-14 cursor-pointer" alt="Company Logo" />
       <hr class="h-20 border border-basic-white opacity-70" />
       <div class="flex flex-col justify-center gap-4 font-eina1 text-basic-white">

@@ -8,6 +8,7 @@
 
     <FooterWelcome v-if="showNavBar && !isStudent && !isRecruiter" />
     <FooterCompany class="mt-10" v-if="showNavBar && isRecruiter" />
+    <FooterStudent class="mt-10" v-if="showNavBar && isStudent" />
   </div>
 </template>
 
