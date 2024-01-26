@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[80vh] w-full flex-col gap-10">
+  <div class="flex w-full flex-col gap-10">
     <SubnavRecruiter @update-page="handleUpdatePage" />
     <div v-if="!isStoreReady" class="flex h-full w-full items-center justify-center">
       <Loader />
@@ -29,7 +29,7 @@
     </div>
     <div
       v-if="openModal"
-      class="absolute bottom-0 left-0 z-50 h-[100dvh] w-full bg-basic-black bg-opacity-30"
+      class="fixed inset-0 z-[59] h-full w-full bg-basic-black bg-opacity-30"
       @keyup.esc="handleCloseModal"
       tabindex="0"
     >
@@ -55,9 +55,17 @@ const handleUpdatePage = (page: string) => {
 
 const handleOpenModal = () => {
   openModal.value = true
+  document.body.classList.add('modal-open')
 }
 
 const handleCloseModal = () => {
   openModal.value = false
+  document.body.classList.remove('modal-open')
 }
 </script>
+
+<style>
+.modal-open {
+  overflow: hidden;
+}
+</style>

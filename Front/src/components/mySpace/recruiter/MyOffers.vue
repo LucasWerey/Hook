@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full flex-col gap-6">
+  <div class="flex min-h-full w-full flex-col gap-6">
     <div class="flex w-full items-end gap-4">
       <InputField
         v-model="searchModel"
@@ -48,8 +48,8 @@
         />
       </div>
     </div>
-    <div v-if="isStoreReady" class="inline-flex w-full flex-wrap gap-6">
-      <OfferCard type="empty" class="" @createOffer="emit('createOffer')" />
+    <div v-if="isStoreReady" class="flex w-full flex-wrap gap-6">
+      <OfferCard type="empty" @createOffer="emit('createOffer')" />
       <OfferCard
         v-for="(offer, index) in detailedOffers"
         :key="index"

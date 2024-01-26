@@ -1,10 +1,12 @@
 <template>
-  <div id="app" class="max-h-[100dvh]">
+  <div id="app" class="flex min-h-screen flex-col justify-between">
     <NavBarWelcome v-if="showNavBar && !isStudent && !isRecruiter" />
     <NavBarStudent class="z-50" v-if="showNavBar && isStudent" />
     <NavBarCompany class="z-50" v-if="showNavBar && isRecruiter" />
 
     <RouterView />
+
+    <FooterCompany class="mt-10" v-if="isRecruiter" />
   </div>
 </template>
 
