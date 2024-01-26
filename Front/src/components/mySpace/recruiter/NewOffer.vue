@@ -214,6 +214,37 @@
               />
             </div>
           </div>
+          <div class="flex min-h-[110px] flex-col gap-4">
+            <div class="flex flex-col items-end gap-2 lg:flex-row">
+              <InputField
+                class="w-3/4"
+                v-model="formData.hardSkillsModel"
+                placeholder="Soudure"
+                label="Hard skills"
+                @keyup.enter="addChipHardSkill"
+              />
+              <Button
+                type="default"
+                styled="fill"
+                class="w-1/4"
+                state="active"
+                @click.prevent="addChipHardSkill"
+                isLight
+              >
+                Ajouter
+              </Button>
+            </div>
+            <div class="flex w-full flex-row gap-2 overflow-auto">
+              <ChipContainer
+                v-for="label in hardSkills"
+                :label="label"
+                :key="label"
+                hasIcon
+                iconPosition="trailing"
+                @deleteChip="deleteChipHardSkill(label)"
+              />
+            </div>
+          </div>
           <div class="flex w-full flex-col gap-2">
             <MoreCrits @update:criteria="formData.moreCriteriasModel = $event" />
           </div>
@@ -285,6 +316,7 @@
           styled="fill"
           class="uppercase"
           icon-position="trailing"
+          @click="handleSubmit"
         >
           Enregistrer mon offre
         </Button>
@@ -303,6 +335,7 @@ const formData = reactive({
   expirationDateModel: ref(''),
   formationsWantedModel: ref(''),
   gratificationModel: ref(''),
+  hardSkillsModel: ref(''),
   lookForContractTypeModel: ref(''),
   lookingForModel: ref(''),
   minimumCompatibilityModel: ref(''),
@@ -353,6 +386,19 @@ const addChipSoftSkill = () => {
 
 const deleteChipSoftSkill = (label: string) => {
   deleteChip(softSkillsRef, label)
+}
+
+const hardSkillsRef: Ref<string[]> = ref([])
+const hardSkills = computed(() => hardSkillsRef.value)
+
+const addChipHardSkill = () => {
+  if (formData.hardSkillsModel === '') return
+  addChip(hardSkillsRef, formData.hardSkillsModel)
+  formData.hardSkillsModel = ''
+}
+
+const deleteChipHardSkill = (label: string) => {
+  deleteChip(hardSkills, label)
 }
 
 const persolanityCriteriaRef: Ref<string[]> = ref([])
@@ -468,6 +514,59 @@ const areAllRequiredFieldsFilled = computed(() => {
     formData.avantagesModel !== ''
   )
 })
+
+const companyStore = useCompanyStore()
+const recruiterStore = useRecruiterStore()
+const response = ref()
+
+async function handleSubmit() {
+  const id_recruiter = recruiterStore.recruiters[0]._id
+  const id_company = companyStore.companies[0]._id
+  const matchs = null
+  const details = {
+    benefits: formData.avantagesModel,
+    compatibility_min: formData.minimumCompatibilityModel.toString() + '%',
+    contract_duration: formData.contractDurationModel,
+    contract_type: formData.lookForContractTypeModel,
+    description: formData.descriptionModel,
+    exp_date: {
+      $date: {
+        $numberLong: String(new Date(formData.expirationDateModel).getTime())
+      }
+    },
+    location: formData.contractLocationModel,
+    position_name: formData.lookingForModel,
+    salary: formData.gratificationModel,
+    tags: {
+      certifications: certifications.value,
+      experience: professionalExperienceduration.value,
+      formations: formationsWanted.value,
+      hard_skills: hardSkills.value,
+      more: moreCriterias.value,
+      personality: persolanityCriterias.value,
+      soft_skills: softSkills.value
+    },
+    tasks: formData.missionModel
+  }
+  const data = {
+    details,
+    id_company,
+    id_recruiter,
+    matchs
+  }
+  try {
+    const companyData = await getCompanyByAdmin(id_recruiter.$oid)
+    response.value = await createOffer(data)
+    const offerId = response.value.insertedId.$oid
+    companyData.offers.push(offerId)
+    await updateCompany(companyData._id.$oid, companyData)
+    await populateCompanyStoreByAdmin(id_recruiter.$oid)
+    emit('closeModal')
+  } catch (error) {
+    const apiError = handleApiError(error)
+    console.error(apiError)
+  }
+}
 
 const emit = defineEmits(['closeModal'])
 </script>

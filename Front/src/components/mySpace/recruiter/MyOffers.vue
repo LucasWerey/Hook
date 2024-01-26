@@ -49,7 +49,7 @@
       </div>
     </div>
     <div v-if="isStoreReady" class="inline-flex w-full flex-wrap gap-6">
-      <OfferCard type="empty" class="min-h-full" @createOffer="emit('createOffer')" />
+      <OfferCard type="empty" class="" @createOffer="emit('createOffer')" />
       <OfferCard
         v-for="(offer, index) in detailedOffers"
         :key="index"
@@ -62,7 +62,12 @@
         :nCandidates="offer.matchs[0] ? offer.matchs.length : 0"
         :student-names="offer.matchs.map((match: any) => match.studentName).slice(0, 4)"
         :desktopColor="offer.details.color"
-        @seeOffer="() => console.log(offer)"
+        :notification="
+          actualNumberOfStudentsMatched.find(
+            offerMatchCount => offerMatchCount.id === offer._id.$oid
+          )?.newCount || 0
+        "
+        @seeOffer="() => console.log(companyStore.companies[0])"
       />
     </div>
   </div>
@@ -80,6 +85,31 @@ const durationFilterModel = ref('')
 const expDateFilterModel = ref('')
 const groupFilterModel = ref('')
 const searchModel = ref('')
+
+const actualNumberOfStudentsMatched = ref(
+  detailedOffers.value.map(offer => ({
+    count: offer.matchs.length,
+    id: offer._id.$oid,
+    newCount: 0
+  }))
+)
+
+const checkForNewProfiles = async () => {
+  // @ts-ignore
+  const offers = await getOfferByCompany(companyStore.companies[0]._id.$oid)
+  actualNumberOfStudentsMatched.value.forEach((offerMatchCount, index) => {
+    const correspondingOffer = offers.find(offer => offer._id.$oid === offerMatchCount.id)
+    if (correspondingOffer && offerMatchCount.count < correspondingOffer.matchs.length) {
+      actualNumberOfStudentsMatched.value[index].newCount =
+        correspondingOffer.matchs.length - offerMatchCount.count
+      actualNumberOfStudentsMatched.value[index].count = correspondingOffer.matchs.length
+    }
+  })
+}
+
+setTimeout(() => {
+  setInterval(checkForNewProfiles, 60000)
+}, 60000)
 
 const typeFilterOptions = [
   { label: 'Stage ou alternance', value: 'stage ou alternance' },
