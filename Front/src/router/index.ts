@@ -32,6 +32,11 @@ const routes = [
     path: '/profile'
   },
   {
+    component: () => import('../views/OfferdetailView.vue'),
+    name: 'OfferDetail',
+    path: '/myspace/offer/:id'
+  },
+  {
     beforeEnter: redirectToMySpaceIfUserExists,
     component: () => import('../views/LoginView.vue'),
     meta: { requiresAuth: false },

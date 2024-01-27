@@ -67,7 +67,7 @@
             offerMatchCount => offerMatchCount.id === offer._id.$oid
           )?.newCount || 0
         "
-        @seeOffer="() => console.log(companyStore.companies[0])"
+        @seeOffer="() => $router.push(`/myspace/offer/${offer._id.$oid}`)"
       />
     </div>
   </div>

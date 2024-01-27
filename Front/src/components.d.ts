@@ -50,6 +50,8 @@ declare module 'vue' {
     NewOffer: typeof import('./components/mySpace/recruiter/NewOffer.vue')['default']
     NewofferHeader: typeof import('./components/mySpace/recruiter/newOffer/NewofferHeader.vue')['default']
     OfferCard: typeof import('@lucaswerey/dslib-pfe')['OfferCard']
+    OfferDetailRecruiter: typeof import('./components/offerDetail/recruiter/OfferDetailRecruiter.vue')['default']
+    OfferPresentation: typeof import('./components/offerDetail/recruiter/OfferPresentation.vue')['default']
     PersonnalityEmpty: typeof import('./components/profile/student/subComponents/PersonnalityEmpty.vue')['default']
     ProfileHeader: typeof import('./components/profile/ProfileHeader.vue')['default']
     ProfileRecruiter: typeof import('./components/profile/recruiter/ProfileRecruiter.vue')['default']
@@ -75,5 +77,6 @@ declare module 'vue' {
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
     SubnavRecruiter: typeof import('./components/mySpace/recruiter/SubnavRecruiter.vue')['default']
     SubnavStudent: typeof import('./components/mySpace/students/SubnavStudent.vue')['default']
+    SuggestedProfiles: typeof import('./components/offerDetail/recruiter/SuggestedProfiles.vue')['default']
   }
 }

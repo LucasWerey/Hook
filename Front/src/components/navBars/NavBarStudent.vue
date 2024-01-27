@@ -6,9 +6,12 @@
         <div
           class="relative flex h-full items-center align-middle text-3 font-700 uppercase text-primary-powder"
         >
-          <router-link :to="{ name: 'myspace' }" active-class="text-primary-moonstone active-route"
-            >MON ESPACE</router-link
+          <router-link
+            :to="{ name: 'myspace' }"
+            :class="{ 'active-route text-primary-moonstone': isActive }"
           >
+            MON ESPACE
+          </router-link>
         </div>
         <div
           class="relative flex h-full items-center align-middle text-3 font-700 uppercase text-primary-powder"
@@ -102,6 +105,12 @@ onMounted(async () => {
 const onLogoClick = () => {
   // handle logo click
 }
+
+const route = useRoute()
+
+const isActive = computed(() => {
+  return ['/myspace', '/myspace/offer/:id'].some(path => route.path.startsWith(path))
+})
 </script>
 
 <style scoped>
