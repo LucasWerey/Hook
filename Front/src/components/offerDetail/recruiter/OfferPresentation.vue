@@ -31,11 +31,11 @@
         <Button
           :type="'default'"
           :state="'active'"
-          class="max-h-8 max-w-96 text-nowrap uppercase"
+          class="max-h-8 max-w-96 text-nowrap border-0 bg-primary-lightmoonstone uppercase"
           :styled="'fill'"
           isLight
         >
-          aJOUTER UN NIVEAU D’expérience souhaité
+          <span class="text-primary-moonstone"> aJOUTER UN NIVEAU D’expérience souhaité</span>
         </Button>
       </div>
     </div>
@@ -43,7 +43,7 @@
       type="default"
       state="active"
       styled="outlined"
-      class="max-h-8 max-w-28 border-0 bg-basic-verylightgrey uppercase"
+      class="max-h-8 max-w-28 border-basic-verylightgrey bg-basic-verylightgrey uppercase"
     >
       Modifier
     </Button>
@@ -51,7 +51,7 @@
       type="default"
       state="active"
       styled="outlined"
-      class="max-h-8 max-w-28 border-0 bg-basic-verylightgrey uppercase text-error"
+      class="max-h-8 max-w-28 border-basic-verylightgrey bg-basic-verylightgrey uppercase text-error"
     >
       <p class="text-error">SUPPRIMER</p>
     </Button>

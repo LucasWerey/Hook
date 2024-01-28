@@ -1,8 +1,14 @@
 <template>
-  <div class="flex w-full gap-2 text-nowrap">
-    <h2 class="font-eina1 text-4 font-bold uppercase">Profils suggérés</h2>
-    <IconsBase name="info" class="cursor-pointer" size="small" color="darkgrey" />
-    {{ matchingStudents }}
+  <div class="flex w-full flex-col gap-4">
+    <div class="flex w-full gap-2">
+      <h2 class="font-eina1 text-4 font-bold uppercase">Profils suggérés</h2>
+      <IconsBase name="info" class="cursor-pointer" size="small" color="darkgrey" />
+    </div>
+    <div class="flex w-full flex-row gap-6">
+      <div v-for="student in matchingStudents" :key="student.student_id.$oid">
+        <StudentSuggestedCard :data="student" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,6 +21,9 @@ const props = defineProps({
 
 interface Match {
   globalMatch: string
+  student_id: {
+    $oid: string
+  }
 }
 
 const offerDetails = computed(() => {
@@ -30,9 +39,28 @@ const compatibility_min = computed(() =>
 )
 const matchs = computed(() => (props.offerData ? props.offerData.matchs : []))
 
-const matchingStudents = computed(() => {
-  return matchs.value
-    ? matchs.value.filter((match: Match) => parseInt(match.globalMatch) >= compatibility_min.value)
-    : ''
+let matchingStudents = ref<any[]>([])
+
+watchEffect(async () => {
+  if (matchs.value) {
+    const filteredMatches = matchs.value.filter(
+      (match: Match) => parseInt(match.globalMatch) >= compatibility_min.value
+    )
+
+    const studentInfosPromise = Promise.all(
+      filteredMatches.map(async (match: Match) => {
+        try {
+          const studentInfo = await getStudent(match.student_id.$oid)
+          const userInfo = await getUser(match.student_id.$oid)
+          return { ...match, studentInfo, userInfo }
+        } catch (error) {
+          console.error(error)
+          return match
+        }
+      })
+    )
+
+    matchingStudents.value = await studentInfosPromise
+  }
 })
 </script>
