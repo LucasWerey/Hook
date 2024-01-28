@@ -329,12 +329,12 @@
 const formData = reactive({
   avantagesModel: ref(''),
   certificationsModel: ref(''),
+  colorModel: ref(''),
   contractDurationModel: ref(''),
   contractLocationModel: ref(''),
   descriptionModel: ref(''),
   expirationDateModel: ref(''),
   formationsWantedModel: ref(''),
-  colorModel: ref(''),
   gratificationModel: ref(''),
   hardSkillsModel: ref(''),
   lookForContractTypeModel: ref(''),

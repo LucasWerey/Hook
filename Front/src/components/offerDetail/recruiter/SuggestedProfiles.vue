@@ -15,7 +15,6 @@ const props = defineProps({
 
 interface Match {
   globalMatch: string
-  // include other properties of match if there are any
 }
 
 const offerDetails = computed(() => {
@@ -32,8 +31,8 @@ const compatibility_min = computed(() =>
 const matchs = computed(() => (props.offerData ? props.offerData.matchs : []))
 
 const matchingStudents = computed(() => {
-  return matchs.value.filter(
-    (match: Match) => parseInt(match.globalMatch) >= compatibility_min.value
-  )
+  return matchs.value
+    ? matchs.value.filter((match: Match) => parseInt(match.globalMatch) >= compatibility_min.value)
+    : ''
 })
 </script>

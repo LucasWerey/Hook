@@ -67,7 +67,7 @@ const offerDetails = computed(() => {
   if (props.offerData && props.offerData.details) {
     const { position_name, contract_duration, contract_type, location, color } =
       props.offerData.details
-    return { contract_duration, contract_type, location, position_name, color }
+    return { color, contract_duration, contract_type, location, position_name }
   }
   return {}
 })
