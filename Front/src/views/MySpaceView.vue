@@ -36,6 +36,7 @@ onMounted(async () => {
       isCompany.value = true
       store.setUserType('recruiter')
       await populateCompanyStoreByAdmin(response.value._id.$oid)
+      console.log('eza')
       await populateRecruiterStore(response.value._id.$oid)
       email.value = recruiterStore.recruiters[0].email
     }

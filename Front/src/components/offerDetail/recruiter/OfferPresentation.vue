@@ -1,8 +1,7 @@
-import { IconsBase } from '@lucaswerey/dslib-pfe';
 <template>
   <div class="flex w-full gap-2 rounded-xl bg-basic-white p-6">
     <div class="flex w-full gap-6">
-      <IconsBase name="desktop" class="h-40 w-40" color="darkgrey" />
+      <IconsBase name="desktop" class="h-40 w-40" :color="color" />
       <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-8 font-800">{{ position_name }}</h1>
@@ -60,16 +59,15 @@ import { IconsBase } from '@lucaswerey/dslib-pfe';
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
 const props = defineProps({
   offerData: Object
 })
 
 const offerDetails = computed(() => {
   if (props.offerData && props.offerData.details) {
-    const { position_name, contract_duration, contract_type, location } = props.offerData.details
-    return { contract_duration, contract_type, location, position_name }
+    const { position_name, contract_duration, contract_type, location, color } =
+      props.offerData.details
+    return { contract_duration, contract_type, location, position_name, color }
   }
   return {}
 })
@@ -78,6 +76,7 @@ const position_name = computed(() => offerDetails.value.position_name)
 const contract_duration = computed(() => offerDetails.value.contract_duration)
 const contract_type = computed(() => offerDetails.value.contract_type)
 const location = computed(() => offerDetails.value.location)
+const color = computed(() => offerDetails.value.color)
 
 let progressValue = ref(50)
 </script>

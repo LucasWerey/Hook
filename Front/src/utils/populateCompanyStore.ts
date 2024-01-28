@@ -4,7 +4,6 @@ export async function populateCompanyStoreByAdmin(adminId: string) {
   const companyData = await getCompanyByAdmin(adminId)
 
   const offerData = await getOfferByCompany(companyData._id.$oid)
-  console.log(offerData)
 
   for (const element of offerData) {
     if (!element.matchs) element.matchs = []

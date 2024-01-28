@@ -306,7 +306,7 @@
       </div>
       <hr class="border-b border-basic-lightgrey" />
       <div class="flex w-full flex-col gap-3">
-        <SpacePersonnalization />
+        <SpacePersonnalization @updateColor="handleUpdateColor($event)" />
       </div>
       <span class="font-eina1 text-3 text-error">*Champs obligatoires</span>
       <div class="flex w-full items-center justify-center">
@@ -334,6 +334,7 @@ const formData = reactive({
   descriptionModel: ref(''),
   expirationDateModel: ref(''),
   formationsWantedModel: ref(''),
+  colorModel: ref(''),
   gratificationModel: ref(''),
   hardSkillsModel: ref(''),
   lookForContractTypeModel: ref(''),
@@ -525,6 +526,7 @@ async function handleSubmit() {
   const matchs = null
   const details = {
     benefits: formData.avantagesModel,
+    color: formData.colorModel,
     compatibility_min: formData.minimumCompatibilityModel.toString() + '%',
     contract_duration: formData.contractDurationModel,
     contract_type: formData.lookForContractTypeModel,
@@ -566,6 +568,10 @@ async function handleSubmit() {
     const apiError = handleApiError(error)
     console.error(apiError)
   }
+}
+
+const handleUpdateColor = (colors: string) => {
+  formData.colorModel = colors
 }
 
 const emit = defineEmits(['closeModal'])
