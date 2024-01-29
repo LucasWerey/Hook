@@ -29,6 +29,8 @@ const props = defineProps({
   dataStudent: { required: true, type: Object }
 })
 
+const dataStudent = computed(() => props.dataStudent)
+
 const questions = [
   { title: 'Mon film préféré', value: 'Avatar' },
   { title: 'Ma musique préférée', value: 'We Are the Champions - Queen' },
