@@ -82,6 +82,7 @@ declare module 'vue' {
     StudentOfferHeader: typeof import('./components/studentOffer/subComponents/StudentOfferHeader.vue')['default']
     StudentOfferHeaderVue: typeof import('@lucaswerey/dslib-pfe')['StudentOfferHeaderVue']
     StudentOfferPage: typeof import('./components/studentOffer/StudentOfferPage.vue')['default']
+    StudentOfferStats: typeof import('./components/studentOffer/subComponents/StudentOfferStats.vue')['default']
     StudentProfile: typeof import('./components/offerDetail/recruiter/studentProfile/StudentProfile.vue')['default']
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
     StudentSuggestedCard: typeof import('./components/offerDetail/recruiter/StudentSuggestedCard.vue')['default']

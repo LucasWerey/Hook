@@ -1,14 +1,19 @@
 <template>
-  <div class="flex h-full w-full flex-col gap-12">
+  <Loader v-if="loading" />
+  <div v-else class="flex h-full w-full flex-col gap-12">
     <IconsBase
       name="moveLeft"
       class="h-10 w-10 cursor-pointer"
       color="darkgrey"
       @click="goToLast"
     />
-    <Loader v-if="loading" />
     <StudentOfferHeader v-if="data.offer && data.user && data.student" :data="data" />
     <hr class="w-full text-basic-lightgrey" />
+    <StudentOfferStats
+      v-if="data.offer && data.user && data.student"
+      :dataStudent="data.student"
+      :dataOffer="data.offer"
+    />
   </div>
 </template>
 
