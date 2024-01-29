@@ -14,6 +14,7 @@
       :dataStudent="data.student"
       :dataOffer="data.offer"
     />
+    <StudentOfferSingularity />
   </div>
 </template>
 

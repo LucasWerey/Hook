@@ -11,6 +11,7 @@ declare module 'vue' {
     AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
     AddExperiences: typeof import('./components/profile/student/subComponents/AddExperiences.vue')['default']
     AddFormations: typeof import('./components/profile/student/subComponents/AddFormations.vue')['default']
+    AudioPlayer: typeof import('./components/studentOffer/subComponents/AudioPlayer.vue')['default']
     Avatar: typeof import('@lucaswerey/dslib-pfe')['Avatar']
     Button: typeof import('@lucaswerey/dslib-pfe')['Button']
     CertificationsContainer: typeof import('./components/profile/student/subComponents/CertificationsContainer.vue')['default']
@@ -82,6 +83,7 @@ declare module 'vue' {
     StudentOfferHeader: typeof import('./components/studentOffer/subComponents/StudentOfferHeader.vue')['default']
     StudentOfferHeaderVue: typeof import('@lucaswerey/dslib-pfe')['StudentOfferHeaderVue']
     StudentOfferPage: typeof import('./components/studentOffer/StudentOfferPage.vue')['default']
+    StudentOfferSingularity: typeof import('./components/studentOffer/subComponents/StudentOfferSingularity.vue')['default']
     StudentOfferStats: typeof import('./components/studentOffer/subComponents/StudentOfferStats.vue')['default']
     StudentProfile: typeof import('./components/offerDetail/recruiter/studentProfile/StudentProfile.vue')['default']
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
@@ -89,5 +91,7 @@ declare module 'vue' {
     SubnavRecruiter: typeof import('./components/mySpace/recruiter/SubnavRecruiter.vue')['default']
     SubnavStudent: typeof import('./components/mySpace/students/SubnavStudent.vue')['default']
     SuggestedProfiles: typeof import('./components/offerDetail/recruiter/SuggestedProfiles.vue')['default']
+    TestAudioPlayer: typeof import('./components/studentOffer/subComponents/TestAudioPlayer.vue')['default']
+    VideoPlayer: typeof import('@lucaswerey/dslib-pfe')['VideoPlayer']
   }
 }
