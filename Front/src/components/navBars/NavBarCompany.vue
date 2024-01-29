@@ -115,7 +115,9 @@ const onLogoClick = () => {
 const route = useRoute()
 
 const isActive = computed(() => {
-  return ['/myspace', '/myspace/offer/:id'].some(path => route.path.startsWith(path))
+  return ['/myspace', '/myspace/offer/:id', 'myspace/offer/:offerId/student/:studentId'].some(
+    path => route.path.startsWith(path)
+  )
 })
 </script>
 

@@ -44,7 +44,9 @@ pub struct MongoRepo {
                 email: new_user.email,
                 password: new_user.password,
                 statut: new_user.statut,
-                date: new_user.date
+                date: new_user.date,
+                phone: new_user.phone,
+                address: new_user.address
             };
             let user = self
                 .col

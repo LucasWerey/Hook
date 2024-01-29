@@ -12,6 +12,8 @@ pub struct User {
     pub password: String,
     pub statut: String,
     pub date: Option<BsonDateTime>,
+    pub phone: Option<String>,
+    pub address: Option<String>
 }
 
 

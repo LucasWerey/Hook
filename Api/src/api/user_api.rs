@@ -28,6 +28,8 @@ pub fn create_user(
         },
         statut: new_user.statut.to_owned(),
         date: Some(BsonDateTime::from_millis(Utc::now().timestamp_millis())),
+        phone: new_user.phone.to_owned(),
+        address: new_user.address.to_owned()
     };
     let user_clone = data.clone();
     let user_detail = db.create_user(user_clone);
@@ -87,6 +89,8 @@ pub fn update_user(
         },
         statut: new_user.statut.to_owned(),
         date: new_user.date.to_owned(),
+        phone: new_user.phone.to_owned(),
+        address: new_user.address.to_owned()
     };
     let update_result = db.update_user(&id, data);
     match update_result {

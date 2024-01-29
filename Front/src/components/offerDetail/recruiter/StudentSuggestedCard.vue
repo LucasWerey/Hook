@@ -29,6 +29,7 @@
           :class="isSuperMatch ? 'border-warning bg-warning ' : 'bg-primary-moonstone'"
           state="active"
           styled="outlined"
+          @click="() => emit('seeProfile', props.data)"
         >
           <span class="text-basic-white">Voir le profil</span>
         </Button>
@@ -45,9 +46,6 @@ const props = defineProps({
   }
 })
 
-onMounted(() => {
-  console.log(props.data)
-})
 
 const firstname = computed(() => props.data.userInfo.firstname)
 const lastname = computed(() => props.data.userInfo.lastname)
@@ -62,6 +60,8 @@ const avatarUrl = computed(() => {
 })
 
 const isSuperMatch = computed(() => parseInt(compatibility.value) >= 90)
+
+const emit = defineEmits(['seeProfile'])
 </script>
 
 <style scoped>

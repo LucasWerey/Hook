@@ -62,10 +62,10 @@ This way, you can work on the frontend and backend separately, but they're both 
 As our project continues to evolve, there are several enhancements and features we're planning to implement:
 
 1. ~~Setup the front end and the back end~~
-2. Setup MongoDb with all collections
-3. Implement API paths for all collections
-4. Landing Page
-5. Make the sign in and sign up
+2. ~~Setup MongoDb with all collections~~
+3. ~~Implement API paths for all collections~~
+4. ~~Landing Page~~
+5. ~~Make the sign in and sign up~~
 
 ## 📝 Commit Guidelines
 

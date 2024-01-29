@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ActionButtons: typeof import('@lucaswerey/dslib-pfe')['ActionButtons']
     AddCompetencies: typeof import('./components/profile/student/subComponents/AddCompetencies.vue')['default']
     AddExperiences: typeof import('./components/profile/student/subComponents/AddExperiences.vue')['default']
     AddFormations: typeof import('./components/profile/student/subComponents/AddFormations.vue')['default']
@@ -18,6 +19,7 @@ declare module 'vue' {
     ChipContainer: typeof import('@lucaswerey/dslib-pfe')['ChipContainer']
     CompatibilityInput: typeof import('./components/mySpace/recruiter/newOffer/CompatibilityInput.vue')['default']
     CompetenciesContainer: typeof import('./components/profile/student/subComponents/CompetenciesContainer.vue')['default']
+    ContactInfo: typeof import('@lucaswerey/dslib-pfe')['ContactInfo']
     ContractTypeinput: typeof import('./components/mySpace/recruiter/newOffer/ContractTypeinput.vue')['default']
     CtaCard: typeof import('./components/profile/student/subComponents/CtaCard.vue')['default']
     CuriculumContainer: typeof import('./components/profile/student/subComponents/CuriculumContainer.vue')['default']
@@ -37,6 +39,7 @@ declare module 'vue' {
     FormationPresentation: typeof import('./components/profile/student/subComponents/FormationPresentation.vue')['default']
     FormationsContainer: typeof import('./components/profile/student/subComponents/FormationsContainer.vue')['default']
     IconsBase: typeof import('@lucaswerey/dslib-pfe')['IconsBase']
+    Img: typeof import('@lucaswerey/dslib-pfe')['Img']
     InputField: typeof import('@lucaswerey/dslib-pfe')['InputField']
     Loader: typeof import('@lucaswerey/dslib-pfe')['Loader']
     MoreCrits: typeof import('./components/mySpace/recruiter/newOffer/MoreCrits.vue')['default']
@@ -76,6 +79,10 @@ declare module 'vue' {
     StudentFormStep1: typeof import('./components/signUp/students/StudentFormStep1.vue')['default']
     StudentFormStep2: typeof import('./components/signUp/students/StudentFormStep2.vue')['default']
     StudentFormStep3: typeof import('./components/signUp/students/StudentFormStep3.vue')['default']
+    StudentOfferHeader: typeof import('./components/studentOffer/subComponents/StudentOfferHeader.vue')['default']
+    StudentOfferHeaderVue: typeof import('@lucaswerey/dslib-pfe')['StudentOfferHeaderVue']
+    StudentOfferPage: typeof import('./components/studentOffer/StudentOfferPage.vue')['default']
+    StudentProfile: typeof import('./components/offerDetail/recruiter/studentProfile/StudentProfile.vue')['default']
     StudentSignup: typeof import('./components/signUp/StudentSignup.vue')['default']
     StudentSuggestedCard: typeof import('./components/offerDetail/recruiter/StudentSuggestedCard.vue')['default']
     SubnavRecruiter: typeof import('./components/mySpace/recruiter/SubnavRecruiter.vue')['default']

@@ -6,7 +6,7 @@
     </div>
     <div class="flex w-full flex-row gap-6">
       <div v-for="student in matchingStudents" :key="student.student_id.$oid">
-        <StudentSuggestedCard :data="student" />
+        <StudentSuggestedCard :data="student" @see-profile="emit('seeProfile', $event)" />
       </div>
     </div>
   </div>
@@ -63,4 +63,6 @@ watchEffect(async () => {
     matchingStudents.value = await studentInfosPromise
   }
 })
+
+const emit = defineEmits(['seeProfile'])
 </script>

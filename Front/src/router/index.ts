@@ -32,6 +32,12 @@ const routes = [
     path: '/profile'
   },
   {
+    component: () => import('../views/StudentOfferView.vue'),
+    meta: { requiresAuth: true },
+    name: 'StudentProfile',
+    path: '/myspace/offer/:offerId/student/:studentId'
+  },
+  {
     component: () => import('../views/OfferdetailView.vue'),
     name: 'OfferDetail',
     path: '/myspace/offer/:id'

@@ -10,7 +10,7 @@
       <h2 class="self-baseline text-nowrap text-16 font-800">Mon offre</h2>
     </div>
     <OfferPresentation :offerData="data" />
-    <SuggestedProfiles :offerData="data" />
+    <SuggestedProfiles :offerData="data" @see-profile="goToStudentProfile($event)" />
     <OfferProcess />
   </div>
 </template>
@@ -34,6 +34,12 @@ onMounted(async () => {
 })
 
 const router = useRouter()
+
+const goToStudentProfile = (event: any) => {
+  router.push({
+    path: `/myspace/offer/${offerId.value}/student/${event.student_id.$oid}`
+  })
+}
 
 const goToMyspace = () => {
   router.push('/myspace')

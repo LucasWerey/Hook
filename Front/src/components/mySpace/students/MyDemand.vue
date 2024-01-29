@@ -29,7 +29,9 @@
           :contractType="demand.contract_type"
           :contractDuration="demand.duration"
           :nMatchs="numberOfMatch"
-          desktopColor="warning"
+          :notification="0"
+          desktopColor="moonstone"
+          @seeDemand="() => console.log('see demand')"
         />
       </div>
     </div>
