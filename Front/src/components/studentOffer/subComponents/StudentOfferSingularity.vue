@@ -29,6 +29,7 @@ const props = defineProps({
   dataStudent: { required: true, type: Object }
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const dataStudent = computed(() => props.dataStudent)
 
 const questions = [
