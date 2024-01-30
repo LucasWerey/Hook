@@ -14,7 +14,7 @@
       :dataStudent="data.student"
       :dataOffer="data.offer"
     />
-    <StudentOfferSingularity />
+    <StudentOfferSingularity :dataStudent="data.student" />
   </div>
 </template>
 
@@ -22,7 +22,7 @@
 const route = useRoute()
 const offerId = computed(() => route.params.offerId)
 const studentId = computed(() => route.params.studentId)
-const data = ref({
+const data = ref<Record<string, any>>({
   offer: null,
   student: null,
   user: null
