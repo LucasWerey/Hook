@@ -44,13 +44,15 @@ The `User` model represents a user in the system. Here's the structure of the `U
 
 ```rust
 pub struct User {
-    pub id: Option<ObjectId>,  // The unique ID of the user. This is optional because MongoDB will automatically assign an ID when a user is created.
-    pub firstname: String,     // The user's first name.
-    pub lastname: String,      // The user's last name.
-    pub email: String,         // The user's email address.
-    pub password: String,      // The user's password. In a real system, this would be hashed and salted for security.
-    pub statut: String,        // The user's status.
-    pub date: DateTime<Utc>,   // The date and time when the user was created. Should be number long
+    pub id: Option<ObjectId>,
+    pub firstname: String,
+    pub lastname: String,
+    pub email: String,
+    pub password: String,
+    pub statut: String,
+    pub date: Option<BsonDateTime>,
+    pub phone: Option<String>,
+    pub address: Option<String>
 }
 ```
 
@@ -60,14 +62,14 @@ The `Student` model represents a user in the system. Here's the structure of the
 
 ```rust
 pub struct Students {
-    pub user_id: Option<ObjectId>, // The student id linked to user ID
-    pub duration: i32,                // The duration of the stage/internship
-    pub level: String,            // The graduation level
-    pub contract_type: String,      // Type of contract
-    pub start_date: BsonDateTime,  // Date of start
-    pub location: String,              // Place of stage
-    pub research: bool,           // Currently looking for ?
-    pub profile: Bson,          //Profile informations
+    pub user_id: Option<ObjectId>,
+    pub duration: String,
+    pub level: String,
+    pub contract_type: String,
+    pub start_date: BsonDateTime,
+    pub location: String,
+    pub research: bool,
+    pub profile: Bson,
 }
 ```
 
@@ -85,7 +87,7 @@ pub struct Companies {
     pub city: String,
     pub country: String,
     pub legal_status: String,
-    pub nb_emp: i32,
+    pub nb_emp: String,
     pub emp: Bson,
     pub admin: ObjectId,
     pub offers: Bson,
@@ -106,11 +108,13 @@ pub struct Offers {
 }
 ```
 
-## Endpoints
+## API Endpoints
 
-### Create User - `POST /user`
+<details>
+<summary><strong>POST Requests</strong></summary>
+<br>
 
-Creates a new user. The request body should be a JSON object with the following structure:
+1. **Create User - `POST /user`**
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -118,14 +122,16 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "lastname": "Last Name",
     "email": "user@example.com",
     "password": "password",
-    "statut": "Status"
+    "statut": "Status",
+    "phone": "0606060606",
+    "address": "2 rue de perpignan"
 
 }' http://127.0.0.1:8000/user
 ```
 
 > To create a student statut must be set to "student"
 
-#### Create Companie - `POST /companie`
+2. **Create Companie - `POST /companie`**
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -143,7 +149,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/companie
 ```
 
-#### Create Offer - `POST /offer`
+3. **Create Offer - `POST /offer`**
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -175,49 +181,79 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/offer
 ```
 
-### Get all queries
+</details>
+
+<details>
+<summary><strong>GET ALL Requests</strong></summary>
+<br>
 
 Returns a list of all users in the system. No request body is required for this endpoint.
 
-Examples:
-
-#### Get All Users - `GET /users`
+1. **Get All Users - `GET /users`**
 
 ```bash
 curl -X GET http://127.0.0.1:8000/users
 ```
 
-#### Get All Students - `GET /students`
+2. **Get All Students - `GET /students`**
 
 ```bash
 curl -X GET http://127.0.0.1:8000/students
 ```
 
-### Get queries
+3. **Get All Offers - `GET /offers`**
+
+```bash
+curl -X GET http://127.0.0.1:8000/offers
+```
+
+4. **Get All Companies - `GET /companies`**
+
+```bash
+curl -X GET http://127.0.0.1:8000/companies
+```
+
+</details>
+
+<details>
+<summary><strong>GET Requests</strong></summary>
+<br>
 
 Returns the details of a specific user. Replace `<id>` with the ID of the user you want to retrieve. No request body is required for this endpoint.
 
-Examples:
-
-#### Get User - `GET /user/<id>`
+1. **Get User - `GET /user/<id>`**
 
 ```bash
 curl -X GET http://127.0.0.1:8000/user/<id>
 ```
 
-#### Get Student - `GET /student/<id>`
+2. **Get Student - `GET /student/<id>`**
 
 ```bash
 curl -X GET http://127.0.0.1:8000/student/<id>
 ```
 
-### Update queries
+3. **Get Offer - `GET /offer/<id>`**
+
+```bash
+curl -X GET http://127.0.0.1:8000/offer/<id>
+```
+
+4. **Get Company - `GET /company/<id>`**
+
+```bash
+curl -X GET http://127.0.0.1:8000/company/<id>
+```
+
+</details>
+
+<details>
+<summary><strong>UPDATE Requests</strong></summary>
+<br>
 
 Updates the details of a specific user. Replace `<id>` with the ID of the user you want to update. The request body should be a JSON object with the fields to update.
 
-Examples:
-
-#### Update User - `PUT /user/<id>`
+1. **Update User - `PUT /user/<id>`**
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -229,7 +265,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/user/<id>
 ```
 
-#### Update Student - `PUT /student/<id>`
+2. **Update Student - `PUT /student/<id>`**
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -349,7 +385,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/student/65af07ee284739d707b13590
 ```
 
-#### Update Company - `PUT /companie/<id>`
+3. **Update Company - `PUT /companie/<id>`**
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -367,7 +403,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/companie/65ad31f91370388a775b9b44
 ```
 
-#### Update Offer - `PUT /offer/<id>`
+4. **Update Offer - `PUT /offer/<id>`**
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -377,25 +413,45 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/offer/65aaa64351bc57dc19f0a92c
 ```
 
-### Delete queries
+</details>
+
+<details>
+<summary><strong>DELETE Requests</strong></summary>
+<br>
 
 Deletes a specific user. Replace `<id>` with the ID of the user you want to delete. No request body is required for this endpoint.
 
-Examples:
-
-#### Delete User - `DELETE /user/<id>`
+1. **Delete User - `DELETE /user/<id>`**
 
 ```bash
 curl -X DELETE http://127.0.0.1:8000/user/<id>
 ```
 
-#### Delete Student - `DELETE /student/<id>`
+2. **Delete Student - `DELETE /student/<id>`**
 
 ```bash
 curl -X DELETE http://127.0.0.1:8000/student/<id>
 ```
 
-### Login - `POST /login`
+3. **Delete Offer - `DELETE /offer/<id>`**
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/offer/<id>
+```
+
+4. **Delete Company - `DELETE /company/<id>`**
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/company/<id>
+```
+
+</details>
+
+<details>
+<summary><strong>Some more Requests</strong></summary>
+<br>
+
+1. **Login - `POST /login`**
 
 Logs in a user. The request body should be a JSON object with the following properties:
 
@@ -410,7 +466,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"email":"test@example.com"
 
 In this command, replace `test@example.com` and `password` with the actual email and password you want to test. If the login is successful, the server will print "User connected" to the console.
 
-### Get Email from Token - `GET /user/email/<token>`
+2. **Get Email from Token - `GET /user/email/<token>`**
 
 This endpoint returns the email associated with the provided JWT token.
 
@@ -420,7 +476,7 @@ curl -X GET http://127.0.0.1:8000/user/email/<token>
 
 Replace `<token>` with the actual JWT token. If the operation is successful, the server will return the email associated with the token.
 
-### Get User Info from Token - `GET /user/info/<token>`
+3. **Get User Info from Token - `GET /user/info/<token>`**
 
 This endpoint returns the user information associated with the provided JWT token.
 
@@ -429,6 +485,8 @@ curl -X GET http://127.0.0.1:8000/user/info/<token>
 ```
 
 Replace `<token>` with the actual JWT token. If the operation is successful, the server will return the user information associated with the token.
+
+</details>
 
 ## Docker Deployment
 
