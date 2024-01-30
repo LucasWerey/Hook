@@ -83,6 +83,7 @@ declare module 'vue' {
     StudentFormStep1: typeof import('./components/signUp/students/StudentFormStep1.vue')['default']
     StudentFormStep2: typeof import('./components/signUp/students/StudentFormStep2.vue')['default']
     StudentFormStep3: typeof import('./components/signUp/students/StudentFormStep3.vue')['default']
+    StudentOfferExperiences: typeof import('./components/studentOffer/subComponents/StudentOfferExperiences.vue')['default']
     StudentOfferHeader: typeof import('./components/studentOffer/subComponents/StudentOfferHeader.vue')['default']
     StudentOfferHeaderVue: typeof import('@lucaswerey/dslib-pfe')['StudentOfferHeaderVue']
     StudentOfferPage: typeof import('./components/studentOffer/StudentOfferPage.vue')['default']

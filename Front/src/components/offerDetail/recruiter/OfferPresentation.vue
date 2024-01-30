@@ -19,7 +19,7 @@
             <h4 class="font-eina1 text-4 font-bold text-primary-moonstone">
               Votre offre est complétée à {{ progressValue }}%
             </h4>
-            <IconsBase name="info" color="grey" class="h-4 w-4 self-start" />
+            <IconsBase name="info" color="grey" size="small" class="max-h-4 max-w-4 self-start" />
           </div>
           <div class="h-2 w-4/5 rounded bg-primary-lightmoonstone">
             <div

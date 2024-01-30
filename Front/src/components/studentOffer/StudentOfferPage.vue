@@ -14,8 +14,9 @@
       :dataStudent="data.student"
       :dataOffer="data.offer"
     />
-    <StudentOfferSingularity :dataStudent="data.student" />
-    <StudentOfferPersonality :dataStudent="data.student" />
+    <StudentOfferSingularity v-if="data.student" :dataStudent="data.student" />
+    <StudentOfferPersonality v-if="data.student" :dataStudent="data.student" />
+    <StudentOfferExperiences v-if="data.student" :dataStudent="data.student" />
   </div>
 </template>
 
