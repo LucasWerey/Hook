@@ -46,7 +46,7 @@
         <div v-for="(interest, index) in interests" :key="index" class="flex flex-col gap-4">
           <div>
             <h4 class="font-eina1 text-4 font-bold">{{ interest.genre }}</h4>
-            <ul class="list-inside list-disc whitespace-pre-line">
+            <ul class="list-inside list-disc whitespace-pre-line" v-if="interest.desc !== ''">
               <li
                 v-for="(line, lineIndex) in interest.desc.split('\n')"
                 :key="lineIndex"
@@ -81,15 +81,21 @@ const refs: Record<RefKeys, Ref<string | boolean>> = {
   random: ref('')
 }
 
-watch(singularity, newVal => {
-  if (newVal && newVal.length > 0) {
-    const singularityObj = newVal[0]
+const updateRefs = () => {
+  if (singularity.value && singularity.value.length > 0) {
+    const singularityObj = singularity.value[0]
     for (const property in refs) {
       if (Object.prototype.hasOwnProperty.call(singularityObj, property)) {
         refs[property as RefKeys].value = singularityObj[property]
       }
     }
   }
+}
+
+onMounted(updateRefs)
+
+watch(singularity, () => {
+  updateRefs()
 })
 
 const questions = computed(() => [

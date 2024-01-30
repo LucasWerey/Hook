@@ -8,7 +8,7 @@
       <div
         v-for="(experience, index) in mappedExperiences"
         :key="index"
-        class="flex flex-col gap-2"
+        class="flex w-5/6 flex-col gap-2"
       >
         <div class="flex flex-col gap-1">
           <h3 class="font-eina1 text-4 font-bold">{{ experience.jobTitle }}</h3>
@@ -28,11 +28,11 @@
               </li>
             </ul>
           </div>
-          <div v-else class="font-eina1 text-4">
+          <div v-else class="w-full font-eina1 text-4">
             {{ experience.description }}
           </div>
         </div>
-        <hr v-if="index < experiences.length - 1" class="w-full text-basic-lightgrey" />
+        <hr v-if="index < experiences.length - 1" class="w-5/6 text-basic-lightgrey" />
       </div>
     </div>
     <div class="col-span-1 flex flex-col gap-4">

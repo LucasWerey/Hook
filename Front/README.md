@@ -18,6 +18,8 @@ You can install these extensions from the VS Code marketplace by clicking on the
 
 ## 🚀 Getting Started
 
+> Disclaimer: This project is for educational purposes only. You will need some permissions to install it so contact me if you want the access
+
 1. **Install the packages**
 
 Get all the dependencies set up by running:

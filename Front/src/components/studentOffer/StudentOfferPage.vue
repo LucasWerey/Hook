@@ -17,6 +17,17 @@
     <StudentOfferSingularity v-if="data.student" :dataStudent="data.student" />
     <StudentOfferPersonality v-if="data.student" :dataStudent="data.student" />
     <StudentOfferExperiences v-if="data.student" :dataStudent="data.student" />
+    <StudentOfferCompetencies v-if="data.student" :dataStudent="data.student" />
+    <StudentOfferCertifications v-if="data.student" :dataStudent="data.student" />
+
+    <div class="flex flex-row items-center justify-center gap-12">
+      <Button type="default" state="active" styled="outlined" class="border-error uppercase">
+        <span class="text-error">Je ne suis pas intéressé</span>
+      </Button>
+      <Button type="default" state="active" styled="fill" class="uppercase">
+        Ce profil m'intéresse
+      </Button>
+    </div>
   </div>
 </template>
 
