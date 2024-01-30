@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="flex min-w-fit flex-col gap-2" v-if="refs.has_audio">
+      <div class="flex min-w-fit flex-col gap-2" v-if="refs.has_audio.value">
         <h3 class="font-eina1 text-4 font-bold">Audio de présentation</h3>
         <AudioPlayer />
       </div>

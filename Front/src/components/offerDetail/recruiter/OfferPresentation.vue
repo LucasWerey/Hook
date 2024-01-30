@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full gap-2 rounded-xl bg-basic-white p-6">
     <div class="flex w-full gap-6">
-      <IconsBase name="desktop" class="h-40 w-40" :color="color" />
+      <IconsBase name="desktop" class="h-40 w-40" size="large" :color="color" />
       <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-8 font-800">{{ position_name }}</h1>

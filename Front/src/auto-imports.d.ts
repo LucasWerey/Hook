@@ -122,6 +122,7 @@ declare global {
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
   const name: typeof import('./utils/offerApiUtils')['name']
+  const nerisDesc: typeof import('./data/neris')['nerisDesc']
   const newOfferContractDurationOptions: typeof import('./data/newOfferConst')['newOfferContractDurationOptions']
   const newOfferContractLocationOptions: typeof import('./data/newOfferConst')['newOfferContractLocationOptions']
   const newOfferProfessionalExperienceDurationOptions: typeof import('./data/newOfferConst')['newOfferProfessionalExperienceDurationOptions']
@@ -514,6 +515,7 @@ declare module 'vue' {
     readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly nerisDesc: UnwrapRef<typeof import('./data/neris')['nerisDesc']>
     readonly newOfferContractDurationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferContractDurationOptions']>
     readonly newOfferContractLocationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferContractLocationOptions']>
     readonly newOfferProfessionalExperienceDurationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferProfessionalExperienceDurationOptions']>
@@ -892,6 +894,7 @@ declare module '@vue/runtime-core' {
     readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly nerisDesc: UnwrapRef<typeof import('./data/neris')['nerisDesc']>
     readonly newOfferContractDurationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferContractDurationOptions']>
     readonly newOfferContractLocationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferContractLocationOptions']>
     readonly newOfferProfessionalExperienceDurationOptions: UnwrapRef<typeof import('./data/newOfferConst')['newOfferProfessionalExperienceDurationOptions']>

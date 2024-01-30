@@ -74,3 +74,5 @@ Here's a high-level overview of our main directories:
     ├── 📂 utils/             # 🛠️ Utility functions
     └── 📂 views/             # 🖼️ Vue components representing entire pages
 ```
+
+⚠️ ALL THE PERSONNALITY SVG USED AND PERSONNALITY ANALYSIS ARE OWNED BY https://www.16personalities.com
