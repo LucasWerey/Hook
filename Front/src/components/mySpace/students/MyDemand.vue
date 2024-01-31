@@ -31,7 +31,7 @@
           :nMatchs="numberOfMatch"
           :notification="0"
           desktopColor="moonstone"
-          @seeDemand="() => console.log('see demand')"
+          @seeDemand="() => $router.push(`/myspace/demand/${idStudent}`)"
         />
       </div>
     </div>
