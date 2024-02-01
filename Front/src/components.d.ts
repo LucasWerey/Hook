@@ -29,6 +29,7 @@ declare module 'vue' {
     DemandCard: typeof import('@lucaswerey/dslib-pfe')['DemandCard']
     DemandDetailHeader: typeof import('./components/demandDetail/DemandDetailHeader.vue')['default']
     DemandDetailKey: typeof import('./components/demandDetail/DemandDetailKey.vue')['default']
+    DemandDetailMatchs: typeof import('./components/demandDetail/DemandDetailMatchs.vue')['default']
     DemandDetailPage: typeof import('./components/demandDetail/DemandDetailPage.vue')['default']
     DropDown: typeof import('./components/navBars/DropDown.vue')['default']
     E: typeof import('@lucaswerey/dslib-pfe')['E']

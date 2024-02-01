@@ -72,7 +72,7 @@
             </div>
             <Button
               type="default"
-              class="w-full"
+              class="w-full uppercase"
               @click="getLoggedInUser"
               styled="fill"
               state="active"

@@ -1,5 +1,5 @@
-type ObjectId = string // replace with actual ObjectId type if available
-type BsonDateTime = any // replace with actual BsonDateTime type if available
+type ObjectId = string
+type BsonDateTime = any 
 
 type Students = {
   user_id?: ObjectId

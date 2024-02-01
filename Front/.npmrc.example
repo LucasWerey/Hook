@@ -1,0 +1,3 @@
+@lucaswerey:registry=https://npm.pkg.github.com
+
+//npm.pkg.github.com/:_authToken=<Your github _authToken>

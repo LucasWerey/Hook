@@ -32,7 +32,7 @@
           <Button
             :type="'default'"
             :state="'active'"
-            class="max-h-8 max-w-fit text-nowrap bg-primary-lightmoonstone uppercase"
+            class="max-h-8 max-w-fit text-nowrap border-none bg-primary-lightmoonstone uppercase"
             :styled="'fill'"
             isLight
           >
@@ -42,7 +42,7 @@
             v-if="demandDetails.transportDuration === ''"
             :type="'default'"
             :state="'active'"
-            class="max-h-8 max-w-fit text-nowrap bg-primary-lightmoonstone uppercase"
+            class="max-h-8 max-w-fit text-nowrap border-none bg-primary-lightmoonstone uppercase"
             :styled="'fill'"
             isLight
           >
@@ -56,7 +56,7 @@
         type="default"
         state="active"
         styled="outlined"
-        class="max-h-8 max-w-28 border-basic-verylightgrey bg-basic-white uppercase"
+        class="max-h-8 max-w-28 border-none border-basic-verylightgrey bg-basic-white uppercase"
       >
         Modifier
       </Button>
@@ -64,7 +64,7 @@
         type="default"
         state="active"
         styled="outlined"
-        class="max-h-8 max-w-28 border-0 border-basic-verylightgrey bg-basic-white uppercase"
+        class="max-h-8 max-w-28 border-none border-basic-verylightgrey bg-basic-white uppercase"
       >
         <p class="text-error">SUPPRIMER</p>
       </Button>
