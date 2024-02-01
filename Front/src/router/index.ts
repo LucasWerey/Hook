@@ -34,7 +34,7 @@ const routes = [
   {
     component: () => import('../views/StudentOfferView.vue'),
     meta: { requiresAuth: true },
-    name: 'StudentProfile',
+    name: 'StudentProfileRecruiter',
     path: '/myspace/offer/:offerId/student/:studentId'
   },
   {

@@ -21,7 +21,13 @@
     <StudentOfferCertifications v-if="data.student" :dataStudent="data.student" />
 
     <div class="flex flex-row items-center justify-center gap-12">
-      <Button type="default" state="active" styled="outlined" class="border-error uppercase">
+      <Button
+        type="default"
+        state="active"
+        styled="fill"
+        class="uppercase"
+        style="background-color: white; border-color: #ff5656"
+      >
         <span class="text-error">Je ne suis pas intéressé</span>
       </Button>
       <Button type="default" state="active" styled="fill" class="uppercase">

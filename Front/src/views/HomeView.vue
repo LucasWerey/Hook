@@ -10,7 +10,7 @@
       <p class="font-400 text-center text-4 text-basic-white opacity-80 lg:text-8">
         {{ homeWords.description }}
       </p>
-      <p class="text-center text-4 font-700 text-primary-charcoal lg:text-8">
+      <p class="text-center text-4 font-700 text-basic-white lg:text-8">
         {{ homeWords.ask }}
       </p>
       <div class="flex max-w-full flex-col items-center justify-center gap-4 sm:flex-row">

@@ -31,7 +31,7 @@
         <Button
           :type="'default'"
           :state="'active'"
-          class="max-h-8 max-w-96 text-nowrap border-0 bg-primary-lightmoonstone uppercase"
+          class="max-h-8 max-w-96 text-nowrap border-none bg-primary-lightmoonstone uppercase"
           :styled="'fill'"
           isLight
         >
@@ -43,7 +43,7 @@
       type="default"
       state="active"
       styled="outlined"
-      class="max-h-8 max-w-28 border-basic-verylightgrey bg-basic-verylightgrey uppercase"
+      class="max-h-8 max-w-28 border-none border-basic-verylightgrey bg-basic-verylightgrey uppercase"
     >
       Modifier
     </Button>
@@ -51,7 +51,7 @@
       type="default"
       state="active"
       styled="outlined"
-      class="max-h-8 max-w-28 border-basic-verylightgrey bg-basic-verylightgrey uppercase text-error"
+      class="max-h-8 max-w-28 border-none border-basic-verylightgrey bg-basic-verylightgrey uppercase text-error"
     >
       <p class="text-error">SUPPRIMER</p>
     </Button>

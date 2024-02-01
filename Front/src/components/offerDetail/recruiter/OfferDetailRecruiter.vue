@@ -37,7 +37,8 @@ const router = useRouter()
 
 const goToStudentProfile = (event: any) => {
   router.push({
-    path: `/myspace/offer/${offerId.value}/student/${event.student_id.$oid}`
+    name: 'StudentProfileRecruiter',
+    params: { offerId: offerId.value, studentId: event.student_id.$oid }
   })
 }
 
