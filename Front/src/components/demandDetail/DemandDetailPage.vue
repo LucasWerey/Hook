@@ -10,6 +10,7 @@
       <h2 class="self-baseline text-nowrap text-16 font-800">Ma demande</h2>
     </div>
     <DemandDetailHeader v-if="data && data.profile" :demandInfo="data.profile.jobWanted" />
+    <DemandDetailKey />
   </div>
 </template>
 
