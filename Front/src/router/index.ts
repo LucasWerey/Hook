@@ -14,12 +14,6 @@ const routes = [
     path: '/'
   },
   {
-    component: () => import('../views/AboutView.vue'),
-    meta: { requiresAuth: true },
-    name: 'about',
-    path: '/about'
-  },
-  {
     component: () => import('../views/MySpaceView.vue'),
     meta: { requiresAuth: true },
     name: 'myspace',

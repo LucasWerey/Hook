@@ -9,14 +9,6 @@ test('home route should be correctly defined', () => {
   expect(homeRoute.meta.requiresAuth).toBe(false)
 })
 
-test('about route should be correctly defined', () => {
-  const aboutRoute = router.getRoutes().find(route => route.name === 'about')
-
-  expect(aboutRoute).toBeDefined()
-  expect(aboutRoute.path).toBe('/about')
-  expect(aboutRoute.meta.requiresAuth).toBe(true)
-})
-
 test('login route should be correctly defined', () => {
   const loginRoute = router.getRoutes().find(route => route.name === 'login')
 
