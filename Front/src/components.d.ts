@@ -65,6 +65,8 @@ declare module 'vue' {
     OfferCard: typeof import('@lucaswerey/dslib-pfe')['OfferCard']
     OfferDetailRecruiter: typeof import('./components/offerDetail/recruiter/OfferDetailRecruiter.vue')['default']
     OfferDetailStudent: typeof import('./components/offerDetail/student/OfferDetailStudent.vue')['default']
+    OfferPage: typeof import('./components/offerPage/OfferPage.vue')['default']
+    OfferPageHeader: typeof import('./components/offerPage/subComponents/OfferPageHeader.vue')['default']
     OfferPresentation: typeof import('./components/offerDetail/recruiter/OfferPresentation.vue')['default']
     OfferProcess: typeof import('./components/offerDetail/recruiter/OfferProcess.vue')['default']
     Ore: typeof import('@lucaswerey/dslib-pfe')['Ore']
