@@ -32,6 +32,7 @@ onMounted(async () => {
   //@ts-ignore
   data.value = await getStudent(studentId.value)
   allOffers.value = await getAllOffers()
+  console.log(allOffers.value[0]._id.$oid)
 })
 
 const router = useRouter()
@@ -48,6 +49,9 @@ interface Match {
 }
 
 interface Offer {
+  _id: {
+    $oid: string
+  }
   details: {
     contract_type: string
     location: string
@@ -80,7 +84,8 @@ watchEffect(async () => {
       const {
         details: { contract_type, location, position_name },
         id_company,
-        matchs
+        matchs,
+        _id
       } = offer
       const match = matchs.find(({ student_id }) => student_id.$oid === studentId.value)
       const companyResponse = await getCompany(id_company.$oid)
@@ -91,6 +96,7 @@ watchEffect(async () => {
         globalMatch: match ? match.globalMatch : null,
         id_company: id_company.$oid,
         location,
+        offerId: _id.$oid,
         position_name
       }
     })

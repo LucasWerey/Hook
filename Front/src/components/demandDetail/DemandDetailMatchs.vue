@@ -41,15 +41,16 @@
             :icon="'none'"
             :state="'active'"
             :iconPosition="'none'"
-            :styled="'fill'"
+            :styled="index === 2 ? 'outlined' : 'fill'"
             :isLight="index % 2 !== 0"
             class="max-w-[139px] uppercase"
             :class="{
-              'border-none bg-error': index === 2
+              'border-none bg-error ': index === 2
             }"
             :style="{ 'background-color': index % 2 !== 0 ? 'white' : '' }"
+            @click="seeOffer(match.offerId)"
           >
-            Voir l'offre
+            <span :class="index === 2 ? 'text-basic-white' : ''">Voir l'offre</span>
           </Button>
         </div>
       </div>
@@ -74,12 +75,22 @@ const mappedMatches = computed(() => {
     globalMatch: match.globalMatch,
     id_company: match.id_company,
     location: capitalizeFirstLetter(match.location),
+    offerId: match.offerId,
     positionName: capitalizeFirstLetter(match.position_name)
   }))
 })
 
 function capitalizeFirstLetter(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+const router = useRouter()
+
+const seeOffer = (offerId: string) => {
+  router.push({
+    name: 'Offer',
+    params: { offerId }
+  })
 }
 </script>
 

@@ -98,11 +98,7 @@
       <div
         class="pointer-events-none absolute left-0 top-0 z-[2] flex h-full w-full items-center justify-center align-middle text-17 font-800 text-primary-moonstone backdrop-blur-[100px]"
       >
-        <img
-          src="../assets/images/LoginImage.png"
-          alt="Login Image"
-          class="object-cover opacity-80"
-        />
+        <img src="../assets/images/LoginImage2.png" alt="Login Image" class="w-4/5 object-cover" />
       </div>
       <div ref="blobItems" class="absolute left-0 top-0 z-[1] h-full w-full">
         <div ref="blob1" class="blob h-[200px] w-[200px] rounded-full bg-primary-moonstone" />
