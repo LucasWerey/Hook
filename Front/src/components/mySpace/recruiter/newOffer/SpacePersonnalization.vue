@@ -59,10 +59,13 @@ const colorsOptions = ref([
   { equivalent: 'test', label: 'Vert', value: 'Vert' }
 ])
 
+const emit = defineEmits(['updateColor'])
+
 watch(colors, newColor => {
   const selectedColor = colorsOptions.value.find(option => option.value === newColor)
   if (selectedColor) {
     equivalentColor.value = selectedColor.equivalent as colorType
+    emit('updateColor', equivalentColor.value) // emit the updateColor event
   }
 })
 </script>
