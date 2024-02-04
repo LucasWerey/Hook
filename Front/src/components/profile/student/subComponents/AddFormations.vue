@@ -126,7 +126,7 @@ const saveChanges = async () => {
     profile: {
       ...studentStore.students[0].profile,
       formation: [
-        ...studentStore.students[0].profile.formation,
+        ...studentStore.students[0].profile.formations,
         {
           description: dataInfo.descriptionModel,
           endDate: {
@@ -151,7 +151,7 @@ const saveChanges = async () => {
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
     emit('closeModal')
   } catch (error) {
-    const apiError = handleApiError(error)
+    handleApiError(error)
   }
 }
 
