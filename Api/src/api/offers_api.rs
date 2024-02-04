@@ -1,6 +1,7 @@
 use crate::{models::offers_model::Offers,  repository::mongodb_repo::MongoRepo};
 use mongodb::{bson::oid::ObjectId, results::InsertOneResult};
 use rocket::{http::Status, serde::json::Json, State};
+use std::process::Command;
 
 
 #[post("/offer", data = "<new_offers>")]
@@ -13,14 +14,29 @@ pub fn create_offers(
         id_company: new_offers.id_company,
         id_recruiter: new_offers.id_recruiter,
         details: new_offers.details.clone(),
-        matchs: new_offers.matchs.clone()
+        matchs: new_offers.matchs.clone(),
     };
     let offers_detail = db.create_offers(data);
     match offers_detail {
-        Ok(offers) => Ok(Json(offers)),
+        Ok(offers) => {
+            if let Err(err) = call_python_script("/Users/lucaswerey/Code/Web/Hook/Api/src/neural/main.py") {
+                eprintln!("Error calling Python script: {:?}", err);
+                return Err(Status::InternalServerError);
+            }
+
+            Ok(Json(offers))
+        }
         Err(_) => Err(Status::InternalServerError),
     }
 }
+
+fn call_python_script(script_path: &str) -> std::io::Result<()> {
+    Command::new("python3")
+        .arg(script_path)
+        .spawn()?;
+    Ok(())
+}
+
 
 
 #[get("/offer/<path>")]

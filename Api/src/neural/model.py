@@ -14,6 +14,7 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+import os
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -46,18 +47,18 @@ def preprocess_text(text, tokenizer):
     txt_tok_nr = np.transpose(txt_tok_nr)
     return txt_tok_nr
 
-def load_tokenizer_from_json(file_path):
+
+def load_tokenizer_from_json(file_name):
+    file_path = os.path.join(os.path.dirname(__file__), file_name)
     with open(file_path) as f:
         data = json.load(f)
         tokenizer = tokenizer_from_json(data)
     return tokenizer
 
-def load_onnx_model(model_path):
-    print("\033[92mLoading the ONNX model...\033[0m")
-    sess = rt.InferenceSession(model_path)
-    print("\033[92mONNX model loaded successfully.\033[0m")
+def load_onnx_model(file_name):
+    file_path = os.path.join(os.path.dirname(__file__), file_name)
+    sess = rt.InferenceSession(file_path)
     input_name = sess.get_inputs()[0].name
-    print(f"\033[92mInput name: {input_name}\033[0m")
     return sess, input_name
 
 def run_model(sess, input_name, entries):
@@ -132,7 +133,9 @@ def main(student_id):
             'Project_manager', 'Database_Administrator', 'Front_End_Developer', 'Security_Analyst', 'Python_Developer']
 
     output = np.array(output).flatten()
+    print("\033[92mModel Output:\033[0m")
     output_dict = dict(zip(keys, output))
+    print(output_dict, '\n')
     for key in output_dict:
         output_dict[key] = f"{output_dict[key] * 100:.0f}%"
 
