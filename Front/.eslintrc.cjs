@@ -33,6 +33,7 @@ module.exports = {
         '.vue': 'PascalCase'
       }
     ],
+    'no-console': ['error', { allow: ['error'] }],
     'sort-keys-fix/sort-keys-fix': ['warn', 'asc', { caseSensitive: false, natural: true }],
     'vue/component-tags-order': [
       'error',

@@ -15,7 +15,7 @@
         class="grid-template col-span-8 min-h-[72px] bg-basic-verylightgrey px-2"
         :class="{
           'bg-error bg-opacity-10': index === 2,
-          ' bg-primary-lightmoonstone': index % 2 !== 0,
+          ' bg-basic-white': index % 2 !== 0,
           'rounded-t-md': index === 0,
           'rounded-b-md': index === mappedMatches.length - 1
         }"

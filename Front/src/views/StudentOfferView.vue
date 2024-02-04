@@ -36,7 +36,7 @@ onMounted(async () => {
       email.value = recruiterStore.recruiters[0].email
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     if ((error as any).response && (error as any).response.status === 500) {
       AuthenticationUtils.removeToken()
       errorMessage.value = 'Invalid token.'

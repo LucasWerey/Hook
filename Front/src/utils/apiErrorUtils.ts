@@ -17,9 +17,9 @@ export class ApiError extends Error {
  */
 export function handleApiError(error: any): ApiError {
   if (error.response) {
-    console.log(error.response.data)
-    console.log(error.response.status)
-    console.log(error.response.headers)
+    console.error(error.response.data)
+    console.error(error.response.status)
+    console.error(error.response.headers)
 
     if (error.response.status === 401) {
       return new ApiError(401, 'Unauthorized: Please login again.')
@@ -31,10 +31,10 @@ export function handleApiError(error: any): ApiError {
       return new ApiError(error.response.status, error.response.data)
     }
   } else if (error.request) {
-    console.log(error.request)
+    console.error(error.request)
     return new ApiError(500, 'No response received from server')
   } else {
-    console.log('Error', error.message)
+    console.error('Error', error.message)
     return new ApiError(500, error.message)
   }
 }

@@ -24,7 +24,6 @@ const recruiterStore = useRecruiterStore()
 onMounted(async () => {
   try {
     response.value = await getUserInfoFromToken(AuthenticationUtils.getToken() || '')
-    console.log(response.value)
     email.value = response.value.email
     hasToken.value = true
     if (response.value.statut === 'student') {
@@ -39,9 +38,7 @@ onMounted(async () => {
       await populateRecruiterStore(response.value._id.$oid)
       email.value = recruiterStore.recruiters[0].email
     }
-    console.log(isStudent.value)
   } catch (error) {
-    console.log(error)
     if ((error as any).response && (error as any).response.status === 500) {
       AuthenticationUtils.removeToken()
       errorMessage.value = 'Invalid token.'

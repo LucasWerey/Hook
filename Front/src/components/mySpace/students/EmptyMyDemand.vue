@@ -20,7 +20,5 @@
 </template>
 
 <script setup lang="ts">
-const handleClicked = () => {
-  console.log('clicked')
-}
+const handleClicked = () => {}
 </script>

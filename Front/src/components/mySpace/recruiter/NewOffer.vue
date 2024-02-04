@@ -14,7 +14,6 @@
         :inputType="'text'"
         :isRequired="true"
         class="w-full"
-        @blur="() => console.log('blur')"
       />
       <div class="flex w-full flex-col gap-2">
         <ContractTypeinput v-model="formData.lookForContractTypeModel" />
@@ -58,7 +57,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
       </div>
       <InputField
@@ -73,7 +71,6 @@
         :inputType="'text'"
         :isRequired="true"
         class="w-full"
-        @blur="() => console.log('blur')"
       />
       <InputField
         v-model="formData.missionModel"
@@ -87,7 +84,6 @@
         :inputType="'text'"
         :isRequired="true"
         class="w-full"
-        @blur="() => console.log('blur')"
       />
       <InputField
         v-model="formData.avantagesModel"
@@ -101,7 +97,6 @@
         :inputType="'text'"
         :isRequired="true"
         class="w-full"
-        @blur="() => console.log('blur')"
       />
       <hr class="border-b border-basic-lightgrey" />
       <div class="flex flex-col gap-4">

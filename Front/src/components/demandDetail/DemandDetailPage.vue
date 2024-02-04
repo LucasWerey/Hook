@@ -32,7 +32,6 @@ onMounted(async () => {
   //@ts-ignore
   data.value = await getStudent(studentId.value)
   allOffers.value = await getAllOffers()
-  console.log(allOffers.value[0]._id.$oid)
 })
 
 const router = useRouter()
@@ -75,8 +74,9 @@ interface MatchResult {
 const matchs = ref<MatchResult[]>([])
 
 watchEffect(async () => {
-  const offers = allOffers.value.filter((offer: Offer) =>
-    offer.matchs.some(({ student_id }) => student_id.$oid === studentId.value)
+  const offers = allOffers.value.filter(
+    (offer: Offer) =>
+      offer.matchs && offer.matchs.some(({ student_id }) => student_id.$oid === studentId.value)
   )
 
   matchs.value = await Promise.all(

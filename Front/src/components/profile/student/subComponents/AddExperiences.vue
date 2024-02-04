@@ -24,7 +24,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
         <InputField
           v-model="dataInfo.companyNameModel"
@@ -37,7 +36,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
       </div>
       <CheckBox
@@ -84,7 +82,6 @@
           :state="'default'"
           :inputType="'text'"
           isRequired
-          @blur="() => console.log('blur')"
         />
         <InputField
           v-model="dataInfo.descriptionModel"
@@ -97,7 +94,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
       </div>
       <Button
@@ -168,12 +164,11 @@ const saveChanges = async () => {
   }
   try {
     studentStore.updateExperiences(updatedStudent.profile.experiences)
-    console.log('updatedStudent', studentStore.students[0].profile.experiences)
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
     emit('closeModal')
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 

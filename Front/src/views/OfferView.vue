@@ -43,7 +43,7 @@ onMounted(async () => {
       router.push({ name: 'myspace' })
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     if ((error as any).response && (error as any).response.status === 500) {
       AuthenticationUtils.removeToken()
 

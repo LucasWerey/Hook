@@ -21,7 +21,7 @@
         {{ value }}%
       </div>
     </div>
-    <div class="w-1/2 text-end font-eina1 text-2 font-normal">
+    <div class="w-1/2 text-nowrap text-end font-eina1 text-2 font-normal">
       <p>
         Compatibilité minimale des profils suggérés :
         <span class="font-eina1 text-3 font-700 text-success">{{ value }}%</span>

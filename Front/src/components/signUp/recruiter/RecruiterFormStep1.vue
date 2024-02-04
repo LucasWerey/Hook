@@ -19,7 +19,7 @@
           styled="fill"
           @click.prevent="
             () => {
-              console.log('Not implemented yet')
+              console.error('Not implemented yet')
             }
           "
           >Valider</Button
@@ -187,7 +187,6 @@ const handleSubmit = () => {
       companySiret: companySiretModel.value,
       idKey: idKeyModel.value !== '' ? idKeyModel.value : undefined
     })
-    console.log(store)
 
     emit('submit')
   }

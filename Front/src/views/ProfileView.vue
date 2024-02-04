@@ -38,9 +38,8 @@ onMounted(async () => {
       await populateRecruiterStore(response.value._id.$oid)
       email.value = recruiterStore.recruiters[0].email
     }
-    console.log(isStudent.value)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     if ((error as any).response && (error as any).response.status === 500) {
       AuthenticationUtils.removeToken()
       errorMessage.value = 'Invalid token.'

@@ -88,7 +88,7 @@ const createUserStudent = async () => {
     }
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 

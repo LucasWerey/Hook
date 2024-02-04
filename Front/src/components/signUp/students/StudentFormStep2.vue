@@ -307,34 +307,26 @@ const softSkills = computed(() => softSkillsRef.value)
 
 const addHardSkills = () => {
   if (addHardSkillModel.value !== '') {
-    console.log(addHardSkillModel.value)
     hardSkillsRef.value.push(addHardSkillModel.value)
-    console.log(hardSkills)
     addHardSkillModel.value = ''
   }
 }
 
 const deleteHardSkill = (label: string) => {
-  console.log(label)
   const index = hardSkillsRef.value.indexOf(label)
   hardSkillsRef.value.splice(index, 1)
-  console.log(hardSkills)
 }
 
 const addSoftSkills = () => {
   if (addSoftSkillModel.value !== '') {
-    console.log(addSoftSkillModel.value)
     softSkillsRef.value.push(addSoftSkillModel.value)
-    console.log(softSkills)
     addSoftSkillModel.value = ''
   }
 }
 
 const deleteSoftSkill = (label: string) => {
-  console.log(label)
   const index = softSkillsRef.value.indexOf(label)
   softSkillsRef.value.splice(index, 1)
-  console.log(softSkills)
 }
 
 const goBack = () => {

@@ -66,7 +66,7 @@ const allOffers = ref<any[]>([])
 const numberOfMatch = computed(() => {
   let count = 0
   allOffers.value.forEach(offer => {
-    if (offer.matchs.length > 0) {
+    if (offer.matchs && offer.matchs.length > 0) {
       offer.matchs.forEach((match: any) => {
         if (match.student_id.$oid === idStudent.value) {
           count++

@@ -81,7 +81,7 @@ const createUserAdmin = async () => {
     }
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 
@@ -101,11 +101,10 @@ const createNewCompany = async () => {
   }
   try {
     response.value = await createCompany(data)
-    console.log(response.value)
     onSuccess()
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 

@@ -150,7 +150,7 @@ const saveChanges = async () => {
     emit('closeModal')
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
+    console.error(apiError)
   }
 }
 

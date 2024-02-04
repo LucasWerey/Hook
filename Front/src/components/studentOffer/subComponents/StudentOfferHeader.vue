@@ -39,7 +39,7 @@
     </div>
     <div class="flex flex-col items-center justify-end gap-2">
       <Button type="default" state="active" styled="outlined" class="max-w-72 uppercase">
-        Télécharge le CV
+        Télécharger le CV
       </Button>
       <Button
         type="default"

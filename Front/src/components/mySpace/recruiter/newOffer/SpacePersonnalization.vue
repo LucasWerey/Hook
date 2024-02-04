@@ -1,7 +1,7 @@
 <template>
   <h4 class="font-eina1 text-2 font-700 uppercase">Personnaliser mon espace</h4>
   <div class="flex items-center gap-7">
-    <IconsBase :color="equivalentColor" name="desktop" class="h-20 w-20" />
+    <IconsBase :color="equivalentColor" name="desktop" class="min-h-20 min-w-20" />
     <div class="flex h-full items-center">
       <hr class="h-4/5 border border-basic-grey" />
     </div>

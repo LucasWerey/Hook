@@ -15,7 +15,7 @@
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex w-fit flex-col gap-2">
-          <div class="flex gap-2">
+          <div class="flex items-center gap-2">
             <h2 class="DS-text-body-bold font-eina1 text-primary-moonstone">
               Votre demande est compétée à {{ demandDetails.progress + '%' }}
             </h2>

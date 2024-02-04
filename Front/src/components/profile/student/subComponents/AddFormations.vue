@@ -24,7 +24,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
         <InputField
           v-model="dataInfo.formationNameModel"
@@ -37,7 +36,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
       </div>
       <div class="flex w-full gap-6">
@@ -74,7 +72,6 @@
           :state="'default'"
           :inputType="'text'"
           :isRequired="true"
-          @blur="() => console.log('blur')"
         />
         <InputField
           v-model="dataInfo.resultModel"
@@ -86,7 +83,6 @@
           :size="'default'"
           :state="'default'"
           :inputType="'text'"
-          @blur="() => console.log('blur')"
         />
       </div>
       <Button
@@ -152,12 +148,10 @@ const saveChanges = async () => {
   }
   try {
     studentStore.updateFormation(updatedStudent.profile.formation)
-    console.log('updatedStudent', studentStore.students[0].profile.formation)
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
     emit('closeModal')
   } catch (error) {
     const apiError = handleApiError(error)
-    console.log(apiError)
   }
 }
 

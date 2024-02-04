@@ -73,7 +73,7 @@ const handleDelete = async (index: number) => {
   try {
     await updateStudent(studentStore.students[0]._id.$oid, updatedStudent)
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

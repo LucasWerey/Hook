@@ -21,7 +21,6 @@ const currentSignupComponent = computed(() => {
 })
 
 const goLoginPage = () => {
-  console.log('goLoginPage')
   router.push({ name: 'login' })
 }
 </script>

@@ -73,7 +73,6 @@ const handleAddFormation = () => {
 }
 
 const handleAddExperience = () => {
-  console.log('handleAddExperience')
   openModalExperience.value = !openModalExperience.value
   openModal.value = openModalExperience.value
   if (openModalExperience.value) {

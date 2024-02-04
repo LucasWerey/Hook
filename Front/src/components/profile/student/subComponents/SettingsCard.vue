@@ -18,19 +18,15 @@
 
 <script setup lang="ts">
 const editNotifications = () => {
-  console.log('editNotifications')
 }
 
 const changePassword = () => {
-  console.log('changePassword')
 }
 
 const logout = () => {
-  console.log('logout')
 }
 
 const deleteAccount = () => {
-  console.log('deleteAccount')
 }
 
 type IconName = 'bellRing' | 'lockKeyhole' | 'logout' | 'userRoundx'
