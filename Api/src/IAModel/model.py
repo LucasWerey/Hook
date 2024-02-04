@@ -1,3 +1,4 @@
+import requests
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
 import tensorflow as tf
@@ -57,6 +58,58 @@ def model(input):
     return predictions
 
 
+def get_student_info(student_id):
+    response = requests.get(f'http://127.0.0.1:8000/student/{student_id}')
+
+    if response.status_code == 200:
+        student = response.json()
+        id = student['_id']['$oid']
+        formations = ' '.join([formation['name']
+                               for formation in student['profile']['formations']])
+        soft_skills = ' '.join(student['profile']['softSkills'])
+        hard_skills = ' '.join(student['profile']['hardSkills'])
+        experiences = ' '.join([experience['jobTitle']
+                                for experience in student['profile']['experiences']])
+        jobDescription = ' '.join([experience['description']
+                                   for experience in student['profile']['experiences']])
+
+        txt = f"{formations} {soft_skills} {hard_skills} {experiences} {jobDescription}"
+        return txt, id
+    else:
+        return f"Request failed with status code {response.status_code}"
+
+
+def get_all_offers():
+    response = requests.get(f'http://127.0.0.1:8000/offers')
+    if response.status_code == 200:
+        data = response.json()
+        offers = []
+        for offer in data:
+            offer_id = offer['_id']['$oid']
+            matches = offer['matchs']
+            position_name = offer['details']['position_name']
+            details=offer['details']
+            id_company = offer['id_company']
+            id_recruiter = offer['id_recruiter']
+            offers.append({
+                "ID": offer_id,
+                "Matches": matches,
+                "Position Name": position_name,
+                "id_company": id_company,
+                'details': details,
+                "id_recruiter": id_recruiter,
+            })
+        return offers
+    else:
+        return f"Request failed with status code {response.status_code}"
+
+def updated_offer(offer_id, data):
+    json_data = json.dumps(data)
+    response = requests.put(f"http://127.0.0.1:8000/offer/{offer_id}", data=json_data)
+    return response.text
+
+
+
 with open('tokenizer.json') as f:
     data = json.load(f)
     tokenizer = tokenizer_from_json(data)
@@ -70,18 +123,9 @@ input_name = sess.get_inputs()[0].name
 print(f"\033[92mInput name: {input_name}\033[0m")
 
 print("\033[92mPreprocessing the input data...\033[0m")
-txt = """"
-Planification de projets
-Réseau étendu (WAN)
-Programmation en C et VHDL
-Gestion de projet
-Product Owner (stage)
-Conseil client en zone bien-être et outdoor, opérations de caisse, mise en place de table de présentation produit.
-Réalisation des prérequis pour la migration d'équipements sous le réseau INUITMises à jour patrimoniales.
-Rigueur
-Autonomie
-Esprit d’équipe
-"""
+
+txt, id = get_student_info('65afec2897cb083d98525cbf')
+
 translator = Translator()
 translation = translator.translate(txt, dest='en')
 
@@ -107,3 +151,37 @@ output_dict = dict(zip(keys, output))
 for key in output_dict:
     output_dict[key] = f"{output_dict[key] * 100:.0f}%"
 print(output_dict)
+
+offers = get_all_offers()
+format_keys = [key.replace('_', ' ') for key in keys]
+
+for offer in offers:
+    try:
+        position_name = translator.translate(
+            offer['Position Name'], dest='en').text.replace('-',  ' ')
+        for key in format_keys:
+            key_with_underscores = key.replace(' ', '_')
+            if key.lower() in position_name.lower():
+                if not offer.get('Matches'):
+                    offer['Matches'] = [{'student_id': {'$oid': id}, 'globalMatch': output_dict[key_with_underscores]}]
+                else:
+                    match_found = False
+                    for match in offer['Matches']:
+                        if match['student_id']['$oid'] == id:
+                            match['globalMatch'] = output_dict[key_with_underscores]
+                            match_found = True
+                    if not match_found:
+                        offer['Matches'].append({'student_id': {'$oid': id}, 'globalMatch': output_dict[key_with_underscores]})
+                print("Offer:", offer)
+                data = {
+                    'id_company': offer['id_company']['$oid'],
+                    'id_recruiter': offer['id_recruiter']['$oid'],
+                    'details': offer.get('details', ''),
+                    'matchs': offer['Matches'],
+                    'id': offer['ID']
+                }
+                print(updated_offer(offer['ID'], data))
+    except KeyError as e:
+        print(f"Missing key {e} in offer")
+    except Exception as e:
+        print(f"An error occurred: {e}")
