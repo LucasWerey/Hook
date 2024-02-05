@@ -59,8 +59,23 @@
         :contract-type="offer.details.contract_type"
         :contract-duration="offer.details.contract_duration"
         :id="offer._id.$oid"
-        :nCandidates="offer.matchs[0] ? offer.matchs.length : 0"
-        :student-names="offer.matchs.map((match: any) => match.studentName).slice(0, 4)"
+        :nCandidates="
+          offer.matchs.filter(
+            (match: any) =>
+              Number(match.globalMatch.replace('%', '')) >=
+              Number(offer.details.compatibility_min.replace('%', ''))
+          ).length
+        "
+        :student-names="
+          offer.matchs
+            .filter(
+              (match: any) =>
+                Number(match.globalMatch.replace('%', '')) >=
+                Number(offer.details.compatibility_min.replace('%', ''))
+            )
+            .map((match: any) => match.studentName)
+            .slice(0, 4)
+        "
         :desktopColor="offer.details.color"
         :notification="
           actualNumberOfStudentsMatched.find(
@@ -99,7 +114,11 @@ const checkForNewProfiles = async () => {
   const offers = await getOfferByCompany(companyStore.companies[0]._id.$oid)
   actualNumberOfStudentsMatched.value.forEach((offerMatchCount, index) => {
     const correspondingOffer = offers.find(offer => offer._id.$oid === offerMatchCount.id)
-    if (correspondingOffer && offerMatchCount.count < correspondingOffer.matchs.length) {
+    if (
+      correspondingOffer &&
+      correspondingOffer.matchs &&
+      offerMatchCount.count < correspondingOffer.matchs.length
+    ) {
       actualNumberOfStudentsMatched.value[index].newCount =
         correspondingOffer.matchs.length - offerMatchCount.count
       actualNumberOfStudentsMatched.value[index].count = correspondingOffer.matchs.length

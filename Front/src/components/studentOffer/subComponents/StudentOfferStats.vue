@@ -103,10 +103,44 @@ const candidateRequests = [
   { title: 'Durée', value: dataStudent.value.duration }
 ]
 
-const progressBars = [
+const progressBars = ref([
   { title: 'Certifications', value: 50 },
   { title: 'Experiences', value: 60 },
   { title: 'Personnalité', value: 70 },
   { title: 'Formations', value: 80 }
-]
+])
+
+function assignValue(offerMatchs: string) {
+  let total = parseInt(offerMatchs) * progressBars.value.length
+  let sum = 0
+  for (let i = 0; i < progressBars.value.length - 1; i++) {
+    let value
+    if (parseInt(offerMatchs) > 80) {
+      value = Math.floor(Math.random() * (100 - 60 + 1)) + 60
+    } else {
+      value = Math.floor(Math.random() * Math.min(total, parseInt(offerMatchs)))
+    }
+    progressBars.value[i].value = Math.max(0, value)
+    total -= value
+    sum += progressBars.value[i].value
+  }
+  if (parseInt(offerMatchs) > 80) {
+    progressBars.value[progressBars.value.length - 1].value = Math.max(
+      0,
+      Math.min(parseInt(offerMatchs) * progressBars.value.length - sum, 100)
+    )
+  } else {
+    progressBars.value[progressBars.value.length - 1].value = Math.max(
+      0,
+      Math.min(parseInt(offerMatchs) * progressBars.value.length - sum, parseInt(offerMatchs))
+    )
+  }
+  progressBars.value.sort((a, b) => b.value - a.value)
+}
+
+watchEffect(() => {
+  if (offerMatchs.value) {
+    assignValue(offerMatchs.value)
+  }
+})
 </script>

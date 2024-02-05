@@ -32,7 +32,6 @@ declare module 'vue' {
     DemandDetailMatchs: typeof import('./components/demandDetail/DemandDetailMatchs.vue')['default']
     DemandDetailPage: typeof import('./components/demandDetail/DemandDetailPage.vue')['default']
     DropDown: typeof import('./components/navBars/DropDown.vue')['default']
-    E: typeof import('@lucaswerey/dslib-pfe')['E']
     EmptyMyDemand: typeof import('./components/mySpace/students/EmptyMyDemand.vue')['default']
     EmptyMyMatch: typeof import('./components/mySpace/students/EmptyMyMatch.vue')['default']
     EmptyMyRefused: typeof import('./components/mySpace/students/EmptyMyRefused.vue')['default']
