@@ -20,8 +20,14 @@
       </div>
     </div>
     <div class="flex h-full items-end">
-      <Button :type="'default'" :state="'active'" :styled="'fill'" class="max-w-[288px]">
-        Accepter
+      <Button
+        :type="'default'"
+        :state="buttonState ? 'active' : 'disabled'"
+        :styled="'fill'"
+        class="max-w-[288px] cursor-pointer uppercase"
+        @click="buttonState = !buttonState"
+      >
+        {{ buttonState ? 'accepter' : 'accepté' }}
       </Button>
     </div>
   </div>
@@ -38,6 +44,7 @@ const props = defineProps({
   }
 })
 
+const buttonState = ref(true)
 const offerData = computed(() => props.offerData)
 const companyId = computed(() => offerData.value.id_company.$oid)
 

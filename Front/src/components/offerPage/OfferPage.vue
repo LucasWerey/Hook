@@ -10,6 +10,7 @@ import OfferPageHeaderVue from './subComponents/OfferPageHeader.vue';
       />
     </div>
     <OfferPageHeader v-if="offerData" :offer-data="offerData" />
+    <OfferPageBody v-if="offerData" :offer-data="offerData" />
   </div>
 </template>
 
