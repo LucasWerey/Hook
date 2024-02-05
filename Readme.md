@@ -51,8 +51,7 @@ The frontend is built with Vue.js, a progressive JavaScript framework for buildi
 You can find the frontend code in the [frontend directory](https://github.com/LucasWerey/Hook/tree/main/Front).
 
 ### Backend ⚙️
-
-The backend is written in Rust, a language that offers high performance and safety. It handles all the business logic and database interactions.
+The backend is primarily written in Rust, a language that offers high performance and safety. It handles all the business logic and database interactions. However, our AI model is implemented in Python, a language known for its strong support for scientific computing and machine learning.
 
 You can find the backend code in the [backend directory](https://github.com/LucasWerey/Hook/tree/main/Api).
 

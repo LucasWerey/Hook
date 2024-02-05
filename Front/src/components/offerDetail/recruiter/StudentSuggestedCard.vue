@@ -12,7 +12,7 @@
           </h3>
           <p class="font-eina1 text-1 text-basic-darkgrey">{{ degree }}</p>
         </div>
-        <ChipContainer label="non contaté(e)" />
+        <ChipContainer label="non contacté(e)" />
       </div>
       <div class="flex flex-col gap-1">
         <div class="flex items-center gap-1">
@@ -45,7 +45,6 @@ const props = defineProps({
     type: Object
   }
 })
-
 
 const firstname = computed(() => props.data.userInfo.firstname)
 const lastname = computed(() => props.data.userInfo.lastname)

@@ -4,7 +4,7 @@
       <h2 class="font-eina1 text-4 font-bold uppercase">Profils suggérés</h2>
       <IconsBase name="info" class="cursor-pointer" size="small" color="darkgrey" />
     </div>
-    <div class="flex w-full flex-row gap-6">
+    <div class="flex w-full flex-row flex-wrap gap-6">
       <div v-for="student in matchingStudents" :key="student.student_id.$oid">
         <StudentSuggestedCard :data="student" @see-profile="emit('seeProfile', $event)" />
       </div>

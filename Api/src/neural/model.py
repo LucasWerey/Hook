@@ -113,10 +113,10 @@ def update_offer(offer_id, data):
     return response.text
 
 def main(student_id):
-    tokenizer = load_tokenizer_from_json('tokenizer.json')
-    sess, input_name = load_onnx_model("output_model_2.onnx")
+    tokenizer = load_tokenizer_from_json('tokenizer_model_test.json')
+    sess, input_name = load_onnx_model("output_model_test.onnx")
 
-    txt, _ = get_student_info(student_id)  # Extracting 'txt', but not using the second variable '_'
+    txt, _ = get_student_info(student_id)
     translator = Translator()
     translation = translator.translate(txt, dest='en')
 
