@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col gap-10">
+  <div class="flex min-h-[83vh] w-full flex-col gap-10">
     <SubnavRecruiter @update-page="handleUpdatePage" />
     <div v-if="!isStoreReady" class="flex h-full w-full items-center justify-center">
       <Loader />

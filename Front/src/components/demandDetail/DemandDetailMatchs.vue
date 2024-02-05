@@ -69,15 +69,21 @@ const props = defineProps({
 const matchsInfo = computed(() => props.matchsInfo)
 
 const mappedMatches = computed(() => {
-  return matchsInfo.value.map((match: any) => ({
-    companyName: capitalizeFirstLetter(match.companyName),
-    contractType: capitalizeFirstLetter(match.contract_type),
-    globalMatch: match.globalMatch,
-    id_company: match.id_company,
-    location: capitalizeFirstLetter(match.location),
-    offerId: match.offerId,
-    positionName: capitalizeFirstLetter(match.position_name)
-  }))
+  return matchsInfo.value
+    .map((match: any) => ({
+      companyName: capitalizeFirstLetter(match.companyName),
+      contractType: capitalizeFirstLetter(match.contract_type),
+      globalMatch: match.globalMatch,
+      id_company: match.id_company,
+      location: capitalizeFirstLetter(match.location),
+      offerId: match.offerId,
+      positionName: capitalizeFirstLetter(match.position_name)
+    }))
+    .sort((a: any, b: any) => {
+      const aMatch = Number(a.globalMatch.replace('%', ''))
+      const bMatch = Number(b.globalMatch.replace('%', ''))
+      return bMatch - aMatch
+    })
 })
 
 function capitalizeFirstLetter(s: string): string {

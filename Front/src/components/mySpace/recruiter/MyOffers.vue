@@ -48,7 +48,7 @@
         />
       </div>
     </div>
-    <div v-if="isStoreReady" class="flex w-full flex-wrap gap-6">
+    <div v-if="isStoreReady" class="flex h-full w-full flex-wrap gap-6">
       <OfferCard type="empty" @createOffer="emit('createOffer')" />
       <OfferCard
         v-for="(offer, index) in detailedOffers"
@@ -92,7 +92,9 @@
 const companyStore = useCompanyStore()
 const recruiterStore = useRecruiterStore()
 const isStoreReady = computed(() => recruiterStore.recruiters.length > 0)
-const companyDetailedOffers = computed(() => companyStore.companies[0].detailed_offers)
+const companyDetailedOffers = computed(() =>
+  [...companyStore.companies[0].detailed_offers].reverse()
+)
 const detailedOffers = ref(companyDetailedOffers.value)
 
 const typeFilterModel = ref('')

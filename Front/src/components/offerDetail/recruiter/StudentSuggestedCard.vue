@@ -20,8 +20,9 @@
           <span
             class="font-eina1 text-3 font-semibold"
             :class="isSuperMatch ? 'text-success' : 'text-warning'"
-            >{{ compatibility }}</span
           >
+            {{ compatibility }}
+          </span>
         </div>
         <Button
           type="default"

@@ -1,6 +1,6 @@
 import OfferPageHeaderVue from './subComponents/OfferPageHeader.vue';
 <template>
-  <div class="flex w-full flex-col gap-12 text-basic-black">
+  <div class="flex w-full flex-col gap-10 text-basic-black">
     <div class="flex w-full items-center gap-8">
       <IconsBase
         name="moveLeft"
@@ -9,7 +9,7 @@ import OfferPageHeaderVue from './subComponents/OfferPageHeader.vue';
         @click="goToMyDemand"
       />
     </div>
-    <OfferPageHeader />
+    <OfferPageHeader v-if="offerData" :offer-data="offerData" />
   </div>
 </template>
 
@@ -21,7 +21,6 @@ const props = defineProps({
   }
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const offerId = computed(() => props.offerId)
 
 const router = useRouter()
@@ -29,4 +28,20 @@ const router = useRouter()
 const goToMyDemand = () => {
   router.back()
 }
+
+const offerData = ref()
+
+watch(
+  offerId,
+  async newOfferId => {
+    if (newOfferId) {
+      try {
+        offerData.value = await getOffer(newOfferId)
+      } catch (error) {
+        handleApiError(error)
+      }
+    }
+  },
+  { immediate: true }
+)
 </script>

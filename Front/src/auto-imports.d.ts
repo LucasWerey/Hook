@@ -28,6 +28,7 @@ declare global {
   const chai: typeof import('vitest')['chai']
   const clearLocalStorage: typeof import('./utils/storageUtils')['clearLocalStorage']
   const clearSessionStorage: typeof import('./utils/storageUtils')['clearSessionStorage']
+  const companyLogo: typeof import('./data/companyImage')['companyLogo']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -430,6 +431,7 @@ declare module 'vue' {
     readonly chai: UnwrapRef<typeof import('vitest')['chai']>
     readonly clearLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['clearLocalStorage']>
     readonly clearSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['clearSessionStorage']>
+    readonly companyLogo: UnwrapRef<typeof import('./data/companyImage')['companyLogo']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -809,6 +811,7 @@ declare module '@vue/runtime-core' {
     readonly chai: UnwrapRef<typeof import('vitest')['chai']>
     readonly clearLocalStorage: UnwrapRef<typeof import('./utils/storageUtils')['clearLocalStorage']>
     readonly clearSessionStorage: UnwrapRef<typeof import('./utils/storageUtils')['clearSessionStorage']>
+    readonly companyLogo: UnwrapRef<typeof import('./data/companyImage')['companyLogo']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
