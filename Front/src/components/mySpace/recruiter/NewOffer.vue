@@ -20,7 +20,8 @@
       </div>
       <div class="flex w-full flex-col gap-6 lg:flex-row">
         <SelectField
-          title="Durée*"
+          title="Durée"
+          isRequired
           v-model="formData.contractDurationModel"
           :options="newOfferContractDurationOptions"
           default="Selectionner"
@@ -61,7 +62,7 @@
       </div>
       <InputField
         v-model="formData.descriptionModel"
-        :placeholder="largeInputPlaceholder"
+        :placeholder="largeInputPlaceholder + ' une description...'"
         :label="`Description de l'offre`"
         :hint="'hint'"
         :hasIcon="false"
@@ -74,7 +75,7 @@
       />
       <InputField
         v-model="formData.missionModel"
-        :placeholder="largeInputPlaceholder"
+        :placeholder="largeInputPlaceholder + ' une mission...'"
         :label="`Missions associées`"
         :hint="'hint'"
         :hasIcon="false"
@@ -87,7 +88,7 @@
       />
       <InputField
         v-model="formData.avantagesModel"
-        :placeholder="largeInputPlaceholder"
+        :placeholder="largeInputPlaceholder + ' un avantage...'"
         :label="`Avantages`"
         :hint="'hint'"
         :hasIcon="false"
@@ -146,7 +147,7 @@
                 <InputField
                   class="w-full"
                   v-model="formData.certificationsModel"
-                  placeholder="Jsp l'ékip"
+                  placeholder="Introduction à l'IA"
                   label="Certification souhaitées"
                   @keyup.enter="addChipCertification"
                 />
@@ -342,8 +343,7 @@ const formData = reactive({
   softSkillsModel: ref('')
 })
 
-const largeInputPlaceholder =
-  'Lorem ipsum dolor sit amet consectetur. Malesuada sit quis nec sed phasellus dui gravida. Magna varius tortor sed nisl augue. Mauris massa morbi aliquam nunc molestie adipiscing. '
+const largeInputPlaceholder = 'Ajouter'
 
 const formationsWantedRef: Ref<string[]> = ref([])
 const formationsWanted = computed(() => formationsWantedRef.value)

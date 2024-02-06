@@ -20,9 +20,17 @@
           'rounded-b-md': index === mappedMatches.length - 1
         }"
       >
-        <div class="flex items-center">{{ match.state }}</div>
+        <div class="flex items-center">
+          <ChipContainer class="flex w-fit items-center self-center" :label="match.status" />
+        </div>
         <div class="flex items-center">{{ match.positionName }}</div>
-        <div class="flex items-center"><IconsBase name="logo" class="w-[50px]" /></div>
+        <div class="flex items-center">
+          <img
+            :src="getLogoPath(match.companyName)"
+            class="w-14 object-contain"
+            alt="Company Logo"
+          />
+        </div>
         <div class="DS-text-body flex items-center font-eina1">{{ match.companyName }}</div>
         <div class="DS-text-body flex items-center font-eina1">{{ match.contractType }}</div>
         <div class="DS-text-body flex items-center font-eina1">{{ match.location }}</div>
@@ -59,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+import defaultLogo from '@/assets/images/companiesLogo/hookLogo.png'
+
 const props = defineProps({
   matchsInfo: {
     required: true,
@@ -70,14 +80,15 @@ const matchsInfo = computed(() => props.matchsInfo)
 
 const mappedMatches = computed(() => {
   return matchsInfo.value
-    .map((match: any) => ({
+    .map((match: any, index: number) => ({
       companyName: capitalizeFirstLetter(match.companyName),
       contractType: capitalizeFirstLetter(match.contract_type),
       globalMatch: match.globalMatch,
       id_company: match.id_company,
       location: capitalizeFirstLetter(match.location),
       offerId: match.offerId,
-      positionName: capitalizeFirstLetter(match.position_name)
+      positionName: capitalizeFirstLetter(match.position_name),
+      status: getStatus(index)
     }))
     .sort((a: any, b: any) => {
       const aMatch = Number(a.globalMatch.replace('%', ''))
@@ -98,11 +109,41 @@ const seeOffer = (offerId: string) => {
     params: { offerId }
   })
 }
+
+function getStatus(index: number) {
+  if (index === 2) {
+    return 'En attente de lecture'
+  } else if (index === 0) {
+    const interviewDate = new Date('2024-02-12')
+    return `Entretien prévu le ${formatDate(interviewDate)}`
+  } else if (index === 1) {
+    return 'Refusé'
+  } else {
+    return 'En attente de lecture'
+  }
+}
+
+function formatDate(dateString: Date) {
+  const date = new Date(dateString)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const year = date.getFullYear()
+
+  return `${day}/${month}/${year}`
+}
+
+const getLogoPath = (name: string) => {
+  if (!name) {
+    return defaultLogo
+  }
+  const company = companyLogo.find(company => company.name.toLowerCase() === name.toLowerCase())
+  return company ? company.src : 'defaultLogo'
+}
 </script>
 
 <style scoped>
 .grid-template {
   display: grid;
-  grid-template-columns: 1fr 1.3fr 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1.3fr 0.5fr 1fr 1fr 1fr 1fr 1fr;
 }
 </style>
