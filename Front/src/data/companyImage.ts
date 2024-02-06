@@ -2,7 +2,7 @@ import hookLogo from '@/assets/images/companiesLogo/hookLogo.png'
 
 export const companyLogo = [
   {
-    name: 'hook',
+    name: 'Captain Hook',
     src: hookLogo
   }
 ]

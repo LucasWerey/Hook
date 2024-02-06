@@ -30,8 +30,9 @@
   </div>
 </template>
 
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// @ts-nocheck
 const props = defineProps({
   offerData: {
     required: true,

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full px-12 py-6 pt-[104px]">
+  <div class="flex h-full w-full px-12 pb-20 pt-[104px]">
     <ProfileStudent v-if="isStudent" />
     <ProfileRecruiter v-if="isCompany" />
   </div>
