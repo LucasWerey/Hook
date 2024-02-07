@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[450px] w-80 flex-col gap-12 rounded-2xl border border-basic-grey p-6">
+  <div class="flex h-[450px] min-w-80 flex-col gap-12 rounded-2xl border border-basic-grey p-6">
     <div class="flex w-full flex-col items-center gap-2 text-center">
       <p class="DS-text-body font-eina1 text-basic-darkgrey">Vous avez</p>
       <p class="font-eina1 text-24 font-700 text-success">92%</p>
@@ -41,8 +41,8 @@ const props = defineProps({
 })
 
 const progressBarData = [
-  { label: 'Personnalité', value: 12 },
-  { label: 'Compétence', value: 50 },
-  { label: 'Expérience', value: 75 }
+  { label: 'Personnalité', value: 90 },
+  { label: 'Compétence', value: 98 },
+  { label: 'Expérience', value: 86 }
 ]
 </script>

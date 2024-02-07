@@ -30,7 +30,13 @@
       >
         <span class="text-error">Je ne suis pas intéressé</span>
       </Button>
-      <Button type="default" state="active" styled="fill" class="uppercase">
+      <Button
+        type="default"
+        :state="buttonState ? 'active' : 'disabled'"
+        styled="fill"
+        class="cursor-pointer uppercase"
+        @click="buttonState = !buttonState"
+      >
         Ce profil m'intéresse
       </Button>
     </div>
@@ -47,6 +53,7 @@ const data = ref<Record<string, any>>({
   user: null
 })
 const loading = ref(true)
+const buttonState = ref(true)
 
 onMounted(async () => {
   data.value.offer = await fetchData(offerId.value, getOffer)

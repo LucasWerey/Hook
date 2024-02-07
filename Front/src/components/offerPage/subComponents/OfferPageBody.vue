@@ -11,7 +11,8 @@
           :type="'default'"
           state="active"
           :styled="'outlined'"
-          class="max-w-[288px] cursor-pointer border-error uppercase"
+          class="max-w-[288px] cursor-pointer uppercase"
+          style="border-color: rgb(255 86 86)"
         >
           <span class="text-error">refuser</span>
         </Button>

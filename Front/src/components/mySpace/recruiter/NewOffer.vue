@@ -464,6 +464,12 @@ const itemsRank = ref([
   },
   {
     draggable: true,
+    labels: hardSkills.value,
+    title: 'Hard skills',
+    topRank: false
+  },
+  {
+    draggable: true,
     labels: softSkills.value,
     title: 'Soft skills',
     topRank: false

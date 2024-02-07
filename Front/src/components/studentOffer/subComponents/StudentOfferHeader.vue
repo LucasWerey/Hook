@@ -43,12 +43,12 @@
       </Button>
       <Button
         type="default"
-        state="active"
-        iconPosition="none"
+        :state="buttonState ? 'active' : 'disabled'"
         styled="fill"
-        class="max-w-72 uppercase"
+        class="max-w-72 cursor-pointer uppercase"
+        @click="buttonState = !buttonState"
       >
-        Ce profil m’intÉresse
+        Ce profil m'intéresse
       </Button>
     </div>
   </div>
@@ -58,6 +58,8 @@
 const props = defineProps({
   data: { required: true, type: Object }
 })
+
+const buttonState = ref(true)
 
 const studentData = computed(() => props.data.student)
 const offerData = computed(() => props.data.offer)
