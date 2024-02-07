@@ -21,7 +21,7 @@
           :state="buttonState ? 'active' : 'disabled'"
           :styled="'fill'"
           class="max-w-[288px] cursor-pointer uppercase"
-          @click="buttonState = !buttonState"
+          @click="onButtonClick"
         >
           {{ buttonState ? 'accepter' : 'accepté' }}
         </Button>
@@ -31,6 +31,16 @@
       <OfferPageSide v-if="offerData" :offerData="offerData" />
     </div>
   </div>
+  <SnackBar
+    v-if="showSnackbar"
+    type="info"
+    close="yes"
+    size="medium"
+    class="fixed bottom-10 right-1/2 z-50 translate-x-1/2 md:w-1/3"
+  >
+    Le processus de recrutement vient de débuter pour cette offre. Nous avons hâte de travailler
+    ensemble !
+  </SnackBar>
 </template>
 
 <script setup lang="ts">
@@ -41,6 +51,17 @@ const props = defineProps({
   }
 })
 
+const showSnackbar = ref(false)
 const buttonState = ref(true)
 const offerData = computed(() => props.offerData)
+
+const onButtonClick = () => {
+  buttonState.value = !buttonState.value
+  showSnackbar.value = !showSnackbar.value
+  setTimeout(resetSnackbar, 5000)
+}
+
+const resetSnackbar = () => {
+  showSnackbar.value = false
+}
 </script>

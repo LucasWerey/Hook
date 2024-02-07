@@ -90,6 +90,7 @@ declare module 'vue' {
     SelectField: typeof import('@lucaswerey/dslib-pfe')['SelectField']
     SettingsCard: typeof import('./components/profile/student/subComponents/SettingsCard.vue')['default']
     SingularityEmpty: typeof import('./components/profile/student/subComponents/SingularityEmpty.vue')['default']
+    Snackbar: typeof import('@lucaswerey/dslib-pfe')['Snackbar']
     SnackBar: typeof import('@lucaswerey/dslib-pfe')['SnackBar']
     SpacePersonnalization: typeof import('./components/mySpace/recruiter/newOffer/SpacePersonnalization.vue')['default']
     SpaceRecruiter: typeof import('./components/mySpace/recruiter/SpaceRecruiter.vue')['default']

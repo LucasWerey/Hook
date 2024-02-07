@@ -129,8 +129,8 @@ const checkForNewProfiles = async () => {
 }
 
 setTimeout(() => {
-  setInterval(checkForNewProfiles, 60000)
-}, 60000)
+  setInterval(checkForNewProfiles, 600)
+}, 600)
 
 const typeFilterOptions = [
   { label: 'Stage ou alternance', value: 'stage ou alternance' },

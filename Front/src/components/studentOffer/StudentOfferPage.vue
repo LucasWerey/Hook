@@ -35,12 +35,21 @@
         :state="buttonState ? 'active' : 'disabled'"
         styled="fill"
         class="cursor-pointer uppercase"
-        @click="buttonState = !buttonState"
+        @click="onButtonClick"
       >
         Ce profil m'intéresse
       </Button>
     </div>
   </div>
+  <SnackBar
+    v-if="showSnackbar"
+    type="info"
+    close="no"
+    size="medium"
+    class="fixed bottom-10 right-1/2 z-50 translate-x-1/2 md:w-fit"
+  >
+    Votre intérêt pour ce candidat vient de lui être notifié !
+  </SnackBar>
 </template>
 
 <script setup lang="ts">
@@ -54,12 +63,19 @@ const data = ref<Record<string, any>>({
 })
 const loading = ref(true)
 const buttonState = ref(true)
+const showSnackbar = ref(false)
 
 onMounted(async () => {
   data.value.offer = await fetchData(offerId.value, getOffer)
   data.value.user = await fetchData(studentId.value, getUser)
   data.value.student = await fetchData(studentId.value, getStudent)
 })
+
+const onButtonClick = () => {
+  buttonState.value = !buttonState.value
+  showSnackbar.value = !showSnackbar.value
+  setTimeout(resetSnackbar, 5000)
+}
 
 async function fetchData(id: any, fetchFunction: any) {
   try {
@@ -77,5 +93,9 @@ async function fetchData(id: any, fetchFunction: any) {
 
 const goToLast = () => {
   router.push(`/myspace/offer/${offerId.value}`)
+}
+
+const resetSnackbar = () => {
+  showSnackbar.value = false
 }
 </script>
